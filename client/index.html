@@ -19,8 +19,7 @@ rel="stylesheet"> -->
 		<link href="bootstrap/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link href="bootstrap/docs/examples/dashboard/dashboard.css" rel="stylesheet">
-
+		<link href="v2.css" rel="stylesheet">
 		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 		<script src="bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
@@ -34,6 +33,7 @@ rel="stylesheet"> -->
 
 	<body>
 
+	
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -60,42 +60,55 @@ rel="stylesheet"> -->
 		</nav>
 
 		<div class="container-fluid">
-			<div class="row">
-				<h1 class="col-sm-offset-4 titreSite">ThiantaKones</h1>	
+			<div class="row rowTitreSite">
+				<h1 class="col-sm-offset-4 titreSite">Thiantakones</h1>	
 			</div>
-			<div class="row">
+			<div class="row rowContenu">
 				<div class="col-sm-1 col-md-2 sidebarLeft sidebar">
-					<div id="textSidebarLeft" class="textSidebar">LES PUBLICATIONS DE GRACE</div>
+					<div id="textSidebarLeft" class="textSidebar">
+						LES PUBLICATIONS DE GRACE
+					</div>
 				</div>
 
 				<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 					
-					<div class="row placeholders theme">
+					<div class="placeholders theme">
 
-						<button id="carreThemeL" class="col-xs-12 col-sm-12 placeholder">
-							Récemment publiés
-						</button>
+						<div id="carreThemeL" class="col-xs-12 col-sm-12 placeholder">
+							<div class="text-left">RECEMMENT PUBLIES</div>
+							
+						</div>
 
-						<button id="carreTheme" class="col-xs-6 col-sm-6 placeholder">
-							Dieureudieuf CHEIKH BETHIO
-						</button>
-						<button id="carreTheme" class="col-xs-6 col-sm-6 placeholder">
-							L'esprit universel
-						</button>
-						<button id="carreTheme" class="col-xs-7 col-sm-7 placeholder">
+						<div id="carreTheme" class="col-xs-6 col-sm-6 pull-left themeOne placeholder">
+							<div>Dieureudieuf</div>
+							<div>CHEIKH</div>
+							<div>BETHIO</div>							  
+						</div>
+
+
+
+						<div id="carreTheme" class="col-xs-6 col-sm-6 pull-right themeTwo placeholder">
+							<div class="text-left">L'esprit</div>
+							<div class="text-center">universel</div>							 
+						</div>
+
+						<div id="carreTheme" class="col-xs-6 col-sm-6 pull-left themeThre placeholder">
 							Histoires sacrées
-						</button>
-						<button id="carreTheme" class="col-xs-5 col-sm-5 placeholder">
-							Sectarisme
-						</button>
-						<button id="carreTheme" class="col-xs-6 col-sm-6 placeholder">
-							Les plus apprécisés
-						</button>
-						<button id="carreTheme" class="col-xs-6 col-sm-6 placeholder">
-							Nos auteurs
-						</button>
-					</div>
+						</div>
 
+						<div id="carreTheme" class="col-xs-6 col-sm-6 pull-right themeFour placeholder">
+							<div>GATT</div>
+							<div>SAFF!</div>
+						</div>
+
+						<div id="carreTheme" class="col-xs-6 col-sm-6 pull-left themeFive placeholder">
+							Les plus appréciés
+						</div>
+
+						<div id="carreTheme" class="col-xs-6 col-sm-6 pull-right themeSix placeholder">
+							L'originalité spirituelle
+						</div>
+					</div>
 				</div>
 
 				<div class="col-sm-1 col-md-2 sidebarRight sidebar">
