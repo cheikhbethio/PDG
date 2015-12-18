@@ -262,10 +262,6 @@ body {
     background-image: url('cheikhAdiaSaliou.jpg');
     background-repeat : no-repeat;
     background-size: cover;
-    /*font-size: 0px;*/
-    /*width: 190px;
-    height: 140px;
-    background-position: right top;*/
 }
 
 
@@ -302,5 +298,17 @@ min-width:1200px
 @media (min-width:400px) and (max-width:775px){
   .rowContenu{
     margin-top: 11.5vw;
+  }
+  .titreSite{
+      text-align: center;
+  }
+}
+@media(max-width:399px){
+  .rowContenu{
+    margin-top: 22vw;
+  }
+
+  .titreSite{
+      text-align: center;
   }
 }
