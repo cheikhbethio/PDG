@@ -10,6 +10,7 @@
     },
 
     "scripts": {
+        "postinstall": "bower cache clean && bower install",
         "start": "node_modules/.bin/supervisor server.js",
         "test": "node_modules/.bin/mocha -w"
     },
