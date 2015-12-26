@@ -1,9 +1,6 @@
 {
 "name": "PDG",
 "version": "0.0.1",
-  "engines": {
-    "node": "latest"
-  },
 "description": "Back end PDG",
 
     "devDependencies": {
@@ -13,7 +10,6 @@
     },
 
     "scripts": {
-        "postinstall": "node ./node_modules/bower/bin/bower install",
         "start": "node_modules/.bin/supervisor server.js",
         "test": "node_modules/.bin/mocha -w"
     },
