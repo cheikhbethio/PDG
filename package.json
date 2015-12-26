@@ -10,7 +10,6 @@
     },
 
     "scripts": {
-        "postinstall": "bower cache clean && bower install",
         "start": "node_modules/.bin/supervisor server.js",
         "test": "node_modules/.bin/mocha -w"
     },
@@ -18,7 +17,6 @@
     "dependencies": {
 
         "express":"4.12.x",
-        "bower" : "latest",
         "supervisor": "0.6.x",
         "mongoose": "3.8.x",
         "body-parser": "1.12.x",
