@@ -1,0 +1,75 @@
+/*div{
+ border-width	:	1px;
+ border-style	:	solid;
+ border-color	:	black;
+}
+*/
+
+
+.contentRubrique{
+	background-color: #FFF5EE;
+	height: 100%;
+	width: 100%;
+  margin: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.rowRubrique{
+	width: 100%;
+  height: 100%;
+}
+/********************/
+.poeme{
+  margin-top: 20px;
+  min-width: 270px;
+}
+.panel-heading{
+  height : auto;
+  overflow :  auto;
+  background-color : #CFE1F1;
+}
+.titre{
+  font-size: 20px;
+}
+.date{
+  text-align : center;
+  width : 100px;
+  height : auto;
+}
+.contenuePoeme{
+  padding-bottom :15px; /* 
+    font-size: 0.8vw;*/
+}
+.panel-footer{/*
+  border: 1px solid green;*/
+  overflow : auto;
+}
+img{
+width: 100%; height: 150px;
+}
+/*****************************/
+
+@media(min-width:1200px){
+  .contentRubrique{
+    margin-top: 7vw;
+  }
+}
+
+
+@media(min-width:776px) and (max-width:1199px){
+  .contentRubrique{
+    margin-top: 8vw;
+  }
+}
+
+@media (min-width:400px) and (max-width:775px){
+  .contentRubrique{
+    margin-top: 11.5vw;
+    width: 100%;
+  }
+}
+@media(max-width:399px){
+  .contentRubrique{
+    margin-top: 22vw;
+  }
+}
