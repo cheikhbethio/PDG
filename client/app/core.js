@@ -5,7 +5,10 @@ angular.module('pgdApp',[
 	'siteBody',
 	'door3.css',
 	'accueil',
-	'rubrique'
+	'rubrique',
+    'ui.bootstrap',
+    'ui.bootstrap.modal',
+	'dialogs.main'
 	])
 	.config(['$stateProvider', '$urlRouterProvider', 
 		function($stateProvider, $urlRouterProvider){

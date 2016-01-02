@@ -47,6 +47,10 @@
 img{
 width: 100%; height: 150px;
 }
+.panel{
+    box-shadow: 8px 8px 8px #CAC7C7;
+    border-radius: 5px;
+}
 /*****************************/
 
 @media(min-width:1200px){

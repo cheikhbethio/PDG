@@ -17,7 +17,7 @@ body {
     padding-top: 50px;
     background-color: #CFE1F1;/* #E6EEF5;/*#AFEEEE;*/
     width: 100%;
- 
+      min-width: 320px;
     overflow: auto;
     
 }

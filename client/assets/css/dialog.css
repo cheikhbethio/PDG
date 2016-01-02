@@ -1,0 +1,133 @@
+/*div{
+	border : 1px solid red;
+}*/
+
+
+.modal-lg {
+	width: 80%;
+  	margin-left: 10%;
+    min-width: 256px;
+}
+.modal-content{
+  border-radius: 10px;	
+}
+.dialogTexte{
+	text-align: left; 
+	font-family :'Georgia', serif; 
+}
+.dialogTitle{
+	text-align: left; 
+	font-family :'Georgia', serif; 
+}
+.adresse{
+	text-align: left;
+}
+.policeText{
+	font-size: 17px;
+}
+
+/***
+
+link
+
+****/
+.rowLinker{
+	padding-left: 50px;
+	padding-right: 50px;
+
+}
+.rowLinker > div{/*
+	border : 2px solid blue;*/
+	display: inline-block;
+}
+
+.rowLinker > div > a > div > img{
+	width: 100%;
+	height: 100%; 
+}
+
+.rowLinker  > div > a {
+	width: 5%;
+}
+
+@media (max-width: 700px){
+	.rowLinker > div  > a {
+		width: 12%;
+	}
+	.rowLinker{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.modal-lg {
+		width: 100%;
+	  	margin-left: 0%;
+	    min-width: 256px;
+	}
+}
+
+
+/***
+
+Comment
+
+**/
+.rowCommentsList > div{
+	border: 3px solid blue;
+	text-align: left;
+	overflow: auto;
+}
+
+.rowCommentsList {
+	width: 95%;
+	margin-left: 5%;
+}
+.rowCommentInput{
+	width: 95%;
+	margin-left: 5%;
+
+}
+
+
+
+
+.nameCommenter{
+	color: #3b5998;
+	font-weight: bold;
+}
+
+.policeTextComment{
+	text-align: left;
+	font-size: 14px;
+	font-family :arial,'Georgia', serif; 	
+}
+
+/*****
+
+hr
+
+*****/
+.firtHr{
+	border-top: 1px solid #CFD9DE; 
+	width: 70%;
+    margin-top: 0px;
+    margin-bottom: 5px; 
+}
+.secondHr{
+	border-top: 1px solid #AEB7BB; 
+	width: 100%;
+    margin-top: 5px;
+}
+
+
+/*
+.forpoeme {
+
+<hr class="forpoeme col-xs-8 col-xs-offset-2">
+  -moz-border-bottom-colors: none;
+  -moz-border-image: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  border-color: #000 -moz-use-text-color #FFFFFF;
+  border-style: 3px solid none;
+}*/
