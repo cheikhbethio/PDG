@@ -1,0 +1,46 @@
+<!--div class="composants">
+	<div>Poèmes</div>
+		<ul class="action">
+			<li>rédiger</li>
+			<li>chercher</li>
+			<li>voir tous les poèmes</li>
+		</ul>
+	<div>Commentaires</div>
+	<div>Utilisateurs</div>
+	<div>Staistiques</div>
+	<div>Photos</div>
+</div-->
+
+
+<uib-accordion close-others="true">
+
+	<uib-accordion-group heading="Poèmes">
+			<div><a>Les plus récents</a></div>
+			<div><a ui-sref="dashboard.createPoemes">Rédaction</a></div>
+			<div><a>Rechercher</a></div>
+			<div><a>Liste des poèmes</a></div>
+	</uib-accordion-group>
+
+	<uib-accordion-group heading="Commentaires">
+			<div><a>Les plus récents</a></div>
+			<div><a>Rédaction</a></div>
+			<div><a>Rechercher</a></div>
+	</uib-accordion-group>
+
+	<uib-accordion-group heading="Utilisateurs">
+			<div><a>Les plus récents</a></div>
+			<div><a>Liste des utilisateurs</a></div>
+			<div><a>Rechercher</a></div>
+	</uib-accordion-group>
+
+	<uib-accordion-group heading="Statistiques">
+			<div><a>Voir tous les stats</a></div>
+	</uib-accordion-group>
+
+	<uib-accordion-group heading="Photos">
+			<div><a>Les plus récentes</a></div>
+			<div><a>Ajouter de photo</a></div>
+			<div><a>Recherche de photo</a></div>
+	</uib-accordion-group>
+
+</uib-accordion>

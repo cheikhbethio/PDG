@@ -4,18 +4,26 @@ angular.module('pgdApp',[
 	'ui.router',
 	'siteBody',
 	'door3.css',
-	'accueil',
-	'rubrique',
     'ui.bootstrap',
     'ui.bootstrap.modal',
-	'dialogs.main'
+	'dialogs.main',
+    'snap',  
+    'textAngular',
+
+	'accueil',
+	'rubrique',
+	'connexion',
+	'registration',
+
+	'management',
+	'manAccueil',
+	'poemes'
 	])
 	.config(['$stateProvider', '$urlRouterProvider', 
 		function($stateProvider, $urlRouterProvider){
-			$urlRouterProvider.otherwise('/');
+			//$urlRouterProvider.otherwise('/');
 			$stateProvider
 				.state("site", {
-                    css : { href : 'assets/css/body/body.css'},
 					views : {
 						'header' : {
 							templateUrl : 'app/site/body/header.html',
@@ -40,23 +48,52 @@ angular.module('pgdApp',[
 						requireLogin : false
 					}
 				})
-				.state("dashboard", {
-					url : "/dashboard",
+				.state("dashboard", {	
+					url : '/dashboard',		
 					views : {
 						'header' : {
-							templateUrl : 'app/dashboard/body/header.html',
-							controller : 'dashboardHeaderController'
+							
+							templateUrl : 'app/site/body/header.html',
+							controller : 'siteBodyController'
 						},
 						'content' : {
-							templateUrl : 'app/dashboard/body/content.html',
-							controller : 'dashboardHeaderController'
+							templateUrl : 'app/manager/body/content.html',
+							controller : 'manBodyController'
 						}
-					},
-					data : {
-						requireLogin : true
 					}
+
+					/*data : {
+						requireLogin : true
+					}*/
 				});
 		}])
 	.controller('testController', ['$scope', function($scope){
 		$scope.testAngular =  'ça marche coté angular!!!';
-	}]);
+	}])
+	.run(function($rootScope){
+		$rootScope.confVariable = {};
+		$rootScope.confVariable.titre = "Thiantakones";
+
+	});
+
+/*
+
+
+					views : {
+						'header' : {
+							
+							templateUrl : 'app/site/body/header.html',
+							controller : 'siteBodyController'
+						},
+						'title' : {
+							templateUrl : 'app/site/body/title.html',
+							controller : 'managerBodyController',
+						},
+						'content' : {
+							templateUrl : 'app/manager/body/content.html',
+							controller : 'managerBodyController'
+						},
+						'footer' : {
+							templateUrl : 'app/site/body/footer.html'
+						}
+					}*/

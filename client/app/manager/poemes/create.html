@@ -1,0 +1,25 @@
+<h2 class="page-header">Rédaction de Poème</h2>
+
+
+<form name="createPoemeForm">
+    <div class="form-group input-group" novalidate>
+        <span for="title" class="input-group-addon"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></span>
+        <input class="form-control" name="title" type="text" id="title" placeholder="Titre du poeme" ng-model="title" required>
+    </div>
+
+    <text-angular ng-model="htmlVariable" required></text-angular>
+
+    <div class="form-group input-group">
+        <span for="description" class="input-group-addon"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> (séparés par une virgule)</span>
+        <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="keywords" ng-list="," required>
+    </div>
+
+    <button class="btn btn-primary pull-right" ng-click="addArticle()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder</button>
+
+    <div class="checkbox pull-right" style="margin-right: 15px">
+        <label>
+            <input type="checkbox" ng-model="ispublic"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Publier maintenant? 
+        </label>
+    </div>
+
+</form>

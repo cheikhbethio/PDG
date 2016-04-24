@@ -15,8 +15,8 @@ angular.module('accueil', ['ui.router', 'door3.css'])
 		function($rootScope, $scope, $css, $state){
 		$css.add('assets/css/body/content.css');
 		$css.add('assets/css/body/sidebar.css');
-		$rootScope.titre = "Thiantakones";
-
+		
+		$rootScope.confVariable.titre = "Thiantakones";
 		$scope.rubrique = function(id){
 			$state.go("site.rubrique", {id:1});
 		}

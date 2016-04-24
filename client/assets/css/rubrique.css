@@ -21,7 +21,7 @@
 /********************/
 .poeme{
   margin-top: 20px;
-  min-width: 270px;
+  min-width: 200px;
 }
 .panel-heading{
   height : auto;
@@ -52,7 +52,7 @@ width: 100%; height: 150px;
     border-radius: 5px;
 }
 /*****************************/
-
+/*
 @media(min-width:1200px){
   .contentRubrique{
     margin-top: 7vw;
@@ -77,3 +77,4 @@ width: 100%; height: 150px;
     margin-top: 22vw;
   }
 }
+*/

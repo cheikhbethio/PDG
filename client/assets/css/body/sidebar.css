@@ -28,7 +28,8 @@
     display: inline-block;
     font-size: 2.3vw;
     text-align: center;
-    margin-top: 18vw;
+    margin-top: 250px;
+    /*margin-top: 50vh; /*350px;*/
     margin-left: -13.5vw;
     margin-right: -16vw;
 }
@@ -43,16 +44,6 @@
     -webkit-transform: rotate(270deg);
     transform: rotate(270deg);
 }
-
-@media (height: 600px) {
-    .textSidebar{
-       font-size: 41px;
-       margin-top: 243px;
-       margin-left: -245px;        
-    }
-}
-
-
 
 /* Sidebar navigation */
 .nav-sidebar {
@@ -70,3 +61,13 @@
   color: #fff;
   background-color: #428bca;
 }
+
+/*
+@media (height: 600px) {
+    .textSidebar{
+       font-size: 41px;
+       margin-top: 243px;
+       margin-left: -245px;        
+    }
+}
+*/

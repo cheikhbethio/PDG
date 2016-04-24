@@ -7,9 +7,8 @@
 			<title>Publication De Grâce </title>
 
 			<link rel="stylesheet" type="text/css" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
-<!--
-			<link rel="stylesheet" type="text/css" href="assets/css/body/body.css">
--->
+			<link rel="stylesheet" type="text/css" href="assets/css/global.css">
+
 			<link rel="stylesheet" type="text/css" href="assets/libs/font-awesome/css/font-awesome.min.css">					
 			<link rel="stylesheet" href="assets/libs/angular-snap/angular-snap.css">
 			<link rel='stylesheet' href='assets/libs/textAngular/src/textAngular.css'>
@@ -23,27 +22,51 @@
 
 		<div ui-view="header"></div>
 		<div ui-view="title"></div>
-		<div ui-view="content"></div>
-		<div ui-view="footer"></div>
+		<div class="content" ui-view="content"></div>
+		<div ui-view="footer" class="footer"></div>
 
 		<script src="assets/libs/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="assets/libs/angular/angular.js"></script>
-		
 		<script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="assets/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<script src="assets/libs/angular-ui-router/release/angular-ui-router.min.js"></script>	
     	<script src="assets/libs/angular-css/angular-css.min.js"></script>
     	<!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>-->
-
+    	<script type="text/javascript" src="assets/libs/angular-animate/angular-animate.min.js"></script>
     	<script type="text/javascript" src="assets/libs/angular-sanitize/angular-sanitize.min.js"></script>
 		<script type="text/javascript" src="assets/libs/angular-translate/angular-translate.min.js"></script>
 		<script type="text/javascript" src="assets/libs/angular-dialog-service/dist/dialogs.min.js"></script>
+		<script src="assets/libs/angular-resource/angular-resource.js"></script>
+		<script src="assets/libs/angular-contenteditable/angular-contenteditable.js"></script>
+		<script src="assets/libs/ngstorage/ngStorage.js"></script>
+		<script src="assets/libs/angular-bootstrap-show-errors/src/showErrors.js"></script>
+		<script src="assets/libs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+		<script src='assets/libs/textAngular/dist/textAngular-rangy.min.js'></script>
+		<script src="assets/libs/textAngular/dist/textAngular.min.js"></script>
+		<script src="assets/libs/snapjs/snap.js"></script>
+		<script src="assets/libs/angular-snap/angular-snap.js"></script>
+		<script src='assets/libs/ngToast/dist/ngToast.js'></script>
+		<script src='assets/libs/jquery-minicolors/jquery.minicolors.js'></script>
+		<script src='assets/libs/angular-minicolors/angular-minicolors.js'></script>
+		<script src='assets/libs/angular-dialog-service/dist/dialogs.min.js'></script>
+		<script src='assets/libs/angular-dialog-service/dist/dialogs-default-translations.min.js'></script>
+
 		
 		<!--APP-->
 		<script type="text/javascript" src="app/core.js"></script>
+
+			<!--site-->
 		<script type="text/javascript" src="app/site/body/body.js"></script>
 		<script type="text/javascript" src="app/site/accueil/accueil.js"></script>
+		<script type="text/javascript" src="app/site/sign/connexion.js"></script>
+		<script type="text/javascript" src="app/site/sign/registration.js"></script>
 		<script type="text/javascript" src="app/site/rubrique/rubrique.js"></script>
+
+			<!--manager-->
+		<script type="text/javascript" src="app/manager/body/body.js"></script>
+		<script type="text/javascript" src="app/manager/accueil/accueil.js"></script>
+		<script type="text/javascript" src="app/manager/poemes/poeme.js"></script>
+
 	</body>
 </html>
 

@@ -72,14 +72,13 @@ div{
 
 
 #carreThemeL{
-     height: 15vw;
+    height: 15vw;
     min-height: 60px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
     font-size: 3vw;
-    background-color: #fff;
-    
+    background-color: #fff;    
     display: inline-block;
     vertical-align: middle;
     float: none;
@@ -139,6 +138,7 @@ div{
 min-width:1200px
 ================
 */
+/*
 @media(min-width:1200px){
   .rowContenu{
     margin-top: 6.4vw;
@@ -153,7 +153,7 @@ min-width:1200px
     padding: 30px
   }
 }
-
+*/
 /*
 =================
 (min-width:776px) and (max-width:1199px)
@@ -162,7 +162,7 @@ min-width:1200px
 
 @media(min-width:776px) and (max-width:1199px){
   .rowContenu{
-    margin-top: 8vw;
+   // margin-top: 8vw;
   }
   .imgThemeOne{  
     margin-top: 20px;

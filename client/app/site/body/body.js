@@ -5,4 +5,6 @@ angular.module('siteBody',['door3.css'])
 		$css.add('assets/css/body/body.css');
 		$css.add('assets/css/body/title.css');
 		$css.add('assets/css/body/header.css');
+		$css.add('assets/css/body/sidebar.css');
+		$css.add('assets/css/body/footer.css');
 	}]);
