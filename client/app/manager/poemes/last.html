@@ -1,0 +1,16 @@
+<h2 class="page-header">Les 10 poèmes les plus récents : </h2>
+
+<div>
+	<div>
+		<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+			<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+				<img ng-src="{{slide.image}}" style="margin:auto;">
+				<div class="carousel-caption">
+					<h1>Slide {{slide.id}}</h1>
+					<p>{{slide.text}}</p>
+				</div>
+			</uib-slide>
+		</uib-carousel>
+	</div>
+</div>	
+

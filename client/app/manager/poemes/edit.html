@@ -1,0 +1,25 @@
+<h2 class="page-header">Edition du poème <i>{{poeme.title}}</i></h2>
+
+
+<form name="editPoemeForm">
+    <div class="form-group">
+        <label for="description"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Titre</label>
+        <input class="form-control" name="title" type="text" id="title" placeholder="Titre du poème" ng-model="poeme.title" required>
+    </div>
+
+    <text-angular ng-model="poeme.content" required></text-angular>
+
+    <div class="form-group">
+        <label for="description"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés (séparés par une virgule)</label>
+        <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="poeme.keywords" ng-list="," required>
+    </div>
+
+    <button class="btn btn-primary pull-right" ng-click="editPoeme()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder les modifications</button>
+
+    <div class="checkbox pull-right isPublic" >
+        <label>
+            <input type="checkbox" ng-model="article.ispublic"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Publier maintenant? 
+        </label>
+    </div>
+
+</form>
