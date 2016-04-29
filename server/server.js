@@ -14,25 +14,33 @@ var application_root=__dirname,
     passport = require('passport'),
     app         = express();
 
-//file
-//require('./config/passport.js')(passport);
+//db Connection
+var configDB = require('./config/database.js');
+mongoose.connect(configDB.url);
 
-//app.use
-//app.use(express.favicon());
+
+//starting server port
+var port    =   process.env.PORT || 8080;
+
+//passport configuration and required
+require('./config/passport.js')(passport);
+app.use(session({ secret: 'seugneBethiodieuredieufway' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 app.use(express.static(path.join(application_root ,'../client')));
 app.use(morgan('dev'));
 app.use(methodOverride());
-app.use(session({ secret: 'securedsession' }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser()); 
-app.use(flash());
 
-//starting server port
-var port    =   process.env.PORT || 8080;
+/********************************* routes**********************************/ 
+//passeport
+require('./route/passport.js')(app, passport); 
+
 app.listen(port, function(){
     console.log("node server on port : " + port);
     console.log("application_root : " + application_root);
