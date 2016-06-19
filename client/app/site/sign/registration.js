@@ -11,18 +11,14 @@ angular.module('registration', ['ui.router', 'door3.css'])
 				controller	: 'registrationController'
 			})
 	}])
-	.controller('registrationController', ['$rootScope', '$scope', '$css', '$state', 'User',
-		function($rootScope, $scope, $css, $state, User){
+	.controller('registrationController', ['$rootScope', '$scope', '$css', '$state', 'SignUp',
+		function($rootScope, $scope, $css, $state, SignUp){
 
 		$rootScope.titre = "Thiantakones";
-
 		$scope.newUser = {};
-
 		$scope.loginAlreadyUsed = false;
 		$scope.emailAlreadyUsed = false;
-
 		$scope.invalidForm = false;
-
 		$scope.nonMatchingPwd = false;
 
 		$scope.saveNewUser = function() {
@@ -39,7 +35,7 @@ angular.module('registration', ['ui.router', 'door3.css'])
 						password: $scope.newUser.password
 					};
 
-		    		User.save(nuser, function(resp) {
+		    		SignUp.save(nuser, function(resp) {
 						if(resp.error == 0){
 							console.log("Successfuly posted: " + resp.error);
 							$state.go('site.connection', {registration : true});
@@ -50,7 +46,7 @@ angular.module('registration', ['ui.router', 'door3.css'])
 						}
 
 					}, function(error){
-						console.log("Response: " + error);
+						console.log("Response: ", error);
 					});
 
 		    	}
@@ -74,15 +70,6 @@ angular.module('registration', ['ui.router', 'door3.css'])
 			$scope.emailAlreadyUsed = false;
 
 			$scope.nonMatchingPwd = false;;
-  		};
-
-  		/* For debugging purposes only */
-  		var printNewUser = function(newUser){
-  			console.log("User lastName: " + newUser.lastName);
-  			console.log("User firstName: " + newUser.firstName);
-  			console.log("User email: " + newUser.email);
-  			console.log("User password: " + newUser.password);
-  			console.log("User passwordConfirmation: " + newUser.passwordConfirmation);
   		};
 
   		$scope.closeAlert = function() {

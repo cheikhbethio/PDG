@@ -8,6 +8,12 @@
     <div class="signForm col-xs-5 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
         <form name="registrationForm"  class="form-group col-xs-10 col-xs-offset-1" novalidate>
 
+            <alert type="danger" ng-show="invalidForm" close="closeAlert()">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">
+                </span> 
+                Echec de l'inscription. Vérifiez que vous avez bien renseigné tous les champs et que les mots de passes sont identiques. Si c'est le cas, votre identifiant ou adresse email est déjà utilisé.
+            </alert>
+
             <div class="form-group"  ng-class="{ 'has-error': $scope.noLastName }">
                 <label for="exampleInputPassword1">Votre Nom</label>
                 <input type="text" 
@@ -49,6 +55,9 @@
                     placeholder="Saisissez Votre Email" 
                     ng-model="newUser.email" 
                     required>
+                    
+                <p class="help-block input-group-addon" ng-if="registrationForm.email.$error.email">Adresse mail invalid</p>
+                <p class="input-group-addon" ng-show="emailAlreadyUsed">Email déjà utilisé</p>
             </div>
 
 
@@ -70,11 +79,12 @@
                     id="passwordConfirmation" 
                     name="passwordConfirmation" 
                     placeholder="Saisissez Confirmer Mot de Passe" 
-                    ng-model="newUser.passwordConfirmation" required>
+                    ng-model="newUser.passwordConfirmation" 
+                    password-validate="newUser.password" required>
             </div>
 
 
-            <button type="submit" class="btn btn-success">S'incrire</button>
+            <button type="submit" class="btn btn-success" ng-click="saveNewUser(newUser)">S'incrire</button>
             <button type="reset" class="btn btn-link" ng-click="resetRegistrationForm()">Vider les champs</button>
             
 

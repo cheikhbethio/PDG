@@ -20,7 +20,7 @@ mongoose.connect(configDB.url);
 
 
 //starting server port
-var port    =   process.env.PORT || 8080;
+var port    =   process.env.PORT || 8000;
 
 //passport configuration and required
 require('./config/passport.js')(passport);
@@ -39,9 +39,12 @@ app.use(cookieParser());
 
 /********************************* routes**********************************/ 
 //passeport
-require('./route/passport.js')(app, passport); 
+//require('./route/passport.js')(app, passport); 
 
 app.listen(port, function(){
     console.log("node server on port : " + port);
     console.log("application_root : " + application_root);
-})
+});
+
+require('./route/user.js')(app);
+require('./route/connection.js')(app, passport);

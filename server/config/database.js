@@ -1,3 +1,3 @@
 module.exports = {
-	'url' : 'mongodb://localhost/pdqdatabase'
+	'url' : 'mongodb://localhost/pdgdatabase'
 };

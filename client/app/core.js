@@ -13,6 +13,7 @@ angular.module('pgdApp',[
 	'accueil',
 	'rubrique',
 	'connexion',
+	'connectionService',
 	'registration',
 
 	'management',
