@@ -51,7 +51,9 @@ module.exports.user = db;
 exports.create=function (req, res , next) {
     var params = req.body;
     var newUser = new db();
-    newUser.local.login = params.email;
+    var email = params.login;
+    var login = params.login;
+    newUser.local.email = email;
     newUser.local.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
     newUser.local.firstname  = params.firstname;
     newUser.local.lastname   = params.lastname;
@@ -60,15 +62,38 @@ exports.create=function (req, res , next) {
     newUser.local.idPic   = "";   
     newUser.local.phone   = "";
     newUser.local.status  = "";
-    newUser.save(function(err, results){
-        if (err) {
-            res.sendStatus(401,{error : err.message});
-        }
+
+    db.findOne({'local.email' : email}, function(err, user){
+        if (err) {next (err)} 
         else{
-            console.log("#### signup succes!!")
-            res.send({error : 0, result : results, body : req.body});
-        }
-    });
+            if (user) {
+                console.log("email already use!!!!");
+                res.send({message : "email is already used!", code : 1});
+                //res.sendStatus(401, {error : '1'});
+                return next();
+            }
+
+        db.findOne({'local.login' : login}, function(errLogin, userLogin){
+            if (errLogin) {next (errLogin)} 
+            else{
+                if (userLogin) {
+                    console.log("login is already used!");
+                    res.send({message : "login is already used!", code : 2});
+                    //res.sendStatus(401, {error : '2'});
+                    return next();
+                }
+                newUser.save(function(err, results){
+                    if (err) {
+                        res.send({message : err});
+                        //res.sendStatus(401,{error : err.message});
+                    }
+                    else{
+                        console.log("#### signup succes!!")
+                        res.send({message : "signup succes", code : 0, result : results, body : req.body});
+                    }
+                });
+        }})
+    }})
 };
 
 exports.view =  function(req, res,next){

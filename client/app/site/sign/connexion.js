@@ -1,7 +1,6 @@
 'use strict';
 
-
-angular.module('connexion', ['ui.router', 'door3.css'])
+angular.module('connexion', ['ui.router', 'door3.css', ])
 	.config(['$stateProvider', function($stateProvider){
 		$stateProvider
 			.state('site.connexion', {
@@ -11,11 +10,12 @@ angular.module('connexion', ['ui.router', 'door3.css'])
 				controller	: 'connexionController'
 			})
 	}])
-	.controller('connexionController', ['Login','$rootScope', '$scope', '$css', '$state', 
-		function(Login , $rootScope, $scope, $css, $state){
+	.controller('connexionController', ['Login','$rootScope', '$scope', '$css', '$state', '$localStorage',
+		function(Login , $rootScope, $scope, $css, $state, $localStorage){
 
 		$rootScope.titre = "Thiantakones";
 		$scope.user;
+		$scope.invalidForm = false;
 
 		$scope.connexion = function(){
 			if($scope.connectionForm.$valid){
@@ -23,17 +23,23 @@ angular.module('connexion', ['ui.router', 'door3.css'])
 					username : $scope.user.login,
 					password : $scope.user.password,
 				}, function(user){
-					//$localStorage.currentUser = user;
-					$state.go('site');
+					$localStorage.currentUser = user;
+					console.log("###### user stored : ", user);
+					$state.go('dashboard.home');
 					console.log("###### connexion avec success");
 				}, function(error){
 					console.log('Erreur de connection');
-					$scope.connectionError = true;
+					$scope.invalidForm = true;
 				});
 			} else{
 				console.log('Formulaire Invalide');
-				$scope.connectionError = true;
+				$scope.invalidForm = true;
 			}
+		};
+
+		
+  		$scope.closeAlert = function() {
+			$scope.invalidForm = false;
 		};
 
 	}]);

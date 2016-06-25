@@ -20,6 +20,7 @@ angular.module('registration', ['ui.router', 'door3.css'])
 		$scope.emailAlreadyUsed = false;
 		$scope.invalidForm = false;
 		$scope.nonMatchingPwd = false;
+		$scope.message;
 
 		$scope.saveNewUser = function() {
 
@@ -37,13 +38,16 @@ angular.module('registration', ['ui.router', 'door3.css'])
 
 		    		SignUp.save(nuser, function(resp) {
 						if(resp.error == 0){
-							console.log("Successfuly posted: " + resp.error);
-							$state.go('site.connection', {registration : true});
-						}else if( resp.error == 1){
+							console.log("Successfuly posted: " + resp.message);
+							$state.go('site.connexion', {registration : true});
+						}else{
+							
+						}
+						/*else if( resp.error == 1){
 							$scope.emailAlreadyUsed = true;
 						}else if(resp.error == 2){
 							$scope.loginAlreadyUsed = true;
-						}
+						}*/
 
 					}, function(error){
 						console.log("Response: ", error);
@@ -52,7 +56,7 @@ angular.module('registration', ['ui.router', 'door3.css'])
 		    	}
 		    	else{
 		    		$scope.nonMatchingPwd = true;
-		    		console.log("the passwords don't match !!");
+		    		console.log("the password don't match !!");
 		    	}
 		  	}
 		  	else{

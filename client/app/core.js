@@ -9,12 +9,15 @@ angular.module('pgdApp',[
 	'dialogs.main',
     'snap',  
     'textAngular',
+    'ngStorage',    
 
 	'accueil',
 	'rubrique',
 	'connexion',
 	'connectionService',
 	'registration',
+
+	'pdg.currentUser',
 
 	'management',
 	'manAccueil',
@@ -61,11 +64,10 @@ angular.module('pgdApp',[
 							templateUrl : 'app/manager/body/content.html',
 							controller : 'manBodyController'
 						}
-					}
-
-					/*data : {
+					},
+					data : {
 						requireLogin : true
-					}*/
+					}
 				});
 		}])
 	.controller('testController', ['$scope', function($scope){
@@ -75,26 +77,22 @@ angular.module('pgdApp',[
 		$rootScope.confVariable = {};
 		$rootScope.confVariable.titre = "Thiantakones";
 
+	})		
+	.run(function ($rootScope,  $state, CurrentUser) {
+
+	    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+	        var requireLogin = toState.data.requireLogin;
+	        var requireLoginDashboard = toState.data.requireLoginDashboard;
+
+	        if (requireLogin && !CurrentUser.isLoggedIn()) {
+	        	console.log("not connected yet : ");
+	            event.preventDefault();
+	            $state.go('site.connexion');
+	        } 
+	  });
+
 	});
 
-/*
 
 
-					views : {
-						'header' : {
-							
-							templateUrl : 'app/site/body/header.html',
-							controller : 'siteBodyController'
-						},
-						'title' : {
-							templateUrl : 'app/site/body/title.html',
-							controller : 'managerBodyController',
-						},
-						'content' : {
-							templateUrl : 'app/manager/body/content.html',
-							controller : 'managerBodyController'
-						},
-						'footer' : {
-							templateUrl : 'app/site/body/footer.html'
-						}
-					}*/
+	//|| (requireLoginDashboard && CurrentUser.getRight() == 0)
