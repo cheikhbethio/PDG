@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('registration', ['ui.router', 'door3.css'])
+angular.module('registration', ['ui.router'])
 	.config(['$stateProvider', function($stateProvider){
 		$stateProvider
 			.state('site.registration', {
@@ -11,16 +11,17 @@ angular.module('registration', ['ui.router', 'door3.css'])
 				controller	: 'registrationController'
 			})
 	}])
-	.controller('registrationController', ['$rootScope', '$scope', '$css', '$state', 'SignUp',
-		function($rootScope, $scope, $css, $state, SignUp){
+	.controller('registrationController', ['$rootScope', '$scope', '$state', 'SignUp',
+		function($rootScope, $scope, $state, SignUp){
 
 		$rootScope.titre = "Thiantakones";
 		$scope.newUser = {};
+		$scope.message;
+		$scope.invalidForm = false;
+		
 		$scope.loginAlreadyUsed = false;
 		$scope.emailAlreadyUsed = false;
-		$scope.invalidForm = false;
 		$scope.nonMatchingPwd = false;
-		$scope.message;
 
 		$scope.saveNewUser = function() {
 
@@ -37,18 +38,15 @@ angular.module('registration', ['ui.router', 'door3.css'])
 					};
 
 		    		SignUp.save(nuser, function(resp) {
-						if(resp.error == 0){
-							console.log("Successfuly posted: " + resp.message);
+						if(resp.code == 0){
+							$scope.message = resp.message;
 							$state.go('site.connexion', {registration : true});
+							console.log("### ok registration :", $scope.message);
 						}else{
-							
+							$scope.message = resp.message;
+							console.log("### ko registration :", $scope.message);
+							$scope.invalidForm = true;
 						}
-						/*else if( resp.error == 1){
-							$scope.emailAlreadyUsed = true;
-						}else if(resp.error == 2){
-							$scope.loginAlreadyUsed = true;
-						}*/
-
 					}, function(error){
 						console.log("Response: ", error);
 					});

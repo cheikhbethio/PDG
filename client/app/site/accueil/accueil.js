@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('accueil', ['ui.router', 'door3.css'])
+angular.module('accueil', ['ui.router'])
 	.config(['$stateProvider', function($stateProvider){
 		$stateProvider
 			.state('site.accueil', {
@@ -11,11 +11,12 @@ angular.module('accueil', ['ui.router', 'door3.css'])
 				controller	: 'accueilController'
 			})
 	}])
-	.controller('accueilController', ['$rootScope', '$scope', '$css', '$state', 
-		function($rootScope, $scope, $css, $state){
-		$css.add('assets/css/body/content.css');
+	.controller('accueilController', ['$rootScope', '$scope', '$state', 
+		function($rootScope, $scope, $state){
+		/*$css.add('assets/css/body/content.css');
 		$css.add('assets/css/body/sidebar.css');
-		
+		*/
+
 		$rootScope.confVariable.titre = "Thiantakones";
 		$scope.rubrique = function(id){
 			$state.go("site.rubrique", {id:1});

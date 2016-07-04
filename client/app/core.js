@@ -3,7 +3,7 @@
 angular.module('pgdApp',[
 	'ui.router',
 	'siteBody',
-	'door3.css',
+	/*'door3.css',*/
     'ui.bootstrap',
     'ui.bootstrap.modal',
 	'dialogs.main',
@@ -21,7 +21,9 @@ angular.module('pgdApp',[
 
 	'management',
 	'manAccueil',
-	'poemes'
+	
+	'poemes',
+	'poemeServices'
 	])
 	.config(['$stateProvider', '$urlRouterProvider', 
 		function($stateProvider, $urlRouterProvider){

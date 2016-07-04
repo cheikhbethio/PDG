@@ -48,3 +48,4 @@ app.listen(port, function(){
 
 require('./route/user.js')(app);
 require('./route/connection.js')(app, passport);
+require('./route/poeme.js')(app, passport);

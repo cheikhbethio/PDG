@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('rubrique', ['ui.router', 'door3.css'])
+angular.module('rubrique', ['ui.router'])
 	.config(['$stateProvider',  function($stateProvider){
 		$stateProvider
 			.state('site.rubrique', {
@@ -10,10 +10,9 @@ angular.module('rubrique', ['ui.router', 'door3.css'])
 				controller	: 'rubriqueController'
 			})
 	}])
-	.controller('rubriqueController', ['$rootScope','$scope', '$css', 'dialogs',
-		function($rootScope, $scope, $css, dialogs){
-		$css.add(['assets/css/rubrique.css', 'assets/css/body/sidebar.css', 'assets/css/dialog.css']);
-		//$css.add('assets/css/body/sidebar.css');
+	.controller('rubriqueController', ['$rootScope','$scope', 'dialogs',
+		function($rootScope, $scope, dialogs){
+		//$css.add(['assets/css/rubrique.css', 'assets/css/body/sidebar.css', 'assets/css/dialog.css']);
 		$rootScope.titre = "Titre de la rubrique";
 
 		$scope.testBoitedialogue=function(){

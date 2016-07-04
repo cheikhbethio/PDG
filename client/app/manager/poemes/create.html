@@ -1,25 +1,48 @@
-<h2 class="page-header">Rédaction de Poème</h2>
+<div class="ProemeCreate row">
+    
+    <alert type="{{info.type}}" ng-if="info.showMessage" close="closeAlert()">
+        <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 
+        {{info.message}}
+    </alert>
+    <h2 class="page-header col-sm-5  col-sm-offset-3">Rédaction de Poème</h2>
+
+    <form name="createPoemeForm" class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+            <div class="form-group input-group" novalidate>
+                <span for="title" class="input-group-addon">
+                    <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+                </span>
+                <input class="form-control" name="title" type="text" id="title" placeholder="Titre du poeme" 
+                ng-model="newPoeme.title" required>
+            </div>
+            
+            <div class="form-group input-group" aria-hidden="true">
+                <span  for="title" class="input-group-addon">
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span> 
+                </span>
+                <input class="form-control" name="from" type="text" id="from" placeholder="de quel livre est tiré ce poème" ng-model="newPoeme.from">
+            </div>
+            
+            
+        </div>
 
 
-<form name="createPoemeForm">
-    <div class="form-group input-group" novalidate>
-        <span for="title" class="input-group-addon"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></span>
-        <input class="form-control" name="title" type="text" id="title" placeholder="Titre du poeme" ng-model="title" required>
-    </div>
+        <text-angular ng-model="newPoeme.content" required></text-angular>
 
-    <text-angular ng-model="htmlVariable" required></text-angular>
+        <div class="form-group input-group">
+            <span for="description" class="input-group-addon"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> (séparés par une virgule)</span>
+            <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="newPoeme.keywords" ng-list=",">
+        </div>
 
-    <div class="form-group input-group">
-        <span for="description" class="input-group-addon"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> (séparés par une virgule)</span>
-        <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="keywords" ng-list="," required>
-    </div>
+        <button class="btn btn-primary pull-right" ng-click="addPoeme()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder</button>
 
-    <button class="btn btn-primary pull-right" ng-click="addArticle()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder</button>
+        <div class="checkbox pull-right" style="margin-right: 15px">
+            <label>
+                <input type="checkbox" ng-model="newPoeme.isPublic"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Publier maintenant? 
+            </label>
+        </div>
 
-    <div class="checkbox pull-right" style="margin-right: 15px">
-        <label>
-            <input type="checkbox" ng-model="ispublic"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Publier maintenant? 
-        </label>
-    </div>
+    </form>
 
-</form>
+</div>
+

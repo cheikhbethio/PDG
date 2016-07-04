@@ -51,13 +51,13 @@ module.exports.user = db;
 exports.create=function (req, res , next) {
     var params = req.body;
     var newUser = new db();
-    var email = params.login;
+    var email = params.email;
     var login = params.login;
     newUser.local.email = email;
     newUser.local.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
     newUser.local.firstname  = params.firstname;
     newUser.local.lastname   = params.lastname;
-    newUser.local.login   = params.login;
+    newUser.local.login   = login;
     newUser.local.right   = "";
     newUser.local.idPic   = "";   
     newUser.local.phone   = "";
@@ -121,15 +121,26 @@ exports.get=function(req, res, next){
 
 exports.delete = function(req, res, next){
     var id = req.params.id;
-    db.findByIdAndRemove(id, function(err, res) {
-        if (!err) {
-            console.log('User deleted!');
-            return res.json(res);
+    /*
+    try {
+        var res_deletion = db.deleteOne( { "_id" : id } );
+        console.log("### res_deletion : ", res_deletion);
+        return res.json(res_deletion);
+    } catch (e) {
+        console.log("### res_deletion with error : ", e);
+    }*/
+
+    db.findById(id, function(err, doc) {
+        if (err || !doc) {
+            return next(err);
         }else{
-            next(err);
+            var res_deletion = doc.remove();
+            console.log("### deleted : ", res_deletion);
+            return res.json(res_deletion);
         }
         //
     });
+
 };
 
 exports.edit = function(req, res, next){

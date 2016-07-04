@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('poemes', ['ui.router', 'door3.css', 'ngAnimate','ui.bootstrap'])
+angular.module('poemes', ['ui.router', 'ngAnimate','ui.bootstrap'])
 .config(['$stateProvider', function($stateProvider){
 	$stateProvider
 	.state('dashboard.createPoeme', {
@@ -30,30 +30,56 @@ angular.module('poemes', ['ui.router', 'door3.css', 'ngAnimate','ui.bootstrap'])
 		controller : 'lastPoemeController'				
 	})
 }])
-.controller('createPoemeController', ['$state', '$scope', '$css', "$rootScope", 
-	function($state, $scope, $css, $rootScope){
-	$css.add('assets/css/manager/poemes/create.css');
+.controller('createPoemeController', [ 'Poeme', '$state', '$scope', "$rootScope", 
+	function(Poeme, $state, $scope, $rootScope){
+	//$css.add('assets/css/manager/poemes/create.css');
+	$scope.info = {};
+
+	$scope.newPoeme = {};
+	$scope.addPoeme = function(){
+		console.log("####: ", $scope.newPoeme.length);
+		if (!$scope.newPoeme) {
+			console.log("tous les champs semblent vide. Veillez les remplir s'il vous plait.");
+		} else {
+			Poeme.save($scope.newPoeme, function(resp){
+				$scope.info.message = resp.message;
+				$scope.info.showMessage = true;
+				if (resp.code == 0) {
+					$scope.info.type = "success";
+					console.log("### content Poeme : " , $scope.newPoeme);
+				} else {
+					$scope.info.type = "danger";
+				}
+				$scope.newPoeme = {};
+			});
+		}
+	};
+	$scope.closeAlert = function(){
+		$scope.info.showMessage = false;
+		$scope.newPoeme = {};
+	}
+
 
 }])
-.controller('editPoemeController', ['$state', '$scope', '$css', "$rootScope", 
-	function($state, $scope, $css, $rootScope){
-	$css.add('assets/css/manager/poemes/edit.css');
+.controller('editPoemeController', ['$state', '$scope', "$rootScope", 
+	function($state, $scope, $rootScope){
+	//$css.add('assets/css/manager/poemes/edit.css');
 
 }])
-.controller('showPoemeController', ['$state', '$scope', '$css', "$rootScope", 
-	function($state, $scope, $css, $rootScope){
-	$css.add('assets/css/manager/poemes/show.css');
+.controller('showPoemeController', ['$state', '$scope', "$rootScope", 
+	function($state, $scope, $rootScope){
+	//$css.add('assets/css/manager/poemes/show.css');
 
 }])
-.controller('allPoemeController', ['$state', '$scope', '$css', "$rootScope", 
-	function($state, $scope, $css, $rootScope){
-	$css.add('assets/css/manager/poemes/all.css');
+.controller('allPoemeController', ['$state', '$scope', "$rootScope", 
+	function($state, $scope, $rootScope){
+	//$css.add('assets/css/manager/poemes/all.css');
 
 }])
-.controller('lastPoemeController', ['$state', '$scope', '$css', "$rootScope", 
-	function($state, $scope, $css, $rootScope){
+.controller('lastPoemeController', ['$state', '$scope', "$rootScope", 
+	function($state, $scope, $rootScope){
 
-	$css.add('assets/css/manager/poemes/last.css');	
+	//$css.add('assets/css/manager/poemes/last.css');	
 
 	$scope.myInterval = 5000;
 	$scope.noWrapSlides = false;

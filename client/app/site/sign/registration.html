@@ -11,13 +11,15 @@
             <alert type="danger" ng-if="invalidForm" close="closeAlert()">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">
                 </span> 
-                Echec de l'inscription. Vérifiez que vous avez bien renseigné tous les champs et que les mots de passes sont identiques. Si c'est le cas, votre identifiant ou adresse email est déjà utilisé.
+                {{message}}
             </alert>
 
-            <div class="form-group"  ng-class="{ 'has-error': $scope.noLastName }">
+            <div class="form-group"  ng-class="{ 'has-error': registrationForm.lastname.$invalid && registrationForm.lastname.$dirty }">
                 <label for="exampleInputPassword1">Votre Nom</label>
                 <input type="text" 
-                    class="form-control" id="lastname"  
+                    class="form-control" 
+                    id="lastname"  
+                    name="lastname"  
                     ng-model="newUser.lastname" 
                     placeholder=" votre nom" 
                     required minlength="3">
@@ -26,7 +28,8 @@
 
             <div class="form-group" ng-class="{ 'has-error': registrationForm.firstname.$invalid && registrationForm.firstname.$dirty }">
                 <label for="firstname">Prenom</label>
-                <input type="text" class="form-control" 
+                <input type="text" 
+                    class="form-control" 
                     id="firstname" 
                     name="firstname" 
                     placeholder="Saisissez Votre Prenom" 
