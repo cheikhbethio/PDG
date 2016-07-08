@@ -1,13 +1,16 @@
-var db_poeme     = require('../model/poeme.js');
+var db_poeme = require('../model/poeme.js');
 
-module.exports = function(app) {
+module.exports = function (app) {
 
 	app.post('/api/poeme', db_poeme.create);
 	app.delete('/api/poeme/:id', db_poeme.delete);
+
 	app.get('/api/poeme', db_poeme.view);
 	app.get('/api/poeme/:id', db_poeme.get);
+	app.get('/api/last/lastPoeme', db_poeme.getLastPoemes);
+
 	app.put('/api/poeme/:id', db_poeme.edit);
-	
+
 };
 
 // route middleware to make sure

@@ -1,6 +1,6 @@
 {
   "name": "angular-minicolors",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "homepage": "https://github.com/kaihenzler/angular-minicolors",
   "authors": [
     "Kai Henzler <kai.henzler@gmx.de>"
@@ -26,11 +26,11 @@
     "test",
     "tests"
   ],
-  "_release": "0.0.7",
+  "_release": "0.0.8",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.7",
-    "commit": "1839a36685c495e962a66d8a3516a7b18a7599cd"
+    "tag": "0.0.8",
+    "commit": "9916cf4d2fc6e8353e7c04d9f40276b3fbc4455b"
   },
   "_source": "git://github.com/kaihenzler/angular-minicolors.git",
   "_target": "*",

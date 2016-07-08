@@ -1,11 +1,16 @@
 angular.module('poemeServices', ['ngResource'])
-
-.factory('Poeme', ['$resource', function($resource){
-	return $resource('/api/poeme/:id', {}, {
-    	query: {method:'GET', isArray:true},
-    	get: {method:'GET', isArray:false},
-    	save: {method:'POST', isArray:false},
-     	update: {method:'PUT', isArray:false},
-     	remove : {method : 'DELETE'}
-    });
-  }]);
+		.factory('Poeme', ['$resource', function ($resource) {
+				return $resource('/api/poeme/:id', {}, {
+					query: {method: 'GET', isArray: true},
+					get: {method: 'GET'},
+					get: {method: 'GET'},
+					save: {method: 'POST'},
+					update: {method: 'PUT'},
+					remove: {method: 'DELETE'}
+				});
+			}])
+		.factory('LastPoemes', ['$resource', function ($resource) {
+				return $resource('/api/last/lastPoeme', {}, {
+					query: {method: 'GET', isArray: true}
+				});
+			}]);

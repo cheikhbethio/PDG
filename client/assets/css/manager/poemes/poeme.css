@@ -1,6 +1,54 @@
-.tabAll{
-	margin-right: 7px;
+
+/*les 10 derniers poemes*/
+
+.lastPoeme{
+	
+    font-family: Helvetica, sans-serif;
 }
-.isPublic{
-	margin-right: 15px;
+
+.lastPoeme .detail{
+    border: solid #f7f7f9;
+    font-size: large;
+    font-weight: 500;
 }
+.lastPoeme .list .table{
+    border: solid #f7f7f9;
+}
+
+.lastPoeme .messageDetailsPoem{
+	font-size: 25px;
+	color: #696969;
+	background-color: #F0FFF0;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.lastPoeme .poemeContent{
+	border-radius: 10px;
+	background-color: #EDFBE9;
+	padding: 20px;
+	
+}
+
+.allPoem .table{
+	/*min-width: 850px;*/
+}
+.allPoem .table tbody td:first-child{
+	/*min-width: 200px*/
+}
+.allPoem .table tbody td:nth-child(2){
+	min-width: 200px;
+}
+.allPoem .table tbody td:nth-child(3){
+	min-width: 200px;
+}
+.allPoem .table td{
+    border-right: 1px solid #ddd;
+}
+.allPoem .table td:last-child{
+    border-right: 0px;
+}
+
+
+
+/*background-color: black;*/

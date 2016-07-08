@@ -181,7 +181,7 @@ min-width:1200px
 
 @media(min-width:776px) and (max-width:1199px){
   .rowContenu{
-   // margin-top: 8vw;
+   /*// margin-top: 8vw;*/
   }
   .imgThemeOne{  
     margin-top: 20px;

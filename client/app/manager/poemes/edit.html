@@ -3,14 +3,14 @@
 
 <form name="editPoemeForm">
     <div class="form-group">
-        <label for="description"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Titre</label>
+        <label for="title"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Titre</label>
         <input class="form-control" name="title" type="text" id="title" placeholder="Titre du poème" ng-model="poeme.title" required>
     </div>
 
     <text-angular ng-model="poeme.content" required></text-angular>
 
     <div class="form-group">
-        <label for="description"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés (séparés par une virgule)</label>
+        <label for="keywords"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés (séparés par une virgule)</label>
         <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="poeme.keywords" ng-list="," required>
     </div>
 

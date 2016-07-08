@@ -1,9 +1,10 @@
 <div class="ProemeCreate row">
-    
-    <alert type="{{info.type}}" ng-if="info.showMessage" close="closeAlert()">
+		
+	<uib-alert type="{{info.type}}" ng-if="info.showMessage" close="closeAlert()">
         <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 
         {{info.message}}
-    </alert>
+	</uib-alert>
+	
     <h2 class="page-header col-sm-5  col-sm-offset-3">Rédaction de Poème</h2>
 
     <form name="createPoemeForm" class="col-sm-8 col-sm-offset-2">

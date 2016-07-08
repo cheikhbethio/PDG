@@ -1,85 +1,79 @@
 <h2 class="page-header">Liste des poèmes</h2>
+<div class="allPoem row">
 
-<form class="form pull-right" role="form">
-	<div class="form-group">
-	    <label for="page_search">Chercher parmis les articles du site: </label>
-	    <input id="page_search" type="text" class="form-control" ng-model="articleSearchText" placeholder="Votre recherche">
-	</div>
-</form>
+	<form class="form pull-right" role="form">
+		<div class="form-group">
+			<label for="page_search">Chercher parmis les articles du site: </label>
+			<input id="page_search" type="text" class="form-control" ng-model="poemShearch" placeholder="Votre recherche">
+		</div>
+	</form>
 
-<a class="btn btn-primary" ui-sref="dashboard.createPoeme"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Rédiger un nouveau poème</a>
-<br/>
-<br/>
-<br/>
+	<a class="btn btn-success" ui-sref="dashboard.createPoeme"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Rédiger un nouveau poème</a>
+	<br/>
+	<br/>
+	<br/>
 
-<table class="table table-hover">
-	<thead>
-		<tr>
-			
-			<th>
-				<span class="tabAll glyphicon glyphicon-tower pull-left"></span>
-				<span class="pull-left">Titre</span>
-			</th>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr>
 
-			<th>
-				<span class="tabAll glyphicon glyphicon-user pull-left"></span>
-				<span class="pull-left">Auteur</span>
-			</th>
+				<th>
+					<span class="glyphicon glyphicon-tower "></span>
+					<span class="">Titre</span>
+				</th>
 
-			<th>
-				<span class="tabAll glyphicon glyphicon-tags pull-left"></span>
-				<span class="pull-left">Mots clés</span>
-			</th>
+				<th>
+					<span class="glyphicon glyphicon-user"></span>
+					<span class="">Auteur</span>
+				</th>
 
-			<th style="width:160px">
-				<span class="pull-right">Date de rédaction</span>
-				<span class="tabAll glyphicon glyphicon-calendar pull-right"></span>
-			</th>
+				<th>
+					<span class="glyphicon glyphicon-calendar"></span>
+					<span class="">Date de rédaction</span>
+				</th>
 
-			<th style="width:100px">
-				<span class="pull-right">Publié</span>
-				<span class="tabAll glyphicon glyphicon-globe pull-right"></span>
-			</th>
+				<th>
+					<span class="glyphicon glyphicon-globe "></span>
+					<span class="">Publié</span>
+				</th>
 
-			<th style="width:180px">
-				<span class="pull-right">Actions</span>
-				<span class="tabAll glyphicon glyphicon-cog pull-right"></span>
-			</th>
+				<th>
+					<span class=" glyphicon glyphicon-cog "></span>
+					<span class="">Actions</span>
+				</th>
 
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="poeme in poemlist  | filter:poemShearch track by $index">
 
-			<td>
-				<a ui-sref="">aaaaaaaaa</a>
-			</td>
+				<td>
+					<a ui-sref="">{{poeme.title}}1345679813456798</a>
+				</td>
 
-			<td>bbbbbbbbbbbb</td>
+				<td>{{poeme.id_auteur.local.lastname}}  &nbsp; {{poeme.id_auteur.local.firstname}}</td>
 
-			<td class="row">
-				<div class="label label-info">aaaaaaaaaa</div> 
-			</td>
+				<td>{{poeme.date | date :'fullDate'}}
+				</td>
 
-			<td>cccccccccccccccc
-			</td>
+				<td>
+					<span ng-if="!poeme.isPublic"  class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+					<span ng-if="poeme.isPublic"  class="glyphicon glyphicon-ok " aria-hidden="true"></span>
 
-			<td>
-				<span ng-hide="{{}}"  class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
-				<span ng-show="{{}}"  class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>
+				</td>
 
-			</td>
+				<td>
+					<button class="btn btn-danger btn-sm pull-right" ng-click="deletePoeme($index)">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					</button>
 
-			<td>
-				<button class="btn btn-danger btn-sm pull-right" ng-click="deletePoeme($index)">
-					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-				</button>
+					<a  class="btn btn-info btn-sm pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					</a>
+				</td>
 
-				<a ui-sref="dashboard.editPoeme({id : 1})" class="btn btn-info btn-sm pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-				</a>
-			</td>
 
-			
-		</tr>
-	</tbody>
-</table>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
