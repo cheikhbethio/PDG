@@ -9,12 +9,15 @@ angular.module('pgdApp', [
 	'snap',
 	'textAngular',
 	'ngStorage',
+	'underscore',	
+
 	'accueil',
 	'rubrique',
 	'connexion',
 	'connectionService',
 	'registration',
 	'pdg.currentUser',
+
 	'management',
 	'manAccueil',
 	'poemes',

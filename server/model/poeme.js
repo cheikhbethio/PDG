@@ -36,23 +36,22 @@ exports.create = function (req, res, next) {
 			newPoeme.from = params.from,
 			newPoeme.id_auteur = params.id_auteur,
 			newPoeme.denounced = false,
-			newPoeme.isPublic = params.isPublic,
-			newPoeme.date = Date.now();
-
-	console.log("params : ", params);
-	console.log("newPoeme : ", newPoeme);
+			newPoeme.date = Date.now(),
+			newPoeme.isPublic = params.isPublic ? params.isPublic :  false; 
 
 
-	if (!newPoeme.title || !newPoeme.content || !newPoeme.isPublic) {
+	if (!newPoeme.title || !newPoeme.content) {
 		return res.send({message: "Les parametres sont incorrects", code: 1});
 	}
 
 
-	newPoeme.save(function (err, results) {
-		if (err) {
+	newPoeme.save(function (err, doc) {
+		if (err || !doc) {
+			console.log(" ########## : kkkooo");
 			res.send({message: err, code: 1});
 		} else {
-			res.send({message: "Le poeme a bien été créer.", code: 0, result: results});
+			console.log(" ########## : ok");
+			res.send({message: "Le poeme a bien été créer.", code: 0, result: doc});
 		}
 	});
 };
@@ -60,7 +59,7 @@ exports.create = function (req, res, next) {
 exports.view = function (req, res, next) {
 	db.find({$query: {}, $orderby: {date: -1}}).populate('id_auteur', 'local.lastname local.firstname').exec(function (err, doc) {
 		if (err || !doc) {
-			return next(err);
+			res.send([{message: "Les poemes sont introuvables.", code: 1}]);
 		} else {
 			res.json(doc);
 		}
@@ -68,11 +67,11 @@ exports.view = function (req, res, next) {
 };
 
 
-//tous un doc par son id avec populate sur l'auteur
+//un doc par son id avec populate sur l'auteur
 exports.get = function (req, res, next) {
 	db.findById(req.params.id).populate('id_auteur', 'local.lastname local.firstname').exec(function (err, poeme) {
 		if (err) {
-			res.send({message: "Le poeme est introuvable.", code: 1});
+			res.send({message: "Le poeme est introuvables.", code: 1});
 		} else {
 			res.send({message: "ok", code: 0, result: poeme});
 		}
@@ -83,7 +82,7 @@ exports.get = function (req, res, next) {
 exports.getLastPoemes = function (req, res, next) {
 	db.find({$query: {}, $orderby: {date: -1}}).populate('id_auteur', 'local.lastname local.firstname').limit(10).exec(function (err, doc) {
 		if (err || !doc) {
-			res.send({message: "Les poemes sont introuvable.", code: 1});
+			res.send([{message: "Les poemes sont introuvables.", code: 1}]);
 		} else {
 			res.json(doc);
 		}
@@ -97,7 +96,7 @@ exports.delete = function (req, res, next) {
 
 	db.findById(id, function (err, doc) {
 		if (err || !doc) {
-			return next(err);
+			res.send({message: "la supression est actuellement impossible (Probleme serveur).", code: 1});
 		} else {
 			var res_deletion = doc.remove();
 			return res.json(res_deletion);

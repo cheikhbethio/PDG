@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap'])
+angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap', 'underscore'])
 		.config(['$stateProvider', function ($stateProvider) {
 				$stateProvider
 						.state('dashboard.createPoeme', {
@@ -32,22 +32,18 @@ angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap'])
 			}])
 		.controller('createPoemeController', ['CurrentUser', 'Poeme', '$scope',
 			function (CurrentUser, Poeme, $scope) {
-				/**
-				 * Function
-				 */
+
 				$scope.addPoeme = addPoeme;
 				$scope.closeAlert = closeAlert;
 
-				/**
-				 * Variable
-				 */
+
 				$scope.info = {};
 				$scope.newPoeme = {};
 				var my_id = CurrentUser.getId();
 
 				function addPoeme() {
 					if (!$scope.newPoeme) {
-						console.log("tous les champs semblent vide. Veillez les remplir s'il vous plait.");
+						console.log("tous les champs semblent vides. Veillez les remplir s'il vous plait.");
 					} else {
 						$scope.newPoeme.id_auteur = my_id;
 						Poeme.save($scope.newPoeme, function (resp) {
@@ -55,7 +51,6 @@ angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap'])
 							$scope.info.showMessage = true;
 							if (resp.code === 0) {
 								$scope.info.type = "success";
-								console.log("### content Poeme : ", $scope.newPoeme);
 							} else {
 								$scope.info.type = "danger";
 							}
@@ -80,18 +75,36 @@ angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap'])
 				//$css.add('assets/css/manager/poemes/show.css');
 
 			}])
-		.controller('allPoemeController', ['Poeme', '$state', '$scope', "$rootScope",
-			function (Poeme, $state, $scope, $rootScope) {
+		.controller('allPoemeController', ['_','Poeme', '$state', '$scope', "$rootScope",
+			function (_ ,Poeme, $state, $scope, $rootScope) {
+				$scope.deletePoeme = deletePoeme;
+
 				$scope.poemlist = Poeme.query();
-				$scope.list = Poeme.query();
 				$scope.config = {
 					itemsPerPage: 2,
 					fillLastPage: true
+				};
+
+				function deletePoeme(indicePoeme){
+					var toDel = $scope.poemlist[indicePoeme];
+					
+					Poeme.delete({id : toDel._id}, function(res){
+						if(res){
+							$scope.poemlist.splice(indicePoeme, 1);
+						} else{
+							console.log("## non : ", res.message);
+						}
+
+					});
 				}
 
 			}])
-		.controller('lastPoemeController', ['LastPoemes', 'Poeme', '$state', '$scope', "$rootScope",
+		.controller('lastPoemeController', ['LastPoemes', '$state', '$scope', "$rootScope",
 			function (LastPoemes, $state, $scope, $rootScope) {
+
+				$scope.listPoeme;
+				$scope.poemToDisplay;
+
 
 				/**
 				 * *********************** carousel ***********************
@@ -122,8 +135,9 @@ angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap'])
 
 
 				/************************lists des poemes**********************/
-				$scope.listPoeme = LastPoemes.query();
-				$scope.poemToDisplay;
+				 LastPoemes.query(function(list){
+				 		$scope.listPoeme = list;	
+				});
 
 
 				function goToPoeme(poem) {
