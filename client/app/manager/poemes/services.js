@@ -3,7 +3,6 @@ angular.module('poemeServices', ['ngResource'])
 				return $resource('/api/poeme/:id', {}, {
 					query: {method: 'GET', isArray: true},
 					get: {method: 'GET'},
-					get: {method: 'GET'},
 					save: {method: 'POST'},
 					update: {method: 'PUT'},
 					remove: {method: 'DELETE'}

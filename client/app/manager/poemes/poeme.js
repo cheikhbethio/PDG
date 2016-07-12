@@ -1,6 +1,4 @@
 'use strict';
-
-
 angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap', 'underscore'])
 		.config(['$stateProvider', function ($stateProvider) {
 				$stateProvider
@@ -35,12 +33,9 @@ angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap', 'underscore'
 
 				$scope.addPoeme = addPoeme;
 				$scope.closeAlert = closeAlert;
-
-
 				$scope.info = {};
 				$scope.newPoeme = {};
 				var my_id = CurrentUser.getId();
-
 				function addPoeme() {
 					if (!$scope.newPoeme) {
 						console.log("tous les champs semblent vides. Veillez les remplir s'il vous plait.");
@@ -65,33 +60,52 @@ angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap', 'underscore'
 				}
 
 			}])
-		.controller('editPoemeController', ['$state', '$scope', "$rootScope",
-			function ($state, $scope, $rootScope) {
-				//$css.add('assets/css/manager/poemes/edit.css');
-
+		.controller('editPoemeController', ["$stateParams", "Poeme", "$scope", "$state",
+			function ($stateParams, Poeme, $scope, $state) {
+				$scope.upatePoem = upatePoem;
+				$scope.poemToEdit;
+				$scope.info;
+				function upatePoem() {
+					if (!$scope.poemToEdit.content) {
+						$scope.info = {
+							message: "Le contenue du poeme est vide: la mise à jour est alors impossible!",
+							type: "danger"
+						}
+					} else {
+						Poeme.update({id: $stateParams.id}, $scope.poemToEdit, function (resp) {
+							if (resp.code !== 0) {
+								$scope.info = {
+									message: resp.message,
+									type: "danger"
+								};
+							} else {
+								$state.go("dashboard.allPoeme");
+							}
+						});
+					}
+				}
+				Poeme.get({id: $stateParams.id}, function (resp) {
+					$scope.poemToEdit = resp.result;
+				});
 			}])
 		.controller('showPoemeController', ['$state', '$scope', "$rootScope",
 			function ($state, $scope, $rootScope) {
-				//$css.add('assets/css/manager/poemes/show.css');
 
 			}])
-		.controller('allPoemeController', ['_','Poeme', '$state', '$scope', "$rootScope",
-			function (_ ,Poeme, $state, $scope, $rootScope) {
+		.controller('allPoemeController', ['_', 'Poeme', '$state', '$scope', "$rootScope",
+			function (_, Poeme, $state, $scope, $rootScope) {
 				$scope.deletePoeme = deletePoeme;
-
 				$scope.poemlist = Poeme.query();
 				$scope.config = {
 					itemsPerPage: 2,
 					fillLastPage: true
 				};
-
-				function deletePoeme(indicePoeme){
+				function deletePoeme(indicePoeme) {
 					var toDel = $scope.poemlist[indicePoeme];
-					
-					Poeme.delete({id : toDel._id}, function(res){
-						if(res){
+					Poeme.delete({id: toDel._id}, function (res) {
+						if (res) {
 							$scope.poemlist.splice(indicePoeme, 1);
-						} else{
+						} else {
 							console.log("## non : ", res.message);
 						}
 
@@ -104,22 +118,18 @@ angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap', 'underscore'
 
 				$scope.listPoeme;
 				$scope.poemToDisplay;
-
-
 				/**
 				 * *********************** carousel ***********************
 				 */
 				//-----------------------------------------function
 				$scope.addSlide = addSlide;
 				$scope.goToPoeme = goToPoeme;
-
 				//-----------------------------------------declaration
 				$scope.myInterval = 5000;
 				$scope.noWrapSlides = false;
 				$scope.active = 0;
 				var slides = $scope.slides = [];
 				var currIndex = 0;
-
 				//à utiliser pour les différents poemes. à voire aussi avec ng-repeat
 				function addSlide() {
 					var newWidth = 600 + slides.length + 1;
@@ -135,14 +145,11 @@ angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap', 'underscore'
 
 
 				/************************lists des poemes**********************/
-				 LastPoemes.query(function(list){
-				 		$scope.listPoeme = list;	
+				LastPoemes.query(function (list) {
+					$scope.listPoeme = list;
 				});
-
-
 				function goToPoeme(poem) {
 					$scope.poemToDisplay = poem;
-
 				}
 
 			}]);

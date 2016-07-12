@@ -1,25 +1,77 @@
-<h2 class="page-header">Edition du poème <i>{{poeme.title}}</i></h2>
+<div class="ProemeCreate row">
+		
+	<uib-alert type="{{info.type}}" ng-if="info" close="closeAlert()">
+        <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 
+        {{info.message}}
+	</uib-alert>
+	
+    <h2 class="page-header col-sm-5  col-sm-offset-3">Edition de Poème</h2>
+
+    <form name="createPoemeForm" class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+			
+			<div class="col-sm-6" ng-class="{ 'has-error': createPoemeForm.title.$invalid && createPoemeForm.title.$dirty }">
+				<div class="form-group input-group" novalidate>
+					<span for="title" class="input-group-addon">
+						<span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+					</span>
+					<input class="form-control" name="title" type="text" id="title" 
+					ng-model="poemToEdit.title" required ng-minlength="5" ng-maxlength="132"/>
+				</div>
+            </div>
+			<div class="col-sm-6" ng-class="{ 'has-error': createPoemeForm.from.$invalid && createPoemeForm.from.$dirty }">
+				<div class="form-group input-group" aria-hidden="true">
+					<span  for="from" class="input-group-addon">
+						<span class="glyphicon glyphicon-book" aria-hidden="true"></span> 
+					</span>
+					<input class="form-control" name="from" type="text" id="from" ng-model="poemToEdit.from"
+					required ng-minlength="3" ng-maxlength="132"/>
+				</div>
+            </div>
+            
+        </div>
+				
+		<div ng-if="createPoemeForm.title.$invalid"  class="row">
+			<span class="errorMsg">Ce champs est obligatoire. taille min 5 taille max 132</span>
+		</div>
+				
+		<div ng-if="createPoemeForm.from.$invalid"  class="row">
+			<span class="errorMsg">Ce champs est obligatoire. taille min 3 taille max 132</span>
+		</div>
+        
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group input-group" novalidate>
+					<span for="autor" class="input-group-addon">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					</span>
+					<input class="form-control" disabled="true" name="name" type="text" id="autor" 
+					value="{{poemToEdit.id_auteur.local.lastname}} &nbsp; {{poemToEdit.id_auteur.local.firstname}}" required>
+				</div>
+            </div>
+			<div class="col-sm-6">
+				<div class="form-group input-group" aria-hidden="true">
+					<span  for="date" class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 
+					</span>
+					<input class="form-control" disabled="true" name="date" type="text" id="from" value="{{poemToEdit.date | date :'fullDate'}}">
+				</div>
+            </div>            
+        </div>
+		
+        <div class="row">
+			<text-angular ng-model="poemToEdit.content" required></text-angular>
+			<button class="btn btn-primary pull-right" ng-disabled="!createPoemeForm.$valid" ng-click="upatePoem()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder</button>
+		
+			<div class="checkbox pull-right" style="margin-right: 15px">
+				<label>
+					<input type="checkbox" ng-model="poemToEdit.isPublic"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Publier maintenant? 
+				</label>
+			</div>
+		</div>
+
+    </form>
+
+</div>
 
 
-<form name="editPoemeForm">
-    <div class="form-group">
-        <label for="title"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Titre</label>
-        <input class="form-control" name="title" type="text" id="title" placeholder="Titre du poème" ng-model="poeme.title" required>
-    </div>
-
-    <text-angular ng-model="poeme.content" required></text-angular>
-
-    <div class="form-group">
-        <label for="keywords"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés (séparés par une virgule)</label>
-        <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="poeme.keywords" ng-list="," required>
-    </div>
-
-    <button class="btn btn-primary pull-right" ng-click="editPoeme()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder les modifications</button>
-
-    <div class="checkbox pull-right isPublic" >
-        <label>
-            <input type="checkbox" ng-model="article.ispublic"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Publier maintenant? 
-        </label>
-    </div>
-
-</form>

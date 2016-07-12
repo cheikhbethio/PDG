@@ -18,7 +18,8 @@ var poemeSchema = mongoose.Schema({
 	id_auteur: {type: schema.Types.ObjectId, ref: 'user'},
 	denounced: Boolean,
 	isPublic: Boolean,
-	date: Date
+	date: Date,
+	updateAt: Date
 });
 
 
@@ -37,25 +38,24 @@ exports.create = function (req, res, next) {
 			newPoeme.id_auteur = params.id_auteur,
 			newPoeme.denounced = false,
 			newPoeme.date = Date.now(),
-			newPoeme.isPublic = params.isPublic ? params.isPublic :  false; 
+			newPoeme.isPublic = params.isPublic ? params.isPublic : false,
+			newPoeme.updateAt = undefined;
 
-
-	if (!newPoeme.title || !newPoeme.content) {
+	if (!newPoeme.title || !newPoeme.content)
+	{
 		return res.send({message: "Les parametres sont incorrects", code: 1});
 	}
 
 
 	newPoeme.save(function (err, doc) {
 		if (err || !doc) {
-			console.log(" ########## : kkkooo");
 			res.send({message: err, code: 1});
 		} else {
-			console.log(" ########## : ok");
 			res.send({message: "Le poeme a bien été créer.", code: 0, result: doc});
 		}
-	});
+	}
+	);
 };
-
 exports.view = function (req, res, next) {
 	db.find({$query: {}, $orderby: {date: -1}}).populate('id_auteur', 'local.lastname local.firstname').exec(function (err, doc) {
 		if (err || !doc) {
@@ -108,29 +108,27 @@ exports.delete = function (req, res, next) {
 exports.edit = function (req, res, next) {
 
 	var id = req.params.id,
-			params = req.body,
-			newer,
-			query = ({_id: id});
-//
-//	title = params.title,
-//			content = params.content,
-//			from = params.from,
-//			denounced = params.denounced,
-//			isPublic = params.isPublic,
-	date = params.date;
+			params = req.body;
 
 	db.findById(id, function (err, poemeFound) {
 		if (err || !poemeFound) {
-			res.send({message: "Mise à jour impossible", code: 1});
+			res.send({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 1});
 		} else {
 			//à voir apres
+			var obj = {'title': params.title,
+				'content': params.content,
+				'from': params.from,
+				'denounced': params.denounced,
+				'isPublic': params.isPublic,
+				'updateAt': Date.now()
+			};
 
-			fillParam(poemeFound, {'title': params.title, 'content': params.content, 'from': params.from, 'denounced': params.denounced, 'isPublic': params.isPublic});
+			fillParam(poemeFound, obj);
 			poemeFound.save(function (err, doc) {
 				if (err || !doc) {
-					return next(err);
+					res.send({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 1});
 				} else {
-					res.json(doc);
+					res.send({message: "Le poeme a bien mis à jour.", code: 0, result: doc});
 				}
 			});
 

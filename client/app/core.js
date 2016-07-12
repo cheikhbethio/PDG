@@ -3,21 +3,19 @@
 angular.module('pgdApp', [
 	'ui.router',
 	'siteBody',
-	'ui.bootstrap',
-	'ui.bootstrap.modal',
-	'dialogs.main',
+	'ui.bootstrap', /*
+	 'ui.bootstrap.modal',
+	 'dialogs.main',*/
 	'snap',
 	'textAngular',
 	'ngStorage',
-	'underscore',	
-
+	'underscore',
 	'accueil',
 	'rubrique',
 	'connexion',
 	'connectionService',
 	'registration',
 	'pdg.currentUser',
-
 	'management',
 	'manAccueil',
 	'poemes',
