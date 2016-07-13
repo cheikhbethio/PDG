@@ -8,31 +8,3 @@ div{
  border-color:black;
 }*/
 
-
-
-.titreSite{
-    color: #1B1A1A;
-    font-size: 45px;
-    text-align: center;
-}
-.rowTitreSite{
-  position: fixed;
-  z-index: 1001;
-  background-color: #CFE1F1;
-  width: 100%;
-  clear: left;
-}
-
-
-/*
-
-@media (min-width:400px) and (max-width:775px){
-  .titreSite{
-      text-align: center;
-  }
-}
-@media(max-width:399px){
-  .titreSite{
-      text-align: center;
-  }
-}*/

@@ -10,12 +10,41 @@ angular.module('rubrique', ['ui.router'])
 							controller: 'rubriqueController'
 						})
 			}])
-		.controller('rubriqueController', ['$rootScope', '$scope', '$uibModal', '$log',
-			function ($rootScope, $scope, $uibModal, $log) {
+		.controller('rubriqueController', ['myModal', '$rootScope', '$scope', '$uibModal', '$log',
+			function (myModal, $rootScope, $scope, $uibModal, $log) {
 				$rootScope.titre = "Titre de la rubrique";
 				$scope.items = ['item1', 'item2', 'item3'];
-//				var size = "lg";
+
+
 				$scope.testBoitedialogue = function (size) {
+					/*
+					 var modalInstance = $uibModal.open({
+					 animation: true,
+					 templateUrl: 'app/common/modalView/confirm.html',
+					 controller: function ($scope, $uibModalInstance) {
+					 $scope.yes = yes;
+					 $scope.no = no;
+
+					 function yes() {
+					 $uibModalInstance.close("yessss");
+					 }
+
+					 function no() {
+					 $uibModalInstance.dismiss('cancel');
+					 }
+					 },
+					 size: size
+					 });
+					 */
+					var modalInstance = myModal.confirm('app/common/modalView/confirm.html', size);
+
+					modalInstance.result.then(function (res) {
+						console.log(res);
+					}, function () {
+						console.log("nooooooooooooooo");
+					});
+				};
+				$scope.testBoitedialogue1 = function (size) {
 
 					var modalInstance = $uibModal.open({
 						animation: true,
@@ -38,56 +67,16 @@ angular.module('rubrique', ['ui.router'])
 
 			}])
 
-		.controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', 'items', function ($scope, $uibModalInstance, items) {
+		.controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance',
+			function ($scope, $uibModalInstance) {
+				$scope.yes = yes;
+				$scope.no = no;
 
-//				$scope.items = items;
-//				$scope.selected = {
-//					item: $scope.items[0]
-//				};
-//
-//				$scope.ok = function () {
-//					$uibModalInstance.close($scope.selected.item);
-//				};
-//
-//				$scope.cancel = function () {
-//					$uibModalInstance.dismiss('cancel');
-//				};
+				function yes() {
+					$uibModalInstance.close("yessss");
+				}
+
+				function no() {
+					$uibModalInstance.dismiss('cancel');
+				}
 			}]);
-//
-//
-//angular.module('rubrique', ['ui.router'])
-//	.config(['$stateProvider',  function($stateProvider){
-//		$stateProvider
-//			.state('site.rubrique', {
-//				url :'/rubrique/:id',
-//				templateUrl : 'app/site/rubrique/rubrique.html',
-//				controller	: 'rubriqueController'
-//			})
-//	}])
-//	.controller('rubriqueController', ['$rootScope','$scope', 'dialogs',
-//		function($rootScope, $scope, dialogs){
-//		//$css.add(['assets/css/rubrique.css', 'assets/css/body/sidebar.css', 'assets/css/dialog.css']);
-//		$rootScope.titre = "Titre de la rubrique";
-//
-//		$scope.testBoitedialogue=function(){
-//			var dlg = dialogs.create('app/site/dialogTemplate/poemeVue.html',
-//			'deleteArticleDialogController',
-//			{ articletitle: 11 },
-//			'lg');
-//		}
-//
-//	}])
-//
-//
-//.controller('deleteArticleDialogController', function($scope, $modalInstance, data){
-//
-//
-//		$scope.cancel = function(){
-//			$modalInstance.dismiss('Canceled');
-//		};
-//
-//		$scope.save = function(){
-//			$modalInstance.close();
-//		};
-//
-//});

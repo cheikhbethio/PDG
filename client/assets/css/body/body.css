@@ -10,75 +10,41 @@ body {
     background-color: #CFE1F1;
     width: 100%;
     min-width: 750px;
-    overflow: auto;
-    
+    overflow: visible;    
+}
+/***********************************
+		titre
+***********************************/
+.siteTile{
+	/*margin-top: 51px;*/
 }
 
-.row{
-	margin-left: 0px;
-	margin-right: 0px; 
+.titreSite{
+    color: #1B1A1A;
+    font-size: 45px;
+    text-align: center;
+}
+.rowTitreSite{
+  position: fixed;
+  z-index: 1001;
+  background-color: #CFE1F1;
+  width: 100%;
 }
 
-.content{
-    /*border: solid blue;*/
+
+.contentBody{
     margin-top: 90px;
-    max-width: 1500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/*
- * Global add-ons
- */
-
-.sub-header {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+    /*max-width: 1500px;*/
+    min-height: 600px;
+    border: solid red
+/*    margin-left: auto;
+    margin-right: auto;*/
 }
 
 .rowContenu{
   width: 100%;
   margin-left: 0px;
   margin-right: 0px;
-  clear: both;
-}
-
-.navbar-fixed-top {
-  border: 0;
-}
-  
-
-.main {
-  padding: 20px;
-}
-@media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-  }
-}
-.main .page-header {
-  margin-top: 0;
-}
-
-
-/*
- * Placeholder dashboard ideas
- */
-
-.placeholders {
-  margin-bottom: 30px;
-  text-align: center;
-}
-.placeholders h4 {
-  margin-bottom: 0;
-}
-.placeholder {
-  margin-bottom: 20px;
-}
-.placeholder img {
-  display: inline-block;
-  border-radius: 50%;
 }
 
 #carreTheme{
@@ -87,8 +53,6 @@ body {
     min-height: 60px;  
     padding: 2vw;
 }
-
-
 
 #carreThemeL{
     height: 15vw;
@@ -149,86 +113,6 @@ body {
     width: 59%;
 }
 
-
-
-
-/*
-================
-min-width:1200px
-================
-*/
-/*
-@media(min-width:1200px){
-  .rowContenu{
-    margin-top: 6.4vw;
-  }
-  .imgThemeOne{  
-    margin-top: 30px;
-  }
-  .textThemeOneImg {
-    font-size: 2vw;
-    height: 15vw;
-    display: inline-block;
-    padding: 30px
-  }
-}
-*/
-/*
-=================
-(min-width:776px) and (max-width:1199px)
-=================
-*/
-
-@media(min-width:776px) and (max-width:1199px){
-  .rowContenu{
-   /*// margin-top: 8vw;*/
-  }
-  .imgThemeOne{  
-    margin-top: 20px;
-  }
-  .textThemeOneImg {
-    font-size: 2vw;
-    height: 15vw;
-    display: inline-block;
-    padding: 30px
-  }
-}
-
-/*
-=================
-(min-width:776px) and (max-width:1199px)
-=================
-*/
-
-@media (min-width:400px) and (max-width:775px){
-  .rowContenu{
-    margin-top: 11.5vw;
-    width: 100%;
-  }/*
-  .titreSite{
-      text-align: center;
-  }*/
-
-  .imgThemeOne{  
-    margin-top: 14px;
-  }
-  .textThemeOneImg {
-    font-size: 2vw;
-    height: 15vw;
-    display: inline-block;
-    padding-top: 14px
-  }
-}
-@media(max-width:399px){
-  .rowContenu{
-    margin-top: 22vw;
-  }/*
-  .titreSite{
-      text-align: center;
-  }*/
-
-}
-
 /**********
     animation
 ***********/
@@ -238,14 +122,10 @@ min-width:1200px
 }
 
 @keyframes hider {
-  /*from { opacity:1; }
-  to { opacity:0; }*/
     to      { transform: translateX(-200%); }
 }
 
 @-webkit-keyframes hider {
-  /*from { opacity:1; }
-  to { opacity:0; }*/
     to      { -webkit-transform: translateX(-200%); }
 }
 
@@ -261,4 +141,33 @@ min-width:1200px
 @-webkit-keyframes shower {
     from    { -webkit-transform:translateX(200%); }
     to      { -webkit-transform: translateX(0%); }
+}
+
+
+
+
+/***********************************
+			footer
+***********************************/
+
+.footer {
+    padding: 40px 0;
+    color: black;
+    font-size: 15px;
+    text-align: center;  
+    margin-bottom : 0px;
+    display: block;
+    border-top: 1px solid #e5e5e5;
+    color: #337ab7;
+    height: auto;
+}
+
+/*******************************************************
+***********************External
+********************************************************/
+
+
+.row{
+	margin-left: 0px;
+	margin-right: 0px; 
 }

@@ -99,7 +99,7 @@ exports.delete = function (req, res, next) {
 			res.send({message: "la supression est actuellement impossible (Probleme serveur).", code: 1});
 		} else {
 			var res_deletion = doc.remove();
-			return res.json(res_deletion);
+			res.send({message: "Le poeme a bien été suprimé", code: 0, result: res_deletion});
 		}
 	});
 
@@ -151,6 +151,8 @@ exports.edit = function (req, res, next) {
 function fillParam(objTo, objFrom) {
 	_.each(objFrom, function (value, key) {
 		if (value) {
+			objTo[key] = value;
+		} else if (key === 'isPublic') {
 			objTo[key] = value;
 		}
 	});

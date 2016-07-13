@@ -45,9 +45,9 @@ angular.module('connexion', ['ui.router'])
 				function setInfo(mes, typer) {
 					$scope.info = {
 						message: mes,
-						type: typer
+						type: typer,
+						showMessage: true
 					};
-					$scope.showAlert = true;
 				}
 
 				$scope.connexion = function () {

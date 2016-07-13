@@ -7,20 +7,15 @@
 
     <div class="signForm col-xs-5 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
         <form name="registrationForm"  class="form-group col-xs-10 col-xs-offset-1" novalidate>
-
-<!--            <alert type="danger" ng-if="invalidForm" close="closeAlert()">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">
-                </span> 
-                {{message}}
-            </alert>-->
 			
 				
-			<uib-alert type="danger" ng-if="invalidForm" close="closeAlert()">
+<!--			<uib-alert type="danger" ng-if="invalidForm" close="closeAlert()">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">
 						</span> 
 						{{message}}
-			</uib-alert>
+			</uib-alert>-->
 	
+<my-info info='info'></my-info>
 
             <div class="form-group"  ng-class="{ 'has-error': registrationForm.lastname.$invalid && registrationForm.lastname.$dirty }">
                 <label for="lastname">Votre Nom</label>
@@ -94,7 +89,7 @@
                     password-validate="newUser.password" required>
             </div>
 
-			<button type="submit" class="btn btn-success" ng-disabled="!registrationForm.$valid" ng-click="saveNewUser(newUser)">S'incrire</button>
+			<button type="submit" class="btn btn-success" sng-disabled="!registrationForm.$valid" ng-click="saveNewUser(newUser)">S'incrire</button>
             <button type="reset" class="btn btn-link" ng-click="resetRegistrationForm()">Vider les champs</button>
             
 

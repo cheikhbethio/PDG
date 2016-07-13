@@ -3,23 +3,27 @@
 angular.module('pgdApp', [
 	'ui.router',
 	'siteBody',
-	'ui.bootstrap', /*
-	 'ui.bootstrap.modal',
-	 'dialogs.main',*/
+	'ui.bootstrap',
 	'snap',
 	'textAngular',
 	'ngStorage',
-	'underscore',
+//	site
 	'accueil',
 	'rubrique',
 	'connexion',
 	'connectionService',
 	'registration',
-	'pdg.currentUser',
+//	management
 	'management',
 	'manAccueil',
 	'poemes',
-	'poemeServices'
+	'poemeServices',
+//	common
+	'pdg.currentUser',
+	'underscore',
+	'custumModal',
+	'myAlerter'
+
 ])
 		.config(['$stateProvider', '$urlRouterProvider',
 			function ($stateProvider, $urlRouterProvider) {
@@ -66,15 +70,18 @@ angular.module('pgdApp', [
 							}
 						});
 			}])
-		.controller('testController', ['$scope', function ($scope) {
-				$scope.testAngular = 'ça marche coté angular!!!';
-			}])
-		.run(function ($rootScope) {
+//		.controller('testController', ['$scope', function ($scope) {
+//				$scope.testAngular = 'ça marche coté angular!!!';
+//			}])
+//		.run(function ($rootScope) {
+//			$rootScope.confVariable = {};
+//			$rootScope.confVariable.titre = "Thiantakones";
+//
+//		})
+		.run(function ($rootScope, $state, CurrentUser) {
+
 			$rootScope.confVariable = {};
 			$rootScope.confVariable.titre = "Thiantakones";
-
-		})
-		.run(function ($rootScope, $state, CurrentUser) {
 
 			$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 				var requireLogin = toState.data.requireLogin;

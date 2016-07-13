@@ -7,25 +7,20 @@
 			<title>Publication De Grâce </title>
 
 			<link rel="stylesheet" type="text/css" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
+			<link href='https://fonts.googleapis.com/css?family=Lily+Script+One&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
-			<!--the locals css-->
-			<link rel="stylesheet" type="text/css" href="assets/css/body/body.css">
-			<link rel="stylesheet" type="text/css" href="assets/css/body/content.css">
-			<link rel="stylesheet" type="text/css" href="assets/css/body/sidebar.css">
-			<link rel="stylesheet" type="text/css" href="assets/css/body/footer.css">
-			<link rel="stylesheet" type="text/css" href="assets/css/body/sign.css">
-			<link rel="stylesheet" type="text/css" href="assets/css/body/title.css">
-			<link rel="stylesheet" type="text/css" href="assets/css/body/header.css">
-			<link rel="stylesheet" type="text/css" href="assets/css/index.css">
-
+			<link rel="stylesheet" type="text/css" href="assets/css/dialog.css">
+			<link rel="stylesheet" type="text/css" href="assets/css/rubrique.css">
+			
 			<link rel="stylesheet" type="text/css" href="assets/css/manager/poemes/poeme.css">
 			<link rel="stylesheet" type="text/css" href="assets/css/manager/accueil.css">
 			<link rel="stylesheet" type="text/css" href="assets/css/manager/body.css">
 			
-			<link rel="stylesheet" type="text/css" href="assets/css/dialog.css">
-			<link rel="stylesheet" type="text/css" href="assets/css/rubrique.css">
+			<!--local js-->
+			<script type="text/javascript" src="assets/js/myOwn.js"></script>
+			
 
-
+			<!--css lib-->
 			<link rel="stylesheet" type="text/css" href="assets/libs/font-awesome/css/font-awesome.min.css">			
 			<link rel="stylesheet" href="assets/libs/angular-snap/angular-snap.css">
 			<link rel='stylesheet' href='assets/libs/textAngular/src/textAngular.css'>
@@ -34,12 +29,19 @@
 			<link rel="stylesheet" href="assets/libs/ngToast/dist/ngToast.css">
 			<link rel="stylesheet" href="assets/libs/jquery-minicolors/jquery.minicolors.css" >
 			<link rel="stylesheet" href="assets/libs/angular-dialog-service/dist/dialogs.min.css">
+			
+			
+			<!--my css-->
+			<link rel="stylesheet" type="text/css" href="assets/css/body/body.css">			
+			<link rel="stylesheet" type="text/css" href="assets/css/body/bodyOther.css">
+			
+			<link rel="stylesheet" type="text/css" href="assets/css/index.css">
 	</head>
-	<body>
+	<body class="layout-column">
 
 		<div ui-view="header"></div>
-		<div ui-view="title"></div>
-		<div class="content" ui-view="content"></div>
+		<div ui-view="title" class="siteTile"></div>
+		<div class="contentBody layout-row" ui-view="content"></div>
 		<div ui-view="footer" class="footer"></div>
 
 		<script src="assets/libs/jquery/dist/jquery.min.js"></script>
@@ -77,6 +79,8 @@
 		<!--Common-->
 		<script type="text/javascript" src="app/common/services/currentUser.js"></script>
 		<script type="text/javascript" src="app/common/underscore.js"></script>
+		<script type="text/javascript" src="app/common/uibModal.js"></script>
+		<script type="text/javascript" src="app/common/directives/alert.js"></script>
 
 			<!--site-->
 		<script type="text/javascript" src="app/site/body/body.js"></script>

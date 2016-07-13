@@ -16,11 +16,10 @@ angular.module('registration', ['ui.router'])
 
 				$rootScope.titre = "Thiantakones";
 				$scope.newUser = {};
-				$scope.message;
-				$scope.invalidForm = false;
 
-				$scope.loginAlreadyUsed = false;
-				$scope.emailAlreadyUsed = false;
+
+				$scope.info = {};
+				$scope.info.showMessage = false;
 
 				$scope.saveNewUser = function (newer) {
 
@@ -29,27 +28,28 @@ angular.module('registration', ['ui.router'])
 						if (newer.password === newer.passwordConfirmation) {
 							SignUp.save(newer, function (resp) {
 								if (resp.code === 0) {
-									$scope.message = resp.message;
+									$scope.info.message = resp.message;
 									$state.go('site.connexion', {registration: true});
-//									console.log("### ok registration :", $scope.message);
 								} else {
-									$scope.message = resp.message;
-//									console.log("### ko registration :", $scope.message);
-									$scope.invalidForm = true;
+									$scope.info.message = resp.message;
+									$scope.info.type = 'danger';
+									$scope.info.showMessage = true;
 								}
 							}, function (error) {
-//								console.log("Response: ", error);
-								$scope.message = "un probleme s'est produit. L'enregistrement est temporairement impossible";
+								$scope.info.message = "un probleme s'est produit. L'enregistrement est temporairement impossible";
+								$scope.info.type = 'danger';
+								$scope.info.showMessage = true;
 							});
 
 						} else {
-//							console.log("the password don't match !!");
-							$scope.message = "les deux mots de passe ne sont pas identiques. Veillez réessayer!!";
-							$scope.invalidForm = true;
+							$scope.info.message = "les deux mots de passe ne sont pas identiques. Veillez réessayer!!";
+							$scope.info.showMessage = true;
+							$scope.info.type = 'danger';
 						}
 					} else {
-						console.log("Invalide form: ");
-						$scope.invalidForm = true;
+						$scope.info.message = 'Les données sont incorrectes, Veillez recommencer svp'
+						$scope.info.showMessage = true;
+						$scope.info.type = 'danger';
 					}
 
 					console.log($scope.newUser);
@@ -57,13 +57,6 @@ angular.module('registration', ['ui.router'])
 
 				$scope.resetRegistrationForm = function () {
 					$scope.newUser = {};
-					$scope.loginAlreadyUsed = false;
-					$scope.emailAlreadyUsed = false;
-					$scope.invalidForm = true;
-				};
-
-				$scope.closeAlert = function () {
-					$scope.invalidForm = false;
 				};
 
 
