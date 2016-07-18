@@ -10,7 +10,8 @@ body {
     background-color: #CFE1F1;
     width: 100%;
     min-width: 750px;
-    overflow: visible;    
+    overflow: visible;   
+    height: auto; 
 }
 /***********************************
 		titre
@@ -21,8 +22,9 @@ body {
 
 .titreSite{
     color: #1B1A1A;
-    font-size: 45px;
     text-align: center;
+    margin-top: 10px;
+/*    font-size: 45px;*/
 }
 .rowTitreSite{
   position: fixed;
@@ -33,18 +35,15 @@ body {
 
 
 .contentBody{
-    margin-top: 90px;
-    /*max-width: 1500px;*/
+    margin-top: 53px;
     min-height: 600px;
-    border: solid red
-/*    margin-left: auto;
-    margin-right: auto;*/
 }
 
 .rowContenu{
   width: 100%;
   margin-left: 0px;
   margin-right: 0px;
+  margin-top: 10px;
 }
 
 #carreTheme{
@@ -144,20 +143,16 @@ body {
 }
 
 
-
-
 /***********************************
 			footer
 ***********************************/
 
 .footer {
-    padding: 40px 0;
+    padding: 10px 0;
     color: black;
     font-size: 15px;
     text-align: center;  
-    margin-bottom : 0px;
     display: block;
-    border-top: 1px solid #e5e5e5;
     color: #337ab7;
     height: auto;
 }
