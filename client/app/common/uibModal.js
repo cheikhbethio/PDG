@@ -19,6 +19,14 @@ custumModal.factory('myModal', ['_', '$uibModal', function (_, $uibModal) {
 					},
 					size: size
 				});
+			},
+			viewPoem: function (template, size) {
+				return $uibModal.open({
+					animation: true,
+					templateUrl: template,
+					controller: 'viewPoemController',
+					size: size
+				});
 			}
 		};
 	}]);

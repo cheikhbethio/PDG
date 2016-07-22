@@ -1,6 +1,6 @@
 <div class="row contentRubrique">
 
-	<div class="row rowRubrique">
+	<!--<div class="row rowRubrique">-->
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
             <h3 class="modal-title">I'm a modal!</h3>
@@ -18,11 +18,51 @@
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+	
+	
 		<div class="row">
 			<button class="btn-lg btn-danger col-md-offset-4" ng-click="testBoitedialogue('lg')">test de la boite de dialogue</button>
 		</div>
-		<div class="col-sm-11  col-md-11 col-sm-offset-1">
-			<div class="poeme col-md-3">
+	
+	
+	<div class="row listPoeme">
+			
+			
+			<div class="poemePanelContainer col-sm-4"  ng-repeat="poeme in poemlist track by $index" ng-click="viewPoem('lg', poeme._id)">
+				<div class="poemePanel panel panel-primary">
+				    <div class="poemePanelHeading panel-heading" style="background-color : #CFE1F1; color: black;">      
+				      <div class="col-sm-9 author">{{poeme.id_auteur.local.lastname}}  &nbsp; {{poeme.id_auteur.local.firstname}}</div>
+				      <div class="col-sm-3 date">{{poeme.date | date:'dd MMM yyyy'}}</div>
+				    </div>
+				    <div class="poemePanelBody panel-body">
+						<section class="title" >
+							{{poeme.title}}
+						</section>
+						<div class="divider"></div>
+						<section class="foto">
+							<img src="../../assets/images/talibe.jpg">
+						</section>
+				    </div>
+				    <div class="panel-footer">   
+				      <div class="cc pull-left">
+				         <span class="glyphicon glyphicon-floppy-disk"></span>
+				       </div>
+				       <div class="dd pull-right">
+				         <span>lire la suite</span>
+				       </div>
+				    </div>
+				  </div>
+			</div>
+			
+		</div>
+
+	<!--</div>-->
+</div>
+
+
+
+
+<!--			<div class="poeme col-sm-4">
 				<div class="panel panel-primary">
 				    <div class="panel-heading" style="background-color : #CFE1F1; color: black;">      
 				      <div class="pull-left titre">Titre du poeme</div>
@@ -51,7 +91,7 @@
 				    </div>
 				  </div>
 			</div>
-			<div class="poeme  col-md-3 ">
+			<div class="poeme  col-md-4 ">
 				<div class="panel panel-primary">
 				    <div class="panel-heading" style="background-color : #CFE1F1; color: black;">      
 				      <div class="pull-left titre">Titre du poeme</div>
@@ -80,7 +120,7 @@
 				    </div>
 				  </div>
 			</div>
-			<div class="poeme  col-md-3 ">
+			<div class="poeme  col-md-4 ">
 				<div class="panel panel-primary">
 				    <div class="panel-heading" style="background-color : #CFE1F1; color: black;">      
 				      <div class="pull-left titre">Titre du poeme</div>
@@ -109,154 +149,4 @@
 				    </div>
 				  </div>
 			</div>
-			<div class="poeme  col-md-3">
-				<div class="panel panel-primary">
-				    <div class="panel-heading" style="background-color : #CFE1F1; color: black;">      
-				      <div class="pull-left titre">Titre du poeme</div>
-				      <div class="pull-right date">22 déc 2015</div>
-				    </div>
-				    <div class="panel-body">
-				      <section class="contenuePoeme">
-				            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				      </section>
-				      <section class="foto">
-				        <img src="../../assets/images/talibe.jpg">
-				      </section>
-				    </div>
-				    <div class="panel-footer">   
-				      <div class="cc pull-left">
-				         <span class="glyphicon glyphicon-floppy-disk"></span>
-				       </div>
-				       <div class="dd pull-right">
-				         <span>lire la suite</span>
-				       </div>
-				    </div>
-				  </div>
-			</div>
-			<div class="poeme col-md-3">
-				<div class="panel panel-primary">
-				    <div class="panel-heading" style="background-color : #CFE1F1; color: black;">      
-				      <div class="pull-left titre">Titre du poeme</div>
-				      <div class="pull-right date">22 déc 2015</div>
-				    </div>
-				    <div class="panel-body">
-				      <section class="contenuePoeme">
-				            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				      </section>
-				      <section class="foto">
-				        <img src="../../assets/images/talibe.jpg">
-				      </section>
-				    </div>
-				    <div class="panel-footer">   
-				      <div class="cc pull-left">
-				         <span class="glyphicon glyphicon-floppy-disk"></span>
-				       </div>
-				       <div class="dd pull-right">
-				         <span>lire la suite</span>
-				       </div>
-				    </div>
-				  </div>
-			</div>
-			<div class="poeme  col-md-3">
-				<div class="panel panel-primary">
-				    <div class="panel-heading" style="background-color : #CFE1F1; color: black;">      
-				      <div class="pull-left titre">Titre du poeme</div>
-				      <div class="pull-right date">22 déc 2015</div>
-				    </div>
-				    <div class="panel-body">
-				      <section class="contenuePoeme">
-				            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				      </section>
-				      <section class="foto">
-				        <img src="../../assets/images/talibe.jpg">
-				      </section>
-				    </div>
-				    <div class="panel-footer">   
-				      <div class="cc pull-left">
-				         <span class="glyphicon glyphicon-floppy-disk"></span>
-				       </div>
-				       <div class="dd pull-right">
-				         <span>lire la suite</span>
-				       </div>
-				    </div>
-				  </div>
-			</div>
-			<div class="poeme  col-md-3 ">
-				<div class="panel panel-primary">
-				    <div class="panel-heading" style="background-color : #CFE1F1; color: black;">      
-				      <div class="pull-left titre">Titre du poeme</div>
-				      <div class="pull-right date">22 déc 2015</div>
-				    </div>
-				    <div class="panel-body">
-				      <section class="contenuePoeme">
-				            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				      </section>
-				      <section class="foto">
-				        <img src="../../assets/images/pouvoir.jpg">
-				      </section>
-				    </div>
-				    <div class="panel-footer">   
-				      <div class="cc pull-left">
-				         <span class="glyphicon glyphicon-floppy-disk"></span>
-				       </div>
-				       <div class="dd pull-right">
-				         <span>lire la suite</span>
-				       </div>
-				    </div>
-				  </div>
-			</div>
-			<div class="poeme col-md-3">
-				<div class="panel panel-primary">
-				    <div class="panel-heading" style="background-color : #CFE1F1; color: black;">      
-				      <div class="pull-left titre">Titre du poeme</div>
-				      <div class="pull-right date">22 déc 2015</div>
-				    </div>
-				    <div class="panel-body">
-				      <section class="contenuePoeme">
-				            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				      </section>
-				      <section class="foto">
-				        <img src="../../assets/images/talibe.jpg">
-				      </section>
-				    </div>
-				    <div class="panel-footer">   
-				      <div class="cc pull-left">
-				         <span class="glyphicon glyphicon-floppy-disk"></span>
-				       </div>
-				       <div class="dd pull-right">
-				         <span>lire la suite</span>
-				       </div>
-				    </div>
-				  </div>
-			</div>
-		</div>
-
-	</div>
-
-
-</div>
+		-->

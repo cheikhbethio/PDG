@@ -226,3 +226,9 @@
 .modal-content{
 	border : 0px;
 }
+
+
+.divider{
+	margin: 5px 0 5px 0; 
+    border-top: 1px solid #ddd;
+}
