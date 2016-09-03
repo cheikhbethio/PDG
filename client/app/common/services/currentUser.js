@@ -1,24 +1,32 @@
-angular.module('pdg.currentUser', [])
-.factory('CurrentUser', ['$localStorage',  
-	function($localStorage) {
-  
-	//var currentUser;
+var currentUserModule = angular.module('currentUser', ['ngCookies', 'ngResource']);
+/*
+currentUserModule.factory('userCookie', ['$resource', function ($resource) {
+	return $resource('/api/session', {}, {
+		get: {method: 'GET'},
+	});
+}]);
+*/
 
-	return {
-
-		set: function(user) {
-			$localStorage.currentUser = angular.copy(user);
-		},
+currentUserModule.factory('CurrentUser', ['$cookies', '$localStorage',  '$resource',
+	function($cookies, $localStorage, $resource) {
+  	return {
 
 		clear: function() {
-			delete $localStorage.currentUser;
+			$cookies.remove('SeugneBethioLaGrace');
 		},
 
 		isLoggedIn: function() {
-			if($localStorage.currentUser === undefined)
-				return false;
-			else
-				return true;
+ 			return angular.isDefined($cookies.get('SeugneBethioLaGrace'));
+		},
+		getId: function(){
+			var cookievalue = JSON.parse($cookies.get('SeugneBethioLaGrace'));
+			return cookievalue.id
+		},
+
+
+
+		set: function(user) {
+			$localStorage.currentUser = angular.copy(user);
 		},
 
 		getRight: function(){
@@ -27,14 +35,6 @@ angular.module('pdg.currentUser', [])
 			else
 				return $localStorage.currentUser.right;
 		},
-
-		getId: function(){
-			if($localStorage.currentUser === undefined)
-				return undefined;
-			else
-				return $localStorage.currentUser._id;
-		},
-
 		isAdmin: function(){
 			if($localStorage.currentUser === undefined)
 				return false;

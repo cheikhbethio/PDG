@@ -56,7 +56,31 @@
 					</span>
 					<input class="form-control" disabled="true" name="date" type="text" id="from" value="{{poemToEdit.date | date :'fullDate'}}">
 				</div>
-            </div>            
+            </div> 
+
+            <!-- tof -->
+            <div class="col-sm-12">
+	            <div class="form-group input-group" aria-hidden="true" ng-click="showModalTof()">
+	                <span  for="tof" class="input-group-addon">
+	                    <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> 
+	                </span>
+
+	                <input class="form-control" name="tof" ng-disabled="true" type="text" id="tof" placeholder=" Cliquez sur l'icone de gauche pour choissir la photo du poême">
+	            </div>
+            </div>
+
+            <!-- rubric -->
+            <div class="col-sm-12">
+            	<div class="form-group input-group" aria-hidden="true">
+                	<span  for="rubric" class="input-group-addon">
+                    	<span class="glyphicon glyphicon-book" aria-hidden="true"></span> 
+               		</span>
+              		<select class="form-control" ng-options="rubric for rubric in rubricList" ng-model="poemToEdit.rubric"></select>
+              		<!-- <select class="form-control" ng-model="poemToEdit.rubric" >
+              			<option value="{{rubric}}" ng-repeat="rubric in rubricList" ng-selected="rubric == rubricList[poemToEdit.rubric-1]">{{rubric}}</option>
+              		</select> -->
+            	</div>            	
+            </div>           
         </div>
 		
         <div class="row">

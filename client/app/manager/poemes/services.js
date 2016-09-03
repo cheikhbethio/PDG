@@ -12,4 +12,9 @@ angular.module('poemeServices', ['ngResource'])
 				return $resource('/api/last/lastPoeme', {}, {
 					query: {method: 'GET', isArray: true}
 				});
+			}])
+		.factory('getPoemsByLabel', ['$resource', function ($resource) {
+				return $resource('/api/forpoem/bylabel', {}, {
+					get: {method: 'GET'}
+				});
 			}]);

@@ -1,20 +1,47 @@
+var _ = require('underscore');
+var mayVar =require('../config/variables.js');
+
+var rightTab = [];
+
+init();
+
+
 module.exports = function(app, passport) {
 
-	app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
-		res.cookie('userid', req.user.local.right, { maxAge: 2592000000 });
-		res.send(req.user);
-		console.log("#### login succes!!")
+	app.get('/api/session', function(req, res) {
+		res.send(req.session.id);
 	});
+	
+	app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
+		var forCookie = {
+			id : req.user._id, 
+			login : req.user.local.login,
+			lastname : req.user.local.lastname,
+			firstname : req.user.local.firstname,
+			right : giveRight(req.user.local.right)		
+		};
+		req.user.local.password = "rien du tout";
+		req.session.curentUser = req.user;
+	
+	// console.log("+++++++++++++++----+ma variable : ", req.session.curentUser);
+
+		res.cookie('SeugneBethioLaGrace', JSON.stringify(forCookie), { maxAge: mayVar.session.session_duration});
+		res.send(forCookie);
+	});
+
 	app.get('/api/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
-		console.log("#### logout succes!!")
 	});
 };
 
 // route middleware to make sure
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated())
-		return next();
-	res.redirect('/');
+
+function giveRight(right){
+	return 1 + rightTab.indexOf(right);
+}
+function init(){
+	_.each(mayVar.darajas, function(elem){
+		rightTab.push(elem);
+	});
 }

@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('poemes', ['ui.router', 'ngAnimate', 'ui.bootstrap'])
+	angular.module('poemes', ['ngCookies', 'ui.router', 'ngAnimate', 'ui.bootstrap', 'underscore'])
 			.config(['$stateProvider', function ($stateProvider) {
 					$stateProvider
 							.state('dashboard.createPoeme', {
@@ -42,24 +42,62 @@
 			.controller('allPoemeController', allPoemeController)
 			.controller('lastPoemeController', lastPoemeController);
 
-	createPoemeController.$inject = ['CurrentUser', 'Poeme', '$scope'];
-	function createPoemeController(CurrentUser, Poeme, $scope) {
+	createPoemeController.$inject = ['myModal', 'CurrentUser', 'Poeme', '$scope', '_'];
+	function createPoemeController(myModal, CurrentUser, Poeme, $scope, _) {
+
+
 		$scope.addPoeme = addPoeme;
+		$scope.showModalTof = showModalTof;
 		$scope.info = {};
 		$scope.info.showMessage = false;
 		$scope.newPoeme = {};
+		$scope.newPoeme.rubric = 0;
 		var my_id = CurrentUser.getId();
+		$scope.rubricList = ['Dieureudieuf Serigne Bethio', 'L\'esprit universel', 'Histoire sacrées',
+			'Gatt Saf', 'Les plus appréciés', 'L\'originalité spiritelle'];
+		$scope.linkList = [];
+
+		initTofList($scope.linkList);
+
+		// initTofList();
+		// function initTofList(){
+		// 	for (var i = 13; i >= 1; i--) {
+		// 		$scope.linkList.push("assets/images/poeme/tofPoeme" + i + ".jpg");			
+		// 	}
+		// 	for (var i = 102; i >= 101; i--) {
+		// 		$scope.linkList.push("assets/images/poeme/tofPoeme" + i + ".png");			
+		// 	}
+		// }
+
+		function showModalTof(){
+			var modalTof = myModal.tofChoice('app/common/modalView/tof.html', 'lg', $scope.linkList);
+			modalTof.result.then(function (res) {
+				if (res) {
+					$scope.newPoeme.tof = res;
+				}
+			});
+		}
+
+
 		function addPoeme() {
 			if (!$scope.newPoeme) {
 				console.log("tous les champs semblent vides. Veillez les remplir s'il vous plait.");
 			} else {
 				$scope.newPoeme.id_auteur = my_id;
+				if( _.indexOf($scope.rubricList,  $scope.newPoeme.rubric)>-1){
+					$scope.newPoeme.rubric = _.indexOf($scope.rubricList,  $scope.newPoeme.rubric) + 1 ;
+				}else{
+					$scope.newPoeme.rubric = null;
+				}
+
 				Poeme.save($scope.newPoeme, function (resp) {
 					$scope.info.message = resp.message;
 					$scope.info.showMessage = true;
 					if (resp.code === 0) {
 						$scope.info.type = "success";
 					} else {
+						$scope.info.message = "Le titre, le livre d'origine, "+
+						"l'image, la catégorie et contenu du poême sont tous obligatoire";
 						$scope.info.type = "danger";
 						$scope.info.showMessage = true;
 					}
@@ -69,12 +107,30 @@
 		}
 	}
 
-	editPoemeController.$inject = ['poemToEdit', "$stateParams", "Poeme", "$scope", "$state"];
-	function editPoemeController(poemToEdit, $stateParams, Poeme, $scope, $state) {
+	editPoemeController.$inject = ['myModal','poemToEdit', "$stateParams", "Poeme", "$scope", "$state"];
+	function editPoemeController(myModal,poemToEdit, $stateParams, Poeme, $scope, $state) {
 		$scope.upatePoem = upatePoem;
+		$scope.showModalTof = showModalTof;
 		$scope.poemToEdit;
 		$scope.info;
 		$scope.poemToEdit = poemToEdit.result;
+		$scope.rubricList = ['Dieureudieuf Serigne Bethio', 'L\'esprit universel', 'Histoire sacrées',
+			'Gatt Saf', 'Les plus appréciés', 'L\'originalité spiritelle'];
+		var holdRubric = $scope.poemToEdit.rubric;
+		$scope.linkList = [];
+
+		initTofList($scope.linkList);
+
+		function showModalTof(){
+			var modalTof = myModal.tofChoice('app/common/modalView/tof.html', 'lg', $scope.linkList);
+			modalTof.result.then(function (res) {
+				if (res) {
+					$scope.poemToEdit.tof = res;
+				}
+			});
+		}
+
+
 		function upatePoem() {
 			if (!$scope.poemToEdit.content) {
 				$scope.info = {
@@ -82,6 +138,13 @@
 					type: "danger"
 				}
 			} else {
+				var ind = _.indexOf($scope.rubricList,  $scope.poemToEdit.rubric);
+				if(ind < 0 || isNaN(ind)){
+					$scope.poemToEdit.rubric = holdRubric
+				} else{
+					$scope.poemToEdit.rubric = ind + 1;
+				}
+
 				Poeme.update({id: $stateParams.id}, $scope.poemToEdit, function (resp) {
 					if (resp.code !== 0) {
 						$scope.info = {
@@ -102,6 +165,8 @@
 		$scope.editPoem = editPoem;
 		$scope.deletePoem = deletePoem;
 		$scope.info;
+		$scope.rubricList = ['Dieureudieuf Serigne Bethio', 'L\'esprit universel', 'Histoire sacrées',
+			'Gatt Saf', 'Les plus appréciés', 'L\'originalité spiritelle'];
 
 		function deletePoem() {
 			var modalConfirm = myModal.confirm('app/common/modalView/confirm.html', 'sm');
@@ -128,8 +193,15 @@
 
 	}
 
-	allPoemeController.$inject = ['Poeme', '$scope'];
-	function allPoemeController(Poeme, $scope) {
+	allPoemeController.$inject = ['$cookies','CurrentUser' ,'Poeme', '$scope'];
+	function allPoemeController($cookies, CurrentUser, Poeme, $scope) {
+		var my_id ;
+		var tempo = CurrentUser.getId;
+
+		// console.log("+++++++++++++ : ", $cookies.getAll());
+		var toto =  JSON.parse($cookies.get('SeugneBethioLaGrace'));
+
+	
 		$scope.deletePoeme = deletePoeme;
 		$scope.poemlist = Poeme.query();
 		$scope.config = {
@@ -155,36 +227,18 @@
 
 		$scope.listPoeme;
 		$scope.poemToDisplay;
-		/**
-		 * *********************** carousel ***********************
-		 */
-		//-----------------------------------------function
-		$scope.addSlide = addSlide;
 		$scope.goToPoeme = goToPoeme;
-		//-----------------------------------------declaration
-		$scope.myInterval = 5000;
-		$scope.noWrapSlides = false;
-		$scope.active = 0;
-		var slides = $scope.slides = [];
-		var currIndex = 0;
-		//à utiliser pour les différents poemes. à voire aussi avec ng-repeat
-		function addSlide() {
-			var newWidth = 600 + slides.length + 1;
-			slides.push({
-				image: 'http://lorempixel.com/' + newWidth + '/300',
-				text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
-				id: currIndex++
-			});
-		}
-		for (var i = 0; i < 4; i++) {
-			$scope.addSlide();
-		}
 
+		$scope.rubricList = ['Dieureudieuf Serigne Bethio', 'L\'esprit universel', 'Histoire sacrées',
+			'Gatt Saf', 'Les plus appréciés', 'L\'originalité spiritelle'];
+
+		
 
 		/************************lists des poemes**********************/
 		LastPoemes.query(function (list) {
 			$scope.listPoeme = list;
 		});
+
 		function goToPoeme(poem) {
 			$scope.poemToDisplay = poem;
 		}
@@ -192,10 +246,20 @@
 	}
 
 
+	/***Functions auxiliaires********************************************/
 
 	getAPoem.$inject = ['Poeme', '$stateParams'];
 	function getAPoem(Poeme, $stateParams) {
 		return Poeme.get({id: $stateParams.id}).$promise;
 	}
 
+	function initTofList(list){
+		for (var i = 13; i >= 1; i--) {
+			list.push("assets/images/poeme/tofPoeme" + i + ".jpg");			
+		}
+
+		for (var i = 102; i >= 101; i--) {
+			list.push("assets/images/poeme/tofPoeme" + i + ".png");			
+		}
+	}
 })();

@@ -18,28 +18,46 @@ var application_root=__dirname,
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 
+var session_duration = 1000000;
+var now_time = new Date(Date.now());
 
 //starting server port
 var port    =   process.env.PORT || 8000;
+app.use(express.static(path.join(application_root ,'../client')));
 
-//passport configuration and required
+app.set('trust proxy', 1) // trust first proxy
 require('./config/passport.js')(passport);
-app.use(session({ secret: 'seugneBethiodieuredieufway' }));
+app.use(morgan('dev'));
+app.use(methodOverride());
+app.use(cookieParser()); 
+app.use(bodyParser.json());
+
+app.use(session({ 
+    secret: 'seugneBethiodieuredieufway', 
+    resave: true,
+    saveUninitialized: true,
+    expires :new Date(Date.now() + session_duration),
+    cookie: { maxAge  : session_duration}
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.use(express.static(path.join(application_root ,'../client')));
-app.use(morgan('dev'));
-app.use(methodOverride());
-app.use(bodyParser());
-app.use(bodyParser.json());
+app.use(function manageSession(req, res, next) {
+    var session_age = req.session.cookie.expires; 
+    // console.log('req.session : ', req.session);
+    // console.log('new Date(Date.now() + 6)', new Date(Date.now()));
+    if (session_age < new Date(Date.now())) {
+        console.log("log out :++++++++++")
+        req.logout();
+        req.session.destroy();
+    }
+    return next();
+});
+
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser()); 
 
 /********************************* routes**********************************/ 
-//passeport
-//require('./route/passport.js')(app, passport); 
 
 app.listen(port, function(){
     console.log("node server on port : " + port);
@@ -49,3 +67,4 @@ app.listen(port, function(){
 require('./route/user.js')(app);
 require('./route/connection.js')(app, passport);
 require('./route/poeme.js')(app, passport);
+require('./route/comment.js')(app, passport);

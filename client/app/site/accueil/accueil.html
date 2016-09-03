@@ -1,47 +1,58 @@
 	<div class="row rowContenu" ng-init="survol=true">
 		<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 			
+			<my-info info='info'></my-info>
 			<div class="placeholders theme">
 
 				<div id="carreThemeL" class="col-xs-12 col-sm-12 placeholder">
-					<div class="text-left">RECEMMENT PUBLIES</div>					
+					<div class="row text-left">RECEMMENT PUBLIES</div>	
+					
+					<div class="row">
+						<div class="carouselPoeme col-sm-6 col-sm-offset-1">
+							<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+								<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+									<img ng-src="{{slide.image}}" style="margin:auto;">
+									<div class="carousel-caption">
+										<h1>Slide {{slide.id}}</h1>
+										<p>{{slide.text}}</p>
+									</div>
+								</uib-slide>
+							</uib-carousel>
+						</div>
+						<div class=" col-sm-4 col-sm-offset-1"> 
+							<ul>
+								<li ng-repeat="poeme in listPoeme">{{poeme.title}}</li>
+							</ul>
+						</div>
+					</div>
+
 				</div>
 
-				<div xng-show="survol" xng-mouseenter="survol=!survol" xng-mouseleave="survol=!survol" id="carreTheme" class="col-xs-6 col-sm-6 pull-left themeOne placeholder anim" ng-click="rubrique(1)">
+				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-left themeOne placeholder anim" ng-click="rubrique(1)">
 					<div>Dieureudieuf</div>
 					<div>SERIGNE</div>
 					<div>BETHIO</div>							  
 				</div>
-				
-				<!--div ng-hide="survol" ng-mouseenter="survol=!survol" ng-mouseleave="survol=!survol" id="carreThemeImg" class="col-xs-6 col-sm-6 pull-left themeOneImg anim" ng-click="rubrique(1)">
-					<img src="../../../../assets/images/cheikhAdiaSaliou.jpg" class="col-xs-6 col-sm-6 pull-left imgThemeOne">
-					<div class="textThemeOneImg col-xs-6 col-sm-6 pull-right">
-						<div>Dieureudieuf</div>
-						<div>SERIGNE</div>
-						<div>BETHIO</div>							
-					</div>						
-				</div-->
 
-
-				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-right themeTwo placeholder"  ng-click="rubrique(1)">
+				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-right themeTwo placeholder"  ng-click="rubrique(2)">
 					<div class="text-left">L'esprit</div>
 					<div class="text-center">universel</div>							 
 				</div>
 
-				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-left themeThre placeholder"  ng-click="rubrique(1)">
+				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-left themeThre placeholder"  ng-click="rubrique(3)">
 					Histoires sacrées
 				</div>
 
-				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-right themeFour placeholder"  ng-click="rubrique(1)">
+				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-right themeFour placeholder"  ng-click="rubrique(4)">
 					<div>GATT</div>
 					<div>SAFF!</div>
 				</div>
 
-				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-left themeFive placeholder"  ng-click="rubrique(1)">
+				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-left themeFive placeholder"  ng-click="rubrique(5)">
 					Les plus appréciés
 				</div>
 
-				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-right themeSix placeholder"  ng-click="rubrique(1)">
+				<div id="carreTheme" class="col-xs-6 col-sm-6 pull-right themeSix placeholder"  ng-click="rubrique(6)">
 					L'originalité spirituelle
 				</div>
 			</div>

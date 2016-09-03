@@ -59,7 +59,8 @@ body {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    font-size: 3vw;
+    font-size: 25px;
+    color: #1b86e4;
     background-color: #fff;    
     display: inline-block;
     vertical-align: middle;

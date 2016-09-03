@@ -13,13 +13,39 @@ angular.module('accueil', ['ui.router'])
 	}])
 	.controller('accueilController', ['$rootScope', '$scope', '$state', 
 		function($rootScope, $scope, $state){
-		/*$css.add('assets/css/body/content.css');
-		$css.add('assets/css/body/sidebar.css');
-		*/
 
 		$rootScope.confVariable.titre = "Thiantakones";
 		$scope.rubrique = function(id){
-			$state.go("site.rubrique", {id:1});
+			$state.go("site.rubrique", {id:id});
 		}
+
+		/************************* carousel *********************** */
+		
+		//-----------------------------------------function
+		$scope.addSlide = addSlide;
+		$scope.goToPoeme = goToPoeme;
+		
+		//-----------------------------------------declaration
+		$scope.myInterval = 5000;
+		$scope.noWrapSlides = false;
+		$scope.active = 0;
+		var slides = $scope.slides = [];
+		var currIndex = 0;
+		//à utiliser pour les différents poemes. à voire aussi avec ng-repeat
+		function addSlide() {
+			var newWidth = 600 + slides.length + 1;
+			slides.push({
+				image: 'http://lorempixel.com/' + newWidth + '/300',
+				text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
+				id: currIndex++
+			});
+		}
+		for (var i = 0; i < 4; i++) {
+			$scope.addSlide();
+		}
+		function goToPoeme(poem) {
+			$scope.poemToDisplay = poem;
+		}
+
 
 	}]);

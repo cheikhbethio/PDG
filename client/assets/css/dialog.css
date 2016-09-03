@@ -10,9 +10,12 @@
 	text-align: left; 
 	font-family :'Georgia', serif; 
 }
-.dialogTitle{
+.dialogPoemeTitle{
 	text-align: left; 
 	font-family :'Georgia', serif; 
+	font-size: 40px;
+	text-align: center;
+	padding-bottom: 20px;
 }
 .adresse{
 	text-align: left;
@@ -21,44 +24,36 @@
 	font-size: 17px;
 }
 
+.poemeView .modal-body img{
+    width: 100%;
+    height: 60vh;
+}
+.modal-footer .fromDate{
+	color: #90949c;
+    font-size: 12px;
+    text-transform: uppercase;
+	padding-bottom: 20px;
+}
+
 /***
 
 link
 
 ****/
 .rowLinker{
-	padding-left: 50px;
-	padding-right: 50px;
 
 }
-.rowLinker > div{/*
-	border : 2px solid blue;*/
-	display: inline-block;
+.rowLinker div{
+	margin-right : 30px;     
+	color: #7f7f7f;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-.rowLinker > div > a > div > img{
-	width: 100%;
-	height: 100%; 
+.rowLinker span {
+	cursor: pointer;
 }
 
-.rowLinker  > div > a {
-	width: 5%;
-}
-
-@media (max-width: 700px){
-	.rowLinker > div  > a {
-		width: 12%;
-	}
-	.rowLinker{
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-	.modal-lg {
-		width: 100%;
-	  	margin-left: 0%;
-	    min-width: 256px;
-	}
-}
 
 
 /***
@@ -66,44 +61,47 @@ link
 Comment
 
 **/
+.rowComments{	
+    background-color: #f6f7f9;
+    border-top: 1px solid #e1e2e3;
+	text-align: left;
+	font-size: 14px;
+	font-family :arial,'Georgia', serif; 
+}
+
 .rowCommentsList > div{
-	border: 3px solid blue;
 	text-align: left;
 	overflow: auto;
 }
 
 .rowCommentsList {
-	width: 95%;
-	margin-left: 5%;
+	margin-top: 10px;
 }
 .rowCommentInput{
-	width: 95%;
-	margin-left: 5%;
 
 }
 
-
-
-
-.nameCommenter{
+.rowCommentsList .CommenterName{
 	color: #3b5998;
 	font-weight: bold;
+	font-size: 12px;
+    float: left;
+    margin-right: 10px;
 }
 
-.policeTextComment{
-	text-align: left;
-	font-size: 14px;
-	font-family :arial,'Georgia', serif; 	
+.rowCommentsList .CommentContent{
+	font-size: 12px;
 }
 
-/*****
-
-hr
-
-*****/
+.rowCommentsList .commentDate, .rowCommentsList .signal{
+	color: #90949c;
+	font-size: 12px;
+	font-weight: normal;
+}
+/***********************les HR***************************/
 .firtHr{
 	border-top: 1px solid #CFD9DE; 
-	width: 70%;
+	width: 80%;
     margin-top: 0px;
     margin-bottom: 5px; 
 }
@@ -111,4 +109,36 @@ hr
 	border-top: 1px solid #AEB7BB; 
 	width: 100%;
     margin-top: 5px;
+}
+
+
+.poemePanel .panel-footer div{
+  cursor: pointer;
+}
+.poemePanel .panel-footer div:hover{
+    color: green;
+    font-weight: bold;
+}
+
+.forSignal:hover{
+    color: green;
+    font-weight: bold;
+  cursor: pointer;
+}
+
+.intoRed{
+	color: red;
+}
+
+.intoNormal{
+	color: #90949c;
+}
+
+.rowComments .denounceComment{
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: normal;
+}
+.rowLinker .denouncePoem{
+
 }

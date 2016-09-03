@@ -2,7 +2,6 @@
 /*les 10 derniers poemes*/
 
 .lastPoeme{
-	
     font-family: Helvetica, sans-serif;
 }
 
@@ -99,3 +98,17 @@
 } 
 
 /*background-color: black;*/
+
+/***********Modal de la tof choice ************/
+
+.tofPoem img{
+	width: 245px;
+	height: 180px;
+	margin: 0px 10px 10px 0px;
+}
+.selectedTof{
+    border: 20px solid green;
+}
+.showError{
+	color: red;
+}

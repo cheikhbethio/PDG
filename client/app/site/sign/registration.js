@@ -17,7 +17,6 @@ angular.module('registration', ['ui.router'])
 				$rootScope.titre = "Thiantakones";
 				$scope.newUser = {};
 
-
 				$scope.info = {};
 				$scope.info.showMessage = false;
 
@@ -51,8 +50,6 @@ angular.module('registration', ['ui.router'])
 						$scope.info.showMessage = true;
 						$scope.info.type = 'danger';
 					}
-
-					console.log($scope.newUser);
 				};
 
 				$scope.resetRegistrationForm = function () {

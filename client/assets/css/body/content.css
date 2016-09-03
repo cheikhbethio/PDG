@@ -132,34 +132,6 @@ div{
 
 
 
-
-/*
-================
-min-width:1200px
-================
-*/
-/*
-@media(min-width:1200px){
-  .rowContenu{
-    margin-top: 6.4vw;
-  }
-  .imgThemeOne{  
-    margin-top: 30px;
-  }
-  .textThemeOneImg {
-    font-size: 2vw;
-    height: 15vw;
-    display: inline-block;
-    padding: 30px
-  }
-}
-*/
-/*
-=================
-(min-width:776px) and (max-width:1199px)
-=================
-*/
-
 @media(min-width:776px) and (max-width:1199px){
   .rowContenu{
    /*// margin-top: 8vw;*/

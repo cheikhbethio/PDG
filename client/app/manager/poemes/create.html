@@ -6,6 +6,7 @@
 
     <form name="createPoemeForm" class="col-sm-8 col-sm-offset-2">
         <div class="row">
+        <!-- title -->
             <div class="form-group input-group" novalidate>
                 <span for="title" class="input-group-addon">
                     <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
@@ -14,13 +15,30 @@
                 ng-model="newPoeme.title" required>
             </div>
             
+            <!-- from -->
             <div class="form-group input-group" aria-hidden="true">
-                <span  for="title" class="input-group-addon">
+                <span  for="from" class="input-group-addon">
                     <span class="glyphicon glyphicon-book" aria-hidden="true"></span> 
                 </span>
                 <input class="form-control" name="from" type="text" id="from" placeholder="de quel livre est tiré ce poème" ng-model="newPoeme.from">
             </div>
             
+            <!-- tof -->
+            <div class="form-group input-group" aria-hidden="true" ng-click="showModalTof()">
+                <span  for="tof" class="input-group-addon">
+                    <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> 
+                </span>
+
+                <input class="form-control" name="tof" ng-disabled="true" type="text" id="tof" placeholder=" Cliquez sur l'icone de gauche pour choissir la photo du poême">
+            </div>
+            
+            <!-- rubric -->
+            <div class="form-group input-group" aria-hidden="true">
+                <span  for="rubric" class="input-group-addon">
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span> 
+                </span>
+              <select class="form-control" ng-options="rubric for rubric in rubricList" ng-model="newPoeme.rubric"></select>
+            </div>
             
         </div>
 

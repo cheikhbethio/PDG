@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var _ = require("underscore");
+var mayVar =require('../config/variables.js');
 
 var schema = mongoose.Schema;
 
@@ -15,7 +16,7 @@ var userSchema = mongoose.Schema({
 		right: String,
 		idPic: String,
 		phone: String,
-		status: Boolean
+		status: String
 	},
 	facebook: {
 		id: String,
@@ -47,33 +48,33 @@ userSchema.methods.validPassword = function (password) {
 var db = mongoose.model('user', userSchema);
 module.exports.user = db;
 
+exports.dbAccess = db;
+
 //
 exports.create = function (req, res, next) {
 	var params = req.body;
 	var newUser = new db();
-	var email = params.email;
-	var login = params.login;
-	newUser.local.email = email;
+	newUser.local.email = params.email;
 	newUser.local.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
 	newUser.local.firstname = params.firstname;
 	newUser.local.lastname = params.lastname;
-	newUser.local.login = login;
-	newUser.local.right = "";
+	newUser.local.login = params.login;
+	newUser.local.right = mayVar.darajas.SIMPLE;
 	newUser.local.idPic = "";
 	newUser.local.phone = "";
 	newUser.local.status = "";
 
-	db.findOne({'local.email': email}, function (err, user) {
+	db.findOne({'local.email': params.email}, function (err, user) {
 		if (err)
 			next(err);
 		else {
 			if (user) {
-				console.log("email already use!!!!");
+				console.log("*******************: ", user);
 				res.send({message: "email is already used!", code: 1});
 				return next();
 			}
 
-			db.findOne({'local.login': login}, function (errLogin, userLogin) {
+			db.findOne({'local.login': params.login}, function (errLogin, userLogin) {
 				if (errLogin) {
 					next(errLogin);
 				} else {
@@ -87,7 +88,7 @@ exports.create = function (req, res, next) {
 							res.send({message: err});
 						} else {
 							console.log("#### signup succes!!");
-							res.send({message: "signup succes", code: 0, result: results, body: req.body});
+							res.send({message: "signup succes", code: 0, result: results});
 						}
 					});
 				}
@@ -122,15 +123,6 @@ exports.get = function (req, res, next) {
 
 exports.delete = function (req, res, next) {
 	var id = req.params.id;
-	/*
-	 try {
-	 var res_deletion = db.deleteOne( { "_id" : id } );
-	 console.log("### res_deletion : ", res_deletion);
-	 return res.json(res_deletion);
-	 } catch (e) {
-	 console.log("### res_deletion with error : ", e);
-	 }*/
-
 	db.findById(id, function (err, doc) {
 		if (err || !doc) {
 			res.send({message: "Suppression impossible : utilissateur introuvable ou probleme server", code: 1});
@@ -144,8 +136,8 @@ exports.delete = function (req, res, next) {
 
 exports.edit = function (req, res, next) {
 
-	var id = req.params.id;
-	var params = req.body;
+	var id = req.body._id;
+	var params = req.body.local;
 
 	var email = params.email;
 	var password = params.password;
@@ -154,55 +146,49 @@ exports.edit = function (req, res, next) {
 	var newer = {local: {}, facebook: {}, google: {}};
 	var query = ({_id: id});
 
+
 	db.findById(id, function (err, user) {
-		if (err)
-			next(err);
-		else if (!user) {
-			console.log('db not found when editing!!!');
-			res.sendStatus(404, {error: '0'});
-			next();
+		// return next(user);
+		if (err || !user){
+			console.log('le document est introuvable!!!');
+			res.send({message: "le document est introuvable!!!", code: 2});
 		} else {
-			db.findOne({'local.email': email}, function (err2, user2) {
-				if (err2)
-					next(err2);
-				else {
-					if (user.local.email !== email) {
-						if (user2) {
-							console.log("email already use!!!!");
-							res.sendStatus(401, {error: '1'});
-							return next();
-						}
-					}
+			var obj = {
+				facebook : user.facebook,
+				google : user.google					
+			};
 
-					//à voir apres
-					var objToUp = _.omit(user, "_id");
+			obj.local = {
+				'email' : user.local.email,
+				'password' : user.local.password,
+				'firstname' : params.firstname,
+				'lastname' : params.lastname,
+				'login' : user.local.login,
+				'right' : params.right,
+				'idPic' : params.idPic,
+				'phone' : params.phone,
+				'status' : params.status
+			};
 
-					if (email !== null)
-						objToUp.local.email = email;
-					if (password !== null)
-						objToUp.local.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-					if (firstname !== null)
-						objToUp.local.firstname = firstname;
-					if (lastname !== null)
-						objToUp.local.lastname = lastname;
 
-					newer.local = objToUp.local;
-					newer.facebook = objToUp.facebook;
-					newer.google = objToUp.google;
-
-					db.update(query, newer, function (updateErr, updateResp) {
-						if (updateErr) {
-							console.log("erreur when update db");
-							next(updateErr);
-						} else {
-							res.sendStatus({error: '0'});
-							next();
-						}
-					});
+			fillParam(user.local, obj.local);
+			user.save(function (updateErr, updateResp) {
+				if (updateErr || !updateResp) {
+					console.log("erreur when update db");
+					res.send({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 1});
+				} else {
+					res.send({message: "Le poeme a bien mis à jour.", code: 0, result: updateResp});
 				}
-				;
 			});
-		}
-	});
+		};
+	})
 };
 
+
+function fillParam(objTo, objFrom) {
+	_.each(objFrom, function (value, key) {
+		if (value || key === 'isPublic' || key === 'denounced') {
+			objTo[key] = value;
+		} 
+	});
+}

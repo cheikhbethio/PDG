@@ -25,6 +25,7 @@
 		"angular-minicolors": "kaihenzler/angular-minicolors",
 		"angular-dialog-service": "m-e-conroy/angular-dialog-service",
 		"angular-iu": "angular-ui/bootstrap-bower",
-		"angular-bootstrap": "~0.12.1"
+		"angular-bootstrap": "~0.12.1",
+		"angular-cookies" : "1.5.8"
 	}
 }

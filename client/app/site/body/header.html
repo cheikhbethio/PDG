@@ -11,6 +11,11 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
+				<li  ng-if="isConnected">
+					<a ui-sref="dashboard.home" ui-sref-active="active" >
+						<span class="glyphicon glyphicon-wrench"></span>Gestion du site 
+					</a>
+				</li>
 				<li><a ui-sref="site.accueil" ui-sref-active="active" ><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
 				<li  ng-if="!isConnected">
 					<a ui-sref="site.connexion" ui-sref-active="active" ><span class="glyphicon glyphicon-user"></span>Connection</a>
@@ -31,3 +36,4 @@
 		</div>
 	</div>
 </nav>
+

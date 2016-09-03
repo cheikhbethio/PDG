@@ -31,7 +31,6 @@ module.exports = function (passport) {
 				process.nextTick(function () {
 
 					User.findOne({'local.login': req.body.login}, function (err, user) {
-						// if there are any errors, return the error
 						if (err)
 							return done(err);
 						if (user) {
