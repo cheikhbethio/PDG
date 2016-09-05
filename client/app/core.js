@@ -13,6 +13,7 @@ angular.module('pgdApp', [
 	'connexion',
 	'connectionService',
 	'registration',
+	'profile',
 	//	management
 	'management',
 	'manAccueil',
@@ -20,6 +21,8 @@ angular.module('pgdApp', [
 	'poemeServices',
 	'commentsService',
 	'comments',
+	'user',
+	'userService',
 	//	common
 	'currentUser',
 	'underscore',
@@ -52,7 +55,8 @@ angular.module('pgdApp', [
 						}
 					},
 					data: {
-						requireLogin: false
+						requireLogin: false,
+						requireLoginDashboard : false
 					}
 				})
 				.state("dashboard", {
@@ -68,7 +72,8 @@ angular.module('pgdApp', [
 						}
 					},
 					data: {
-						requireLogin: true
+						requireLogin: true,
+						requireLoginDashboard : true
 					}
 				});
 	}])
@@ -79,6 +84,7 @@ angular.module('pgdApp', [
 	$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 		var requireLogin = toState.data.requireLogin;
 		var requireLoginDashboard = toState.data.requireLoginDashboard;
+		var status = CurrentUser.getRight();
 
 		if (requireLogin && !CurrentUser.isLoggedIn()) {
 			console.log("not connected yet : ");

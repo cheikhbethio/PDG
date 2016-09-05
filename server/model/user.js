@@ -52,7 +52,7 @@ exports.dbAccess = db;
 
 //
 exports.create = function (req, res, next) {
-	var params = req.body;
+	var params = req.body.local;
 	var newUser = new db();
 	newUser.local.email = params.email;
 	newUser.local.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
@@ -69,7 +69,7 @@ exports.create = function (req, res, next) {
 			next(err);
 		else {
 			if (user) {
-				console.log("*******************: ", user);
+				// console.log("*******************: ", user);
 				res.send({message: "email is already used!", code: 1});
 				return next();
 			}
@@ -127,8 +127,7 @@ exports.delete = function (req, res, next) {
 		if (err || !doc) {
 			res.send({message: "Suppression impossible : utilissateur introuvable ou probleme server", code: 1});
 		} else {
-			var res_deletion = doc.remove();
-			return res.json(res_deletion);
+			res.send({message: "Le doc a bien été suprimé", code: 0, result:  doc.remove()});
 		}
 	});
 

@@ -23,18 +23,19 @@ currentUserModule.factory('CurrentUser', ['$cookies', '$localStorage',  '$resour
 			return cookievalue.id
 		},
 
-
+		getRight : function(){
+			var cookievalue = $cookies.get('SeugneBethioLaGrace');
+			if (cookievalue) {
+				cookievalue = JSON.parse(cookievalue);
+				return cookievalue.right;			
+			} 
+			return null
+		},
 
 		set: function(user) {
 			$localStorage.currentUser = angular.copy(user);
 		},
 
-		getRight: function(){
-			if($localStorage.currentUser === undefined)
-				return undefined;
-			else
-				return $localStorage.currentUser.right;
-		},
 		isAdmin: function(){
 			if($localStorage.currentUser === undefined)
 				return false;

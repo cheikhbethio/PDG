@@ -11,10 +11,11 @@ angular.module('accueil', ['ui.router'])
 				controller	: 'accueilController'
 			})
 	}])
-	.controller('accueilController', ['$rootScope', '$scope', '$state', 
-		function($rootScope, $scope, $state){
+	.controller('accueilController', ['CurrentUser', '$rootScope', '$scope', '$state', 
+		function(CurrentUser,$rootScope, $scope, $state){
 
 		$rootScope.confVariable.titre = "Thiantakones";
+		$rootScope.confVariable.isConnected =  CurrentUser.isLoggedIn();
 		$scope.rubrique = function(id){
 			$state.go("site.rubrique", {id:id});
 		}

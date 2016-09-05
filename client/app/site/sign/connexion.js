@@ -57,7 +57,7 @@ angular.module('connexion', ['ui.router'])
 							password: $scope.user.password,
 						}, function (user) {
 							// $localStorage.currentUser = user;
-							$state.go('dashboard.home');
+							$state.go('site.accueil');
 						}, function (error) {
 							console.log('Erreur de connection');
 							setInfo(echecConnexion, "danger");

@@ -232,8 +232,6 @@
 		$scope.rubricList = ['Dieureudieuf Serigne Bethio', 'L\'esprit universel', 'Histoire sacrées',
 			'Gatt Saf', 'Les plus appréciés', 'L\'originalité spiritelle'];
 
-		
-
 		/************************lists des poemes**********************/
 		LastPoemes.query(function (list) {
 			$scope.listPoeme = list;

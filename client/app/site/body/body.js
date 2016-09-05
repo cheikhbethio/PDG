@@ -1,15 +1,14 @@
 'use strict';
 
 angular.module('siteBody', [])
-		.controller('siteBodyController', ['$scope', 'CurrentUser', '$state',
-			function ($scope, CurrentUser, $state) {
+		.controller('siteBodyController', ['$scope', 'CurrentUser', '$state', '$rootScope',
+			function ($scope, CurrentUser, $state, $rootScope) {
 
 				$scope.toDisconnect = function () {
 					CurrentUser.clear();
 					$state.go("site.connexion", {disconnected: true});
-					$scope.isConnected = false;
+						$rootScope.confVariable.isConnected = false;
 				};
 
-
-				$scope.isConnected = CurrentUser.isLoggedIn();
+				$rootScope.confVariable.isConnected =  CurrentUser.isLoggedIn();
 			}]);

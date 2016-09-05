@@ -16,7 +16,8 @@ var isLoggedIn = function (req, res, next) {
 var isWritter = function(req, res, next){
 		console.log("########### right : ", req.session.curentUser);
 		console.log("########### mayVar.darajas :", mayVar.darajas);
-	var curUser = req.session.curentUser.local
+	var curUser = req.session.curentUser ? req.session.curentUser.local : null;
+
 	if(req.isAuthenticated() && 
 		(curUser.right === mayVar.darajas.MIDDLE ||
 			curUser.right === mayVar.darajas.HIGHT)){

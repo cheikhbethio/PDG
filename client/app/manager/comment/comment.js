@@ -87,61 +87,6 @@
 	}
 
 	viewCommentController.$inject = ['Poeme','CurrentUser', 'comment', 'getCommentByLabel','$scope', '$uibModalInstance','poeme'];
-		function viewPoemController(Poeme, CurrentUser, comment, getCommentByLabel, $scope, $uibModalInstance, poeme) {
-			$scope.poemToDisplay = poeme;
-			$scope.addComment = addComment;
-			$scope.newComment = {};
-			$scope.info ={};
-			$scope.commentList =[];
-			$scope.tooltipInfo;
-
-			$scope.denounceComment = denounceComment;
-			$scope.denouncePoem = denouncePoem;
-
-
-			getComment();
-
-			function denounceComment(commentDoc){
-				commentDoc.denounced =!commentDoc.denounced; 
-				comment.update({id : commentDoc._id}, commentDoc, function(res){		
-				});
-
-			}
-
-
-			function denouncePoem(){
-				// console.log("########## 1 ######## : ", $scope.poemToDisplay.denounced);
-				$scope.poemToDisplay.denounced = !$scope.poemToDisplay.denounced;
-				Poeme.update({id : $scope.poemToDisplay._id}, $scope.poemToDisplay, function(res){
-				console.log("########## 2 ######## : ", $scope.poemToDisplay);});
-			}
-
-			function addComment(){
-				$scope.newComment.id_poeme = poeme._id;
-				$scope.newComment.id_author = CurrentUser.getId();
-				comment.save($scope.newComment, function (resp) {
-					$scope.info.message = resp.message;
-					$scope.info.showMessage = true;
-					if (resp.code === 0) {
-						getComment();
-						$scope.info.type = "success";
-						$scope.info.showMessage = true;
-					}else{
-						$scope.info.type = "danger";
-						$scope.info.showMessage = true;					
-					}
-					$scope.newComment.content = "";
-					$scope.showInputComment = false;
-				});
-			}
-
-			function getComment(){
-				getCommentByLabel.get({key :"id_poeme", value : poeme._id},function(res){
-					$scope.commentList = res.result;
-				});			
-			}
-
-		}
 	function viewCommentController(Poeme, CurrentUser, comment, getCommentByLabel, $scope, $uibModalInstance, poeme) {
 		$scope.commentToDisplay = comment;
 		$scope.addComment = addComment;

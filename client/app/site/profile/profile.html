@@ -1,0 +1,47 @@
+<div class="profile-panel row">
+	<div class="row profile-info">
+		<div class="col-sm-4 profile-pic" style="border: solid">
+			<div class="row">
+				<img ng-src="assets/images/default-user.jpg" class="img-responsive">
+			</div>
+			<div class="row profile-button-panel">
+				<button class="btn btn-info sm">Editer</button>
+				<button class="btn btn-danger sm">Supprimer</button>
+				<button class="btn btn-success sm">Valider</button>
+			</div>
+		</div>
+		<div class="col-sm-8 profile-details">
+			<div class="row showPoem">
+					<div class="blabla row">
+						<div class="col-sm-12">
+							<span class="index">Auteur :</span>
+							<span class="value">{{myProfile.local.lastname}}  &nbsp; {{myProfile.local.firstname}}</span>
+						</div>
+						<div class="col-sm-12">
+							<span class="index">Email :</span>
+							<span class="value">{{myProfile.local.email}}</span>
+						</div>
+						<div class="col-sm-12">
+							<span class="index">Login:</span>
+							<span class="value">{{myProfile.local.login}}</span>
+						</div>
+						<div class="col-sm-12">
+							<span class="index">Date inscription :</span>
+							<span class="value">à venir...</span>
+						</div>
+						<div class="col-sm-12">
+							<span class="index">Phone :</span>
+							<span class="value">{{myProfile.local.phone}}</span>
+						</div>
+						<div class="col-sm-12">
+							<span class="index">Statut :</span>
+							<span class="value">{{myProfile.local.status}}</span>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row profile-docs">
+		
+	</div>
+</div>
