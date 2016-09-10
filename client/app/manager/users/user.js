@@ -47,7 +47,6 @@
 		$scope.deleteUser = deleteUser;
 
 		function deleteUser(){
-			console.log("c'est isi")
 			var modalConfirm = myModal.confirm('app/common/modalView/confirm.html', 'sm');
 			modalConfirm.result.then(function (res) {
 				if (res) {
@@ -71,7 +70,9 @@
 	function editUserController(user, userToEdit, $rootScope, $scope, $state) {
 		$scope.saveUser = saveUser;
 		$scope.cancel = cancel;
-		$scope.user = userToEdit;		
+		$scope.user = userToEdit;	
+		console.log("+++++++$scope.user : ", $scope.user);	
+		console.log("+++++++userToEdit : ", userToEdit);	
 
 		$scope.info = {};
 		$scope.info.showMessage = false;

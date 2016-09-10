@@ -18,8 +18,8 @@ var application_root=__dirname,
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 
-var session_duration = 1000000;
-var now_time = new Date(Date.now());
+// on recup les variables
+var mayVar = require("./config/variables");
 
 //starting server port
 var port    =   process.env.PORT || 8000;
@@ -36,8 +36,8 @@ app.use(session({
     secret: 'seugneBethiodieuredieufway', 
     resave: true,
     saveUninitialized: true,
-    expires :new Date(Date.now() + session_duration),
-    cookie: { maxAge  : session_duration}
+    expires :new Date(Date.now() + mayVar.session.session_duration),
+    cookie: { maxAge  : mayVar.session.session_duration}
 }));
 app.use(passport.initialize());
 app.use(passport.session());

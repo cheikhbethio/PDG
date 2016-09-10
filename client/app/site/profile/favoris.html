@@ -1,0 +1,52 @@
+<div class="profile-panel row">
+	<div class="col-sm-3 profile-pic">
+		<div class="row">
+			<img ng-src="assets/images/default-user.jpg" class="col-sm-12 img-responsive">
+		</div>
+		<div class="row profile-button-panel">
+			<ol class="rounded-list">
+		        <li><a ui-sref-active="active" ui-sref="dashboard.profile.edit">Editer</a></li>
+		        <li><a ui-sref-active="active" ui-sref="dashboard.profile.favoris">Favoris</a></li>
+		        <li><a ui-sref-active="active" ui-sref="dashboard.profile.poems">Mes Poemes</a></li>
+		        <li><a ui-sref-active="active" ui-sref="dashboard.profile.me">Mes infos</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="col-sm-8 profile-details" ui-view></div>
+	
+</div>
+
+
+
+<!-- 
+		<div class="row showPoem">
+				<div class="blabla row">
+					<div class="col-sm-12">
+						<span class="index">Auteur :</span>
+						<span class="value">{{myProfile.local.lastname}}  &nbsp; {{myProfile.local.firstname}}</span>
+					</div>
+					<div class="col-sm-12">
+						<span class="index">Email :</span>
+						<span class="value">{{myProfile.local.email}}</span>
+					</div>
+					<div class="col-sm-12">
+						<span class="index">Login:</span>
+						<span class="value">{{myProfile.local.login}}</span>
+					</div>
+					<div class="col-sm-12">
+						<span class="index">Date inscription :</span>
+						<span class="value">à venir...</span>
+					</div>
+					<div class="col-sm-12">
+						<span class="index">Phone :</span>
+						<span class="value">{{myProfile.local.phone}}</span>
+					</div>
+					<div class="col-sm-12">
+						<span class="index">Statut :</span>
+						<span class="value">{{myProfile.local.status}}</span>
+					</div>
+			</div>
+		</div>
+
+ -->

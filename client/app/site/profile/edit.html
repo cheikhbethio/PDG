@@ -1,0 +1,59 @@
+<div class="profile-edit-panel row">
+	
+	<form name="editForm" class="form-group col-sm-10" novalidate>
+        <div class="form-group"  ng-class="{ 'has-error': editForm.lastname.$invalid && editForm.lastname.$dirty }">
+            <label for="lastname">Votre Nom</label>
+            <input type="text" 
+                class="form-control" 
+                id="lastname"  
+                name="lastname"  
+                ng-model="user.lastname" 
+                placeholder=" votre nom" 
+                required minlength="3">
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': editForm.firstname.$invalid && editForm.firstname.$dirty }">
+            <label for="firstname">Prenom</label>
+            <input type="text" 
+                class="form-control" 
+                id="firstname" 
+                name="firstname" 
+                placeholder="Saisissez Votre Prenom" 
+                ng-model="user.firstname" 
+                required minlength="2">
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': editForm.login.$invalid && editForm.login.$dirty }">
+            <label for="login">Login</label>
+            <input type="text" class="form-control" 
+                id="login" 
+                name="login" 
+                placeholder="Saisissez Votre Pseudo"
+                ng-model="user.login" 
+                required minlength="5">
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': editForm.email.$invalid && editForm.email.$dirty }">
+            <label for="email">Email</label>
+            <input type="email" 
+                class="form-control" 
+                id="email" 
+                name="email" 
+                placeholder="Saisissez Votre Email" 
+                ng-model="user.email" 
+                required>
+                
+            <p class="help-block input-group-addon" ng-if="editForm.email.$error.email">Adresse mail invalid</p>
+            <p class="input-group-addon" ng-show="emailAlreadyUsed">Email déjà utilisé</p>
+        </div>
+
+
+		<button type="submit" class="btn btn-success" sng-disabled="!editForm.$valid" ng-click="saveuser(user)">S'incrire</button>
+        <button type="reset" class="btn btn-default" ng-click="reseteditForm()">Vider les champs</button>
+
+	</form>
+
+</div>

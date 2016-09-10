@@ -2,3 +2,59 @@
     color: green;
     text-align: center;
 }
+
+/*PROFILE*/
+.profile-panel ol{
+    counter-reset: li; /* Initialise le compteur */
+    list-style: none; /* Supprime la numérotation par défaut */
+    *list-style: decimal; /* Restitue la numérotation par défaut pour IE6/7 */
+    font-size: 20px;
+    padding: 0;
+    font-weight: bold;
+}
+
+.profile-panel ol ol{
+    margin: 0 0 0 2em; 
+}
+
+
+.profile-panel .rounded-list a{
+    position: relative;
+    display: block;
+    padding: 5px;
+    margin: .5em 0;
+    background: #7eab7f;;
+    color: #444;
+    text-decoration: none;
+    border-radius: 50% 0%;
+    text-align: center;
+}
+
+.profile-panel .rounded-list a:hover{
+        background: #eee;
+}
+
+/*
+.profile-panel .rounded-list a:before{
+        content: counter(li);
+        counter-increment: li;
+        position: absolute;
+        left: 0;
+        top: 60%;
+        margin-top: -1.3em;
+        background: #699280;
+        height: 2em;
+        width: 2em;
+        line-height: 2em;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 50% 0%;
+        transition: all .3s ease-out;
+}*/
+
+
+
+
+
+
+

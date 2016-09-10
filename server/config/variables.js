@@ -13,7 +13,7 @@ var darajas = {
 }
 
 var session = {
-	session_duration : 1000000
+	session_duration : 10000000000
 }
 
 exports.session = session;

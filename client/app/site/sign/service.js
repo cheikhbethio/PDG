@@ -1,11 +1,13 @@
 angular.module('connectionService', ['ngResource'])
 	.factory('SignUp', ['$resource', function($resource){
-		return $resource('http://localhost:8000/api/users', {}, {
+		return $resource('/api/users', {}, {
       		
 		})
 	}])
 	.factory('Login', ['$resource', function($resource){
-		return $resource('http://localhost:8000/api/login', {},{
+		return $resource('/api/login', {},{
 			login : {method : 'POST', isArray: false}
 		})
 	}]);
+
+
