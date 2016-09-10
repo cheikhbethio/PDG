@@ -52,10 +52,10 @@ exports.dbAccess = db;
 
 //
 exports.create = function (req, res, next) {
-	var params = req.body.local;
+	var params = req.body;
 	var newUser = new db();
 	newUser.local.email = params.email;
-	newUser.local.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
+	newUser.local.password = bcrypt.hashSync(params.password, bcrypt.genSaltSync(8), null);
 	newUser.local.firstname = params.firstname;
 	newUser.local.lastname = params.lastname;
 	newUser.local.login = params.login;
