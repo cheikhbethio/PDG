@@ -31,6 +31,7 @@
 		"passport-google-oauth": "~0.1.5",
 		"connect-flash": "~0.1.1",
 		"underscore": "1.8.3",
-		"moment": "*"
+		"moment": "*",
+		"nodemailer": "2.x"
 	}
 }

@@ -1,25 +1,29 @@
 'use strict';
-
-
 angular.module('registration', ['ui.router'])
 		.config(['$stateProvider', function ($stateProvider) {
 				$stateProvider
 						.state('site.registration', {
-							url: '/registration',
-							css: 'assets/css/body/sign.css',
+							url: '/registration?validation',
 							templateUrl: 'app/site/sign/registration.html',
 							controller: 'registrationController'
 						});
 			}])
-		.controller('registrationController', ['$rootScope', '$scope', '$state', 'SignUp',
-			function ($rootScope, $scope, $state, SignUp) {
+		.controller('registrationController', ['$stateParams', '$rootScope', '$scope', '$state', 'SignUp', "Validation",
+			function ($stateParams, $rootScope, $scope, $state, SignUp, Validation) {
 
 				$rootScope.titre = "Thiantakones";
 				$scope.newUser = {};
+				$scope.showValidation = false;
+				$scope.validation = $stateParams.validation;
+				if ($scope.validation) {
+					$scope.showValidation = true;
+					Validation.getToken({id: $scope.validation}, function (res) {
+						console.log("++++++++ :", res);
+					});
+				}
 
 				$scope.info = {};
 				$scope.info.showMessage = false;
-
 				$scope.saveNewUser = function (newer) {
 
 					if ($scope.registrationForm.$valid) {
@@ -39,7 +43,6 @@ angular.module('registration', ['ui.router'])
 								$scope.info.type = 'danger';
 								$scope.info.showMessage = true;
 							});
-
 						} else {
 							$scope.info.message = "les deux mots de passe ne sont pas identiques. Veillez réessayer!!";
 							$scope.info.showMessage = true;
@@ -51,10 +54,7 @@ angular.module('registration', ['ui.router'])
 						$scope.info.type = 'danger';
 					}
 				};
-
 				$scope.resetRegistrationForm = function () {
 					$scope.newUser = {};
 				};
-
-
 			}]);

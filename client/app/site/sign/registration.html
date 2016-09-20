@@ -1,4 +1,10 @@
-<div class="sign">
+<div class="sign" ng-if="showValidation">
+    <div class="signHeader col-xs-5 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+        <h3>Votre inscription a bien été pris en compte et sera validée par nos équipes dans les plus brefs délais. Merci et à très bientôt</h3>
+    </div>
+</div>
+
+<div class="sign" ng-if="!showValidation">
 
     <div class="signHeader col-xs-5 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
         <h3>Saisissez vos informations dans ce formulaire afin de s'inscrire.</h3>
