@@ -11,7 +11,7 @@ exports.status = status;
 
 var myUrl = {
 	princiaplURL: "http://localhost:8000/#/",
-	emailValidation: "registration/validation/"
+	emailValidation: "registration?validation="
 };
 exports.myUrl = myUrl;
 
@@ -32,21 +32,19 @@ var session = {
 }
 
 var forMail = {
-	from: "lespublicationdegrace@gmail.com",
+	admin: "lespublicationdegrace@gmail.com",
 	signUp: {
 		subject: "PDG - Votre inscription sur les publications de Grâce",
 		text: "Pour valider votre inscription veillez cliquez sur ce lien : ",
 		popupMsg: "un email de vailidation vient de vous être envoyé. Veillez consulter votre messagerie pour activer votre compte"
 	},
 	signUpValidation: {
-		subject: "PDG - Nouvelle inscription",
-		text: "Un nouveau compte vient d'être créé et est en attende de validation",
-		to: "mmoussasow@gmail.com"
+		subject: "PDG - Nouvelle inscription à Valider dans 48h",
+		text: "Un nouveau compte vient d'être créé et est en attende de validation. T'as 48h sinon c'est la merde. bilahi",
 	},
 	poemeCreation: {
 		subject: "PDG - Confirmation de rédaction",
 		text: "Votre derniere rédaction a bien été prise en compte et est attente de validation par nos équipes",
-		to: "mmoussasow@gmail.com"
 	},
 	poemeValidation: {
 		subject: "PDG - Validation nouveau Poême",

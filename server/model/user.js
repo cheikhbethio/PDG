@@ -4,28 +4,10 @@ var bcrypt = require('bcrypt-nodejs');
 var _ = require("underscore");
 var myVar = require('../config/variables.js');
 var theMailer = require('../config/jobsMailer.js');
-var mailer = require("nodemailer");
 
 //var schema = mongoose.Schema;
 
-
-var smtpTransport11 = mailer.createTransport("SMTP", {
-	service: "Gmail",
-	auth: {
-		user: "lespublicationdegrace@gmail.com",
-		pass: "mamadou170889"
-	}
-});
-
-var smtpTransport = mailer.createTransport('smtps://lespublicationdegrace%40gmail.com:mamadou170889@smtp.gmail.com');
-
-var mail = {
-	from: "lespublicationdegrace@gmail.com",
-	to: "mmoussasow@gmail.com",
-	subject: "leSujetDuMail",
-	html: "leCorpsDeVotreMessageEnHTML"
-};
-
+var userProperties = ["email", "password", "firstname", "lastname", "login", "right", "idPic", "phone", "status", "hashkey", "created_at"];
 
 var userSchema = mongoose.Schema({
 	local: {
@@ -78,10 +60,11 @@ exports.create = function (req, res, next) {
 	var params = req.body;
 	var newUser = new db();
 	newUser.local.email = params.email;
-	newUser.local.password = bcrypt.hashSync(params.password, bcrypt.genSaltSync(8), null);
 	newUser.local.firstname = params.firstname;
 	newUser.local.lastname = params.lastname;
 	newUser.local.login = params.login;
+
+	newUser.local.password = bcrypt.hashSync(params.password, bcrypt.genSaltSync(8), null);
 	newUser.local.right = myVar.darajas.SIMPLE;
 	newUser.local.date = Date.now();
 	newUser.local.status = myVar.status.watingClicEmail;
@@ -107,7 +90,7 @@ exports.create = function (req, res, next) {
 						res.send({message: "login is already used!", code: 2});
 						return next();
 					}
-					var hashed = bcrypt.hashSync(newUser.local.email + newUser.local.firstname + newUser.local.lastname, bcrypt.genSaltSync(8), null);
+					var hashed = bcrypt.hashSync(newUser.local.email + newUser.local.firstname + newUser.local.lastname, bcrypt.genSaltSync(8), null) + "end";
 					newUser.local.hashkey = hashed;
 					newUser.save(function (err, results) {
 						if (err) {
@@ -156,13 +139,15 @@ exports.get = function (req, res, next) {
 };
 
 exports.getKeyValidation = function (req, res) {
-
+	console.log("111111111111111");
 	db.findOne({'local.hashkey': req.params.id}, function (err, user) {
 		if (err || !user) {
 			console.log(err);
 			res.send({message: "Désolé mais ce compte est invalide. Veillez vous réinscrire et faire la valivation dans les plus bref délais.", code: 1});
 		} else {
-			res.send({message: "Votre inscription a bien été pris en compte et sera validée par nos équipes dans les plus brefs délais. Merci et à très bientôt", code: 0, result: user});
+			toEdit(user._id, {status: myVar.status.watingValidation});
+			theMailer.emailSender(myVar.forMail.admin, myVar.forMail.signUpValidation.subject, myVar.forMail.signUpValidation.text);
+			res.send({message: "Votre inscription a bien été pris en compte et sera validée par nos équipes dans les plus brefs délais. Merci et à très bientôt", code: 0});
 		}
 	});
 };
@@ -181,61 +166,79 @@ exports.delete = function (req, res, next) {
 
 };
 
+function toEdit(id, params) {
+	return new Promise(function (resolve, reject) {
+		db.findById(id, function (err, user) {
+			if (err || !user) {
+				console.log('le document est introuvable!!!');
+				return reject({message: "le document est introuvable!!!", code: 2});
+			} else {
+				fillParam(user.local, params);
+				console.log(user.local);
+				user.save(function (updateErr, updateResp) {
+					if (updateErr) {
+						console.log(updateErr);
+						return reject({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 1});
+					} else if (!updateResp) {
+						return reject({message: "La Mise à jour impossible de ce poeme a échoué :Introuvable.", code: 2});
+					} else {
+						return resolve({message: "Le poeme a bien mis à jour.", code: 0, result: updateResp});
+					}
+				});
+			}
+		});
+	});
+}
+
 exports.edit = function (req, res, next) {
 
 	var id = req.body._id;
 	var params = req.body.local;
 
-	var email = params.email;
-	var password = params.password;
-	var firstname = params.firstname;
-	var lastname = params.lastname;
-	var newer = {local: {}, facebook: {}, google: {}};
-	var query = ({_id: id});
-
-
-	db.findById(id, function (err, user) {
-		// return next(user);
-		if (err || !user) {
-			console.log('le document est introuvable!!!');
-			res.send({message: "le document est introuvable!!!", code: 2});
-		} else {
-			var obj = {
-				facebook: user.facebook,
-				google: user.google
-			};
-
-			obj.local = {
-				'email': user.local.email,
-				'password': user.local.password,
-				'firstname': params.firstname,
-				'lastname': params.lastname,
-				'login': user.local.login,
-				'right': params.right,
-				'idPic': params.idPic,
-				'phone': params.phone,
-				'status': params.status
-			};
-
-
-			fillParam(user.local, obj.local);
-			user.save(function (updateErr, updateResp) {
-				if (updateErr || !updateResp) {
-					console.log("erreur when update db");
-					res.send({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 1});
-				} else {
-					res.send({message: "Le poeme a bien mis à jour.", code: 0, result: updateResp});
-				}
+	toEdit(id, params)
+			.then(function (response) {
+				res.send(response)
+			})
+			.catch(function (error) {
+				res.send(error)
 			});
-		}
-		;
-	})
+
+//	db.findById(id, function (err, user) {
+//		console.log(req.body.local, id);
+//		// return next(user);
+//		if (err || !user) {
+//			console.log('le document est introuvable!!!');
+//			res.send({message: "le document est introuvable!!!", code: 2});
+//		} else {
+//
+//			fillParam(user.local, params);
+//			console.log(user.local);
+//			user.save(function (updateErr, updateResp) {
+//				if (updateErr) {
+//					console.log(updateErr);
+//					res.send({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 1});
+//				} else if (!updateResp) {
+//					res.send({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 2});
+//				} else {
+//					res.send({message: "Le poeme a bien mis à jour.", code: 0, result: updateResp});
+//				}
+//			});
+//		}
+//	});
 };
 
 
-function fillParam(objTo, objFrom) {
+function fillParam1(objTo, objFrom) {
 	_.each(objFrom, function (value, key) {
 		if (value || key === 'isPublic' || key === 'denounced') {
+			objTo[key] = value;
+		}
+	});
+}
+
+function fillParam(objTo, objFrom) {
+	_.each(objFrom, function (value, key) {
+		if (userProperties.indexOf(key) >= 0) {
 			objTo[key] = value;
 		}
 	});
