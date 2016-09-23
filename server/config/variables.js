@@ -40,7 +40,7 @@ var forMail = {
 	},
 	signUpValidation: {
 		subject: "PDG - Nouvelle inscription à Valider dans 48h",
-		text: "Un nouveau compte vient d'être créé et est en attende de validation. T'as 48h sinon c'est la merde. bilahi",
+		text: "Un nouveau compte vient d'être créé et est en attende de validation. T'as 48h sinon c'est la merde. bilahi"
 	},
 	poemeCreation: {
 		subject: "PDG - Confirmation de rédaction",

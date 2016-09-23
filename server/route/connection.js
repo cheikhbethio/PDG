@@ -6,7 +6,6 @@ var rightTab = [];
 
 init();
 
-
 module.exports = function (app, passport) {
 
 	app.get('/api/session', function (req, res) {
@@ -36,8 +35,6 @@ module.exports = function (app, passport) {
 		res.redirect('/');
 	});
 };
-
-// route middleware to make sure
 
 function giveRight(right) {
 	return 1 + rightTab.indexOf(right);
