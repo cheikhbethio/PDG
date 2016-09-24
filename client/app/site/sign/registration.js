@@ -14,6 +14,7 @@ angular.module('registration', ['ui.router'])
 				$rootScope.titre = "Thiantakones";
 				$scope.newUser = {};
 				$scope.showValidation = false;
+				$scope.registrationForm={};
 				$scope.validation = $stateParams.validation;
 				if ($scope.validation) {
 					$scope.showValidation = true;
@@ -26,7 +27,7 @@ angular.module('registration', ['ui.router'])
 				$scope.info.showMessage = false;
 				$scope.saveNewUser = function (newer) {
 
-					if ($scope.registrationForm.$valid) {
+					// if ($scope.registrationForm.$valid) {
 
 						if (newer.password === newer.passwordConfirmation) {
 							SignUp.save(newer, function (resp) {
@@ -48,11 +49,11 @@ angular.module('registration', ['ui.router'])
 							$scope.info.showMessage = true;
 							$scope.info.type = 'danger';
 						}
-					} else {
-						$scope.info.message = 'Les données sont incorrectes, Veillez recommencer svp'
-						$scope.info.showMessage = true;
-						$scope.info.type = 'danger';
-					}
+					// } else {
+					// 	$scope.info.message = 'Les données sont incorrectes, Veillez recommencer svp'
+					// 	$scope.info.showMessage = true;
+					// 	$scope.info.type = 'danger';
+					// }
 				};
 				$scope.resetRegistrationForm = function () {
 					$scope.newUser = {};

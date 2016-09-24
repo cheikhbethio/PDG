@@ -139,7 +139,6 @@ exports.get = function (req, res, next) {
 };
 
 exports.getKeyValidation = function (req, res) {
-	console.log("111111111111111");
 	db.findOne({'local.hashkey': req.params.id}, function (err, user) {
 		if (err || !user) {
 			console.log(err);

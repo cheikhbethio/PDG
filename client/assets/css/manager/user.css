@@ -34,26 +34,6 @@
         background: #eee;
 }
 
-/*
-.profile-panel .rounded-list a:before{
-        content: counter(li);
-        counter-increment: li;
-        position: absolute;
-        left: 0;
-        top: 60%;
-        margin-top: -1.3em;
-        background: #699280;
-        height: 2em;
-        width: 2em;
-        line-height: 2em;
-        text-align: center;
-        font-weight: bold;
-        border-radius: 50% 0%;
-        transition: all .3s ease-out;
-}*/
-
-
-
 
 
 

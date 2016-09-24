@@ -88,7 +88,7 @@
                     password-validate="newUser.password" required>
             </div>
 
-			<button type="submit" class="btn btn-success" sng-disabled="!registrationForm.$valid" ng-click="saveNewUser(newUser)">S'incrire</button>
+			<button type="submit" class="btn btn-success" ng-disabled="!registrationForm.$valid" ng-click="saveNewUser(newUser)">S'incrire</button>
             <button type="reset" class="btn btn-link" ng-click="resetRegistrationForm()">Vider les champs</button>
             
 
