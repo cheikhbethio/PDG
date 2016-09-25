@@ -1,6 +1,13 @@
 <h2 class="page-header">Liste des utilisateurs</h2>
 <div class="allPoem row">
 	<div class="row">
+		<div class="buttonRecherche pull-left">
+			<button class="btn btn-info lg" ng-click="userShearch = 'Verification email'">Verif email</button>
+			<button class="btn btn-info lg" ng-click="userShearch = 'En attente de Validation' ">Attente Validation</button>
+			<button class="btn btn-success lg"  ng-click="userShearch = 'Actif'">Actifs</button>
+			<button class="btn btn-danger lg"  ng-click="userShearch = 'Suppimé'">Suppimés</button>
+			<button class="btn btn-primary lg"  ng-click="userShearch = ''">Tous</button>
+		</div>
 		<form class="form pull-right" role="form">
 			<div class="form-group">
 				<label for="page_search">Chercher parmis les utilisateurs du site: </label>
@@ -25,6 +32,11 @@
 				</th>
 
 				<th>
+					<span class="glyphicon glyphicon-log-in"></span>
+					<span class="">Statut</span>
+				</th>
+
+				<th>
 					<span class=" glyphicon glyphicon-cog "></span>
 					<span class="">Actions</span>
 				</th>
@@ -41,6 +53,8 @@
 				</td>
 
 				<td>{{user.local.login}}</td>
+
+				<td>{{user.local.status.msg}}</td>
 
 				<td class="layout-align-space-between-center">
 					<!-- visualization -->

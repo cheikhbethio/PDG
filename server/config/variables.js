@@ -2,10 +2,10 @@
 
 
 var status = {
-	watingClicEmail: 1442,
-	watingValidation: 191,
-	active: 451,
-	removed: 660
+	watingClicEmail: {code : 1442, msg :"Verification email"},
+	watingValidation: {code : 191, msg :"En attente de Validation"},
+	active: {code : 451, msg :"Actif"},
+	removed: {code : 660, msg :"Suppimé"},
 };
 exports.status = status;
 

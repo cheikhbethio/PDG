@@ -19,7 +19,7 @@ var userSchema = mongoose.Schema({
 		right: String,
 		idPic: String,
 		phone: String,
-		status: Number,
+		status: Object,
 		hashkey: String,
 		created_at: Date
 	},
@@ -92,6 +92,7 @@ exports.create = function (req, res, next) {
 					}
 					var hashed = bcrypt.hashSync(newUser.local.email + newUser.local.firstname + newUser.local.lastname, bcrypt.genSaltSync(8), null) + "end";
 					newUser.local.hashkey = hashed;
+					newUser.local.created_at =  new Date();
 					newUser.save(function (err, results) {
 						if (err) {
 							res.send({message: err});
@@ -100,7 +101,6 @@ exports.create = function (req, res, next) {
 							var textSent = myVar.forMail.signUp.text + myVar.myUrl.princiaplURL + myVar.myUrl.emailValidation + hashed;
 							theMailer.emailSender(params.email, myVar.forMail.signUp.subject, textSent)
 									.then(function () {
-										console.log("viennnnnnnnnnn");
 										res.send({message: myVar.forMail.signUp.popupMsg, code: 0, result: results});
 									});
 //									.catch(function (error) {
@@ -129,11 +129,17 @@ exports.view = function (req, res, next) {
 exports.get = function (req, res, next) {
 	var id = req.params.id;
 	db.findById(id, function (err, user) {
-		if (!err)
-			return res.json(user);
-		else {
-			console.log(err);
-			next(err);
+		// if (!err)
+		// 	return res.json(user);
+		// else {
+		// 	console.log(err);
+		// 	next(err);
+		// }
+
+		if (err || !user) {
+			res.send({message: "Le poeme est introuvables.", code: 1});
+		} else {
+			res.send(user);
 		}
 	});
 };

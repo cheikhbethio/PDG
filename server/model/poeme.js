@@ -73,8 +73,9 @@ exports.view = function (req, res, next) {
 
 //un doc par son id avec populate sur l'auteur
 exports.get = function (req, res, next) {
-	db.findById(req.params.id).populate('id_auteur', 'local.lastname local.firstname').exec(function (err, poeme) {
-		if (err) {
+	db.findById(req.params.id).populate('id_auteur', 'local.lastname local.firstname')
+		.exec(function (err, poeme) {
+		if (err || !poeme) {
 			res.send({message: "Le poeme est introuvables.", code: 1});
 		} else {
 			res.send({message: "ok", code: 0, result: poeme});
