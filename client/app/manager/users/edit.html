@@ -12,21 +12,25 @@
         <div>
             <span>Changement de droit :</span>
             <select ng-model="right" name="rightGetter" class="form-control">
-                <option value="">Veillez choisir un de ces droit</option>
+                <option value="">Veillez choisir un de ces droits</option>
                 <option value="0">Membre simple</option>
                 <option value="1">Redacteur</option>
-                <option value="2">Supperviseur</option>
+                <option value="2">Superviseur</option>
             </select>
         </div>
 
         <div>
-            <span>Voulez-vous validez cette de demande d'inscription? </span>
-            <button class="btn btn-info">OUI</button>            
-            <button class="btn btn-danger">NON</button>            
+            <span>Voulez-vous valider cette de demande d'inscription? </span>
+            <button class="btn btn-info pull-right">OUI</button>            
+            <button class="btn btn-danger pull-right">NON</button>            
+        </div>
+        
+        <div>
+            <span>Voulez-vous supprimer cet utilisateur? </span>
+            <button class="btn btn-danger pull-right">OUI je supprime</button> <br/>
         </div>
 
         <button class="btn btn-success">Valider les modifications</button>
-        <button class="btn btn-danger">Supprimer cet utilisateur</button>
     </div>
 
 

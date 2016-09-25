@@ -71,8 +71,12 @@
 		$scope.saveUser = saveUser;
 		$scope.cancel = cancel;
 		$scope.user = userToEdit;	
+
+		var tabRight = ["Verification email", "En, attente de Validation","Actif", "Suppimé"];	
+		$scope.right = tabRight.indexOf($scope.user.local.status.msg).toString();
+		console.log("+++++++$scope.user : ", $scope.right);	
+
 		console.log("+++++++$scope.user : ", $scope.user);	
-		console.log("+++++++userToEdit : ", userToEdit);	
 
 		$scope.info = {};
 		$scope.info.showMessage = false;
