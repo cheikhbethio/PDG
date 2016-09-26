@@ -92,7 +92,7 @@ exports.create = function (req, res, next) {
 					}
 					var hashed = bcrypt.hashSync(newUser.local.email + newUser.local.firstname + newUser.local.lastname, bcrypt.genSaltSync(8), null) + "end";
 					newUser.local.hashkey = hashed;
-					newUser.local.created_at =  new Date();
+					newUser.local.created_at = new Date();
 					newUser.save(function (err, results) {
 						if (err) {
 							res.send({message: err});
@@ -129,13 +129,6 @@ exports.view = function (req, res, next) {
 exports.get = function (req, res, next) {
 	var id = req.params.id;
 	db.findById(id, function (err, user) {
-		// if (!err)
-		// 	return res.json(user);
-		// else {
-		// 	console.log(err);
-		// 	next(err);
-		// }
-
 		if (err || !user) {
 			res.send({message: "Le poeme est introuvables.", code: 1});
 		} else {
@@ -179,15 +172,14 @@ function toEdit(id, params) {
 				return reject({message: "le document est introuvable!!!", code: 2});
 			} else {
 				fillParam(user.local, params);
-				console.log(user.local);
 				user.save(function (updateErr, updateResp) {
 					if (updateErr) {
 						console.log(updateErr);
-						return reject({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 1});
+						return reject({message: "La Mise à jour impossible de ce doc a échoué :(Probleme serveur).", code: 1});
 					} else if (!updateResp) {
-						return reject({message: "La Mise à jour impossible de ce poeme a échoué :Introuvable.", code: 2});
+						return reject({message: "La Mise à jour impossible de ce doc a échoué :Introuvable.", code: 2});
 					} else {
-						return resolve({message: "Le poeme a bien mis à jour.", code: 0, result: updateResp});
+						return resolve({message: "Le doc a bien mis à jour.", code: 0, result: updateResp});
 					}
 				});
 			}

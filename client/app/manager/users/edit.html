@@ -1,36 +1,38 @@
 <div class="updateUser">
 
    
+    <my-info info='info'></my-info>
+
 
     <div class="updateUser-content col-sm-8 col-sm-offset-2">
         <div class="row message-edit-user-panel">
             <span class="meup-content">
                 {{message}}
             </span>
-        </div>
-
-        <div>
-            <span>Changement de droit :</span>
-            <select ng-model="right" name="rightGetter" class="form-control">
-                <option value="">Veillez choisir un de ces droits</option>
-                <option value="0">Membre simple</option>
-                <option value="1">Redacteur</option>
-                <option value="2">Superviseur</option>
-            </select>
-        </div>
-
-        <div>
+        </div>        
+        <div ng-if="theStatus === 'In process'">
             <span>Voulez-vous valider cette de demande d'inscription? </span>
-            <button class="btn btn-info pull-right">OUI</button>            
-            <button class="btn btn-danger pull-right">NON</button>            
+            <button class="btn btn-info pull-right" ng-click="validateUser()">OUI</button>            
+            <button class="btn btn-danger pull-right" ng-click="deleteUser()">NON</button>            
         </div>
         
-        <div>
+        <div ng-if="!isMe()">
             <span>Voulez-vous supprimer cet utilisateur? </span>
-            <button class="btn btn-danger pull-right">OUI je supprime</button> <br/>
+            <button class="btn btn-danger pull-right" ng-click="deleteUser()">OUI je supprime</button> <br/>
         </div>
-
-        <button class="btn btn-success">Valider les modifications</button>
+		<form name="userUpdate" novalidate>
+			<div class="droit-user-panel form-group">
+				<span>Veillez choisir un de ces droits pour un changement:</span>
+				<select ng-model="right" name="rightGetter" class="form-control">
+					<option value="0">Membre simple</option>
+					<option value="1">Redacteur</option>
+					<option value="2">Superviseur</option>
+				</select>
+			</div>
+			<button class="btn btn-success" ng-disabled="!userUpdate.$dirty" ng-click="UpdateUser()">
+				Valider les modifications
+			</button>
+		</form>
     </div>
 
 
@@ -47,7 +49,8 @@
 	
     <my-info info='info'></my-info>
 
-            <div class="form-group"  ng-class="{ 'has-error': userForm.lastname.$invalid && userForm.lastname.$dirty }">
+            <div class="form-group"  
+	ng-class="{ 'has-error': userForm.lastname.$invalid && userForm.lastname.$dirty }">
                 <label for="lastname">Nom</label>
                 <input type="text" 
                     class="form-control" 
@@ -69,7 +72,8 @@
                     required minlength="2">
             </div>
 
-			<button type="submit" class="btn btn-success" ng-disabled="!userForm.$valid" ng-click="saveUser(user)">Valider</button>
+			<button type="submit" class="btn btn-success" ng-disabled="!userForm.$valid" 
+ ng-click="saveUser(user)">Valider</button>
             <button type="reset" class="btn btn-primary" ng-click="cancel()">Annuler</button>
 			<button type="submit" class="btn btn-danger" ng-click="deleteUser(user)">Supprimer</button>
             

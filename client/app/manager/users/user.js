@@ -6,8 +6,8 @@
 					$stateProvider
 							.state('dashboard.user', {
 								url: '/user',
-            					abstract: true,
- 		  						template: "<div ui-view></div>"
+								abstract: true,
+								template: "<div ui-view></div>"
 							})
 							.state('dashboard.user.show', {
 								url: '/show/:id',
@@ -15,7 +15,7 @@
 								controller: 'showUserController',
 								resolve: {
 									userToDisplay: getAUser,
-									poemsList : getPoemByAuthor
+									poemsList: getPoemByAuthor
 								}
 							})
 							.state('dashboard.user.edit', {
@@ -40,13 +40,13 @@
 			.controller('allUserController', allUserController);
 
 
-	showUserController.$inject = ['myModal', 'poemsList','userToDisplay', '$state', 'user', '$scope'];
+	showUserController.$inject = ['myModal', 'poemsList', 'userToDisplay', '$state', 'user', '$scope'];
 	function showUserController(myModal, poemsList, userToDisplay, $state, user, $scope) {
 		$scope.userToDisplay = userToDisplay;
 		$scope.poemsList = poemsList.result;
 		$scope.deleteUser = deleteUser;
 
-		function deleteUser(){
+		function deleteUser() {
 			var modalConfirm = myModal.confirm('app/common/modalView/confirm.html', 'sm');
 			modalConfirm.result.then(function (res) {
 				if (res) {
@@ -66,25 +66,94 @@
 
 	}
 
-	editUserController.$inject = ['user', 'userToEdit','$rootScope', '$scope', '$state'];
-	function editUserController(user, userToEdit, $rootScope, $scope, $state) {
+	editUserController.$inject = ['_', 'myModal', 'CurrentUser', 'user', 'userToEdit', '$scope', '$state'];
+	function editUserController(_, myModal, CurrentUser, user, userToEdit, $scope, $state) {
 		$scope.saveUser = saveUser;
+		$scope.isMe = isMe;
 		$scope.cancel = cancel;
-		$scope.user = userToEdit;	
+		$scope.validateUser = validateUser;
+		$scope.deleteUser = deleteUser;
+		$scope.UpdateUser = UpdateUser;
 
-		var tabRight = ["Verification email", "En, attente de Validation","Actif", "Suppimé"];	
-		$scope.right = tabRight.indexOf($scope.user.local.status.msg).toString();
-		console.log("+++++++$scope.user : ", $scope.right);	
-
-		console.log("+++++++$scope.user : ", $scope.user);	
-
+		$scope.user = userToEdit;
+		$scope.message;
+		$scope.theStatus;
+		var rightObj = {
+			salsa: "0",
+			salsaBat: "1",
+			salsaBatKiz: "2"
+		};
+		$scope.right = rightObj[$scope.user.local.right];
 		$scope.info = {};
 		$scope.info.showMessage = false;
+
+		console.log("+++++++$scope.user : ", $scope.right);
+		console.log("+++++++$scope.user : ", $scope.user);
+
+		init();
+		function init() {
+			switch ($scope.user.local.status.code) {
+				case  1442 :
+					$scope.message = "La verification du mail de cet utilisateur est en cours.";
+					$scope.theStatus = "In process";
+					break;
+				case 191 :
+					$scope.message = "On attend que tu valide son inscription, son email a déjà été vérifié.";
+					$scope.theStatus = "For validation";
+					break;
+				case 451 :
+					$scope.message = "Cet Utlisateur est incript et bien validé";
+					$scope.theStatus = "Validated";
+					break;
+				case 660 :
+					$scope.message = "Cet Utlisateur a été supprimé";
+					$scope.theStatus = "Removed";
+					break;
+			}
+		}
+
+		function UpdateUser() {
+			if ($scope.right !== rightObj[$scope.user.local.right]) {
+				_.each(rightObj, function (value, key) {
+					if (value === $scope.right) {
+						$scope.user.local.right = key;
+					}
+				});
+				upUser(user, $scope, $state);
+			}
+		}
+
+		function deleteUser() {
+			deleter(myModal, user, $state, $scope);
+		}
+
+		function validateUser() {
+			$scope.user.local.status = {code: 451, msg: "Actif"};
+			user.update({id: $scope.user._id}, $scope.user,
+					function (resp) {
+						if (resp.code === 0) {
+							$state.go('dashboard.user.show', {id: $scope.user._id});
+						} else {
+							$scope.info.message = resp.message;
+							$scope.info.type = 'danger';
+							$scope.info.showMessage = true;
+						}
+					},
+					function (error) {
+						$scope.info.message = "un probleme s'est produit. L'enregistrement est temporairement impossible";
+						$scope.info.type = 'danger';
+						$scope.info.showMessage = true;
+					});
+		}
+
+		function isMe() {
+			return $scope.user._id === CurrentUser.getId();
+		}
 
 		function saveUser() {
 
 			if ($scope.userForm.$valid) {
-					user.update({id : $scope.user._id}, $scope.user, 
+				user.update({id: $scope.user._id}, $scope.user,
 						function (resp) {
 							if (resp.code === 0) {
 								$state.go('dashboard.user.show', {id: $scope.user._id});
@@ -93,23 +162,25 @@
 								$scope.info.type = 'danger';
 								$scope.info.showMessage = true;
 							}
-						}, 
+						},
 						function (error) {
-						$scope.info.message = "un probleme s'est produit. L'enregistrement est temporairement impossible";
-						$scope.info.type = 'danger';
-						$scope.info.showMessage = true;
-					});
+							$scope.info.message = "un probleme s'est produit. L'enregistrement est temporairement impossible";
+							$scope.info.type = 'danger';
+							$scope.info.showMessage = true;
+						});
 
 			} else {
 				$scope.info.message = 'Les données sont incorrectes, Veillez recommencer svp'
 				$scope.info.showMessage = true;
 				$scope.info.type = 'danger';
 			}
-		};
+		}
+		;
 
 		function cancel() {
 			$state.go('dashboard.user.show', {id: $scope.user._id});
-		};
+		}
+		;
 	}
 
 	allUserController.$inject = ["myModal", "user", "$scope", "usersList", "$state"];
@@ -117,7 +188,7 @@
 		$scope.usersList = usersList;
 		$scope.deleteUser = deleteUser;
 
-		function deleteUser(param){
+		function deleteUser(param) {
 			var modalConfirm = myModal.confirm('app/common/modalView/confirm.html', 'sm');
 			modalConfirm.result.then(function (res) {
 				if (res) {
@@ -150,10 +221,48 @@
 
 	//get allpoeme by author
 	getPoemByAuthor.$inject = ['getPoemsByLabel', '$stateParams'];
-	function getPoemByAuthor(getPoemsByLabel, $stateParams){		
-		return getPoemsByLabel.get({key :"id_auteur", valu : $stateParams.id}).$promise;
+	function getPoemByAuthor(getPoemsByLabel, $stateParams) {
+		return getPoemsByLabel.get({key: "id_auteur", valu: $stateParams.id}).$promise;
 	}
 
 	//deleteUser
+//	deleter.$inject = ['myModal', 'user', '$state', '$scope'];
+	function deleter(myModal, user, $state, $scope) {
+		console.log("-------------------------------------------");
+		var modalConfirm = myModal.confirm('app/common/modalView/confirm.html', 'sm');
+		modalConfirm.result.then(function (res) {
+			if (res) {
+				user.remove({id: $scope.user._id}, function (res) {
+					if (res.code === 0) {
+						$state.go("dashboard.user.all");
+					} else {
+						$scope.info = {
+							message: res.message,
+							type: 'danger'
+						};
+					}
+				});
+			}
+		});
+	}
+
+	//updateUser
+	function upUser(user, $scope, $state) {
+		user.update({id: $scope.user._id}, $scope.user,
+				function (resp) {
+					if (resp.code === 0) {
+						$state.go('dashboard.user.show', {id: $scope.user._id});
+					} else {
+						$scope.info.message = resp.message;
+						$scope.info.type = 'danger';
+						$scope.info.showMessage = true;
+					}
+				},
+				function (error) {
+					$scope.info.message = "un probleme s'est produit. L'enregistrement est temporairement impossible";
+					$scope.info.type = 'danger';
+					$scope.info.showMessage = true;
+				});
+	}
 
 })();

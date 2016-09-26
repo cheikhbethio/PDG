@@ -1,11 +1,10 @@
 "use strict";
 
-
 var status = {
-	watingClicEmail: {code : 1442, msg :"Verification email"},
-	watingValidation: {code : 191, msg :"En attente de Validation"},
-	active: {code : 451, msg :"Actif"},
-	removed: {code : 660, msg :"Suppimé"},
+	watingClicEmail: {code: 1442, msg: "Verification email"},
+	watingValidation: {code: 191, msg: "En attente de Validation"},
+	active: {code: 451, msg: "Actif"},
+	removed: {code: 660, msg: "Suppimé"}
 };
 exports.status = status;
 
@@ -25,11 +24,11 @@ var darajas = {
 	SIMPLE: "salsa",
 	MIDDLE: "salsaBat",
 	HIGHT: "salsaBatKiz"
-}
+};
 
 var session = {
 	session_duration: 10000000000
-}
+};
 
 var forMail = {
 	admin: "lespublicationdegrace@gmail.com",
@@ -44,14 +43,15 @@ var forMail = {
 	},
 	poemeCreation: {
 		subject: "PDG - Confirmation de rédaction",
-		text: "Votre derniere rédaction a bien été prise en compte et est attente de validation par nos équipes",
+		text: "Votre derniere rédaction a bien été prise en compte et est attente de validation par nos équipes"
 	},
 	poemeValidation: {
 		subject: "PDG - Validation nouveau Poême",
 		text: "Un nouveau poême vient d'être créé et est en attende de validation",
 		to: "mmoussasow@gmail.com"
 	}
-}
+};
+
 var myMsg = {
 	error: {
 		mailSendind: "Erreur lors de l'envoye du mail"
@@ -59,7 +59,7 @@ var myMsg = {
 	success: {
 		mailSendind: "Mail envoyé avec succès!"
 	}
-}
+};
 
 exports.session = session;
 exports.darajas = darajas;

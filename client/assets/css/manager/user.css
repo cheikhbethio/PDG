@@ -38,6 +38,20 @@
     padding-bottom: 20px;
 }
 
+.updateUser .meup-content{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.message-edit-user-panel{
+	background-color: #b5d4b5;
+	border-radius: 10px;
+    padding: 30px;
+}
+.updateUser .droit-user-panel{
+	
+}
+
 
 
 
