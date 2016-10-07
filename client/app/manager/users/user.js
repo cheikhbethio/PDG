@@ -87,19 +87,16 @@
 		$scope.info = {};
 		$scope.info.showMessage = false;
 
-		console.log("+++++++$scope.user : ", $scope.right);
-		console.log("+++++++$scope.user : ", $scope.user);
-
 		init();
 		function init() {
 			switch ($scope.user.local.status.code) {
 				case  1442 :
 					$scope.message = "La verification du mail de cet utilisateur est en cours.";
-					$scope.theStatus = "In process";
+					$scope.theStatus = "InProcess";
 					break;
 				case 191 :
 					$scope.message = "On attend que tu valide son inscription, son email a déjà été vérifié.";
-					$scope.theStatus = "For validation";
+					$scope.theStatus = "ForValidation";
 					break;
 				case 451 :
 					$scope.message = "Cet Utlisateur est incript et bien validé";
@@ -175,12 +172,10 @@
 				$scope.info.type = 'danger';
 			}
 		}
-		;
 
 		function cancel() {
 			$state.go('dashboard.user.show', {id: $scope.user._id});
 		}
-		;
 	}
 
 	allUserController.$inject = ["myModal", "user", "$scope", "usersList", "$state"];

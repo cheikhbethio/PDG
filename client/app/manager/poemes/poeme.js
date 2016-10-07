@@ -62,14 +62,14 @@
 		// initTofList();
 		// function initTofList(){
 		// 	for (var i = 13; i >= 1; i--) {
-		// 		$scope.linkList.push("assets/images/poeme/tofPoeme" + i + ".jpg");			
+		// 		$scope.linkList.push("assets/images/poeme/tofPoeme" + i + ".jpg");
 		// 	}
 		// 	for (var i = 102; i >= 101; i--) {
-		// 		$scope.linkList.push("assets/images/poeme/tofPoeme" + i + ".png");			
+		// 		$scope.linkList.push("assets/images/poeme/tofPoeme" + i + ".png");
 		// 	}
 		// }
 
-		function showModalTof(){
+		function showModalTof() {
 			var modalTof = myModal.tofChoice('app/common/modalView/tof.html', 'lg', $scope.linkList);
 			modalTof.result.then(function (res) {
 				if (res) {
@@ -84,9 +84,9 @@
 				console.log("tous les champs semblent vides. Veillez les remplir s'il vous plait.");
 			} else {
 				$scope.newPoeme.id_auteur = my_id;
-				if( _.indexOf($scope.rubricList,  $scope.newPoeme.rubric)>-1){
-					$scope.newPoeme.rubric = _.indexOf($scope.rubricList,  $scope.newPoeme.rubric) + 1 ;
-				}else{
+				if (_.indexOf($scope.rubricList, $scope.newPoeme.rubric) > -1) {
+					$scope.newPoeme.rubric = _.indexOf($scope.rubricList, $scope.newPoeme.rubric) + 1;
+				} else {
 					$scope.newPoeme.rubric = null;
 				}
 
@@ -96,8 +96,8 @@
 					if (resp.code === 0) {
 						$scope.info.type = "success";
 					} else {
-						$scope.info.message = "Le titre, le livre d'origine, "+
-						"l'image, la catégorie et contenu du poême sont tous obligatoire";
+						$scope.info.message = "Le titre, le livre d'origine, " +
+								"l'image, la catégorie et contenu du poême sont tous obligatoire";
 						$scope.info.type = "danger";
 						$scope.info.showMessage = true;
 					}
@@ -107,8 +107,8 @@
 		}
 	}
 
-	editPoemeController.$inject = ['myModal','poemToEdit', "$stateParams", "Poeme", "$scope", "$state"];
-	function editPoemeController(myModal,poemToEdit, $stateParams, Poeme, $scope, $state) {
+	editPoemeController.$inject = ['myModal', 'poemToEdit', "$stateParams", "Poeme", "$scope", "$state"];
+	function editPoemeController(myModal, poemToEdit, $stateParams, Poeme, $scope, $state) {
 		$scope.upatePoem = upatePoem;
 		$scope.showModalTof = showModalTof;
 		$scope.poemToEdit;
@@ -121,7 +121,7 @@
 
 		initTofList($scope.linkList);
 
-		function showModalTof(){
+		function showModalTof() {
 			var modalTof = myModal.tofChoice('app/common/modalView/tof.html', 'lg', $scope.linkList);
 			modalTof.result.then(function (res) {
 				if (res) {
@@ -138,10 +138,10 @@
 					type: "danger"
 				}
 			} else {
-				var ind = _.indexOf($scope.rubricList,  $scope.poemToEdit.rubric);
-				if(ind < 0 || isNaN(ind)){
+				var ind = _.indexOf($scope.rubricList, $scope.poemToEdit.rubric);
+				if (ind < 0 || isNaN(ind)) {
 					$scope.poemToEdit.rubric = holdRubric
-				} else{
+				} else {
 					$scope.poemToEdit.rubric = ind + 1;
 				}
 
@@ -193,15 +193,15 @@
 
 	}
 
-	allPoemeController.$inject = ['$cookies','CurrentUser' ,'Poeme', '$scope'];
+	allPoemeController.$inject = ['$cookies', 'CurrentUser', 'Poeme', '$scope'];
 	function allPoemeController($cookies, CurrentUser, Poeme, $scope) {
-		var my_id ;
-		var tempo = CurrentUser.getId;
+//		var my_id ;
+//		var tempo = CurrentUser.getId;
+//
+//		// console.log("+++++++++++++ : ", $cookies.getAll());
+//		var toto =  JSON.parse($cookies.get('SeugneBethioLaGrace'));
 
-		// console.log("+++++++++++++ : ", $cookies.getAll());
-		var toto =  JSON.parse($cookies.get('SeugneBethioLaGrace'));
 
-	
 		$scope.deletePoeme = deletePoeme;
 		$scope.poemlist = Poeme.query();
 		$scope.config = {
@@ -251,13 +251,13 @@
 		return Poeme.get({id: $stateParams.id}).$promise;
 	}
 
-	function initTofList(list){
+	function initTofList(list) {
 		for (var i = 13; i >= 1; i--) {
-			list.push("assets/images/poeme/tofPoeme" + i + ".jpg");			
+			list.push("assets/images/poeme/tofPoeme" + i + ".jpg");
 		}
 
 		for (var i = 102; i >= 101; i--) {
-			list.push("assets/images/poeme/tofPoeme" + i + ".png");			
+			list.push("assets/images/poeme/tofPoeme" + i + ".png");
 		}
 	}
 })();

@@ -10,7 +10,7 @@
                 {{message}}
             </span>
         </div>        
-        <div ng-if="theStatus === 'In process'">
+        <div ng-if="theStatus === 'InProcess'">
             <span>Voulez-vous valider cette de demande d'inscription? </span>
             <button class="btn btn-info pull-right" ng-click="validateUser()">OUI</button>            
             <button class="btn btn-danger pull-right" ng-click="deleteUser()">NON</button>            
@@ -20,7 +20,7 @@
             <span>Voulez-vous supprimer cet utilisateur? </span>
             <button class="btn btn-danger pull-right" ng-click="deleteUser()">OUI je supprime</button> <br/>
         </div>
-		<form name="userUpdate" novalidate>
+		<form name="userUpdate" novalidate ng-if="theStatus === 'Validated'">
 			<div class="droit-user-panel form-group">
 				<span>Veillez choisir un de ces droits pour un changement:</span>
 				<select ng-model="right" name="rightGetter" class="form-control">

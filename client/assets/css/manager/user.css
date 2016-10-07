@@ -52,7 +52,14 @@
 	
 }
 
+.profile-table-poeme{
+	background-color: #d8f0da;
+}
 
-
-
-
+.profile-edit-panel .pwdToggle{
+	cursor: pointer;
+}
+.profile-edit-panel .pwdToggle:hover {
+	color: green;
+	font-weight: bold;
+}

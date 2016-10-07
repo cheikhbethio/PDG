@@ -14,15 +14,15 @@
 			</div>
 			<div class="col-sm-12">
 				<span class="index">Date inscription :</span>
-				<span class="value">à venir...</span>
+				<span class="value">{{myProfile.local.created_at | date}}</span>
 			</div>
 			<div class="col-sm-12">
 				<span class="index">Phone :</span>
-				<span class="value">{{myProfile.local.phone}}</span>
+				<span class="value">{{myProfile.local.phone || "non fourni"}}</span>
 			</div>
 			<div class="col-sm-12">
 				<span class="index">Statut :</span>
-				<span class="value">{{myProfile.local.status}}</span>
+				<span class="value">{{myProfile.local.status.msg}}</span>
 			</div>
 	</div>
 </div>
