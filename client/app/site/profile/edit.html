@@ -1,5 +1,7 @@
 <div class="profile-edit-panel row">
 	
+    <my-info info='info'></my-info>
+
 	<form name="editForm" class="form-group col-sm-10" novalidate>
 		
 <!--NOM-->
@@ -62,7 +64,8 @@
 			<span  ng-click="pwdToggle = !pwdToggle">{{pwdToggle ? "Je ne veux plus changer  mon mot de passe" : "Je veux changer mon mot de passe"}}</span>
 	</div>
 		<div ng-if="pwdToggle">
-            <div class="form-group" ng-class="{ 'has-error': registrationForm.passwordConfirmation.$invalid && registrationForm.password.$dirty }">
+            <div class="form-group" ng-class="{ 'has-error': 
+            editForm.password.$invalid }">
                 <label for="password">Mot de passe</label>
                 <input type="password" 
                     class="form-control" 
@@ -70,10 +73,12 @@
                     name="password" 
                     placeholder="Saisissez CVotre Mot de passe" 
                     ng-model="user.local.password" 
+                    minlength="5" 
                     required>
             </div>
-
-            <div class="form-group" ng-class="{ 'has-error': registrationForm.passwordConfirmation.$invalid}">
+{{passwordConfirmation}}
+            <div class="form-group" ng-class="{ 'has-error':
+            passwordConfirmation !== user.local.password}">
                 <label for="passwordConfirmation">Confirmation</label>
                 <input type="password" 
                     class="form-control" 
@@ -81,11 +86,12 @@
                     name="passwordConfirmation" 
                     placeholder="Saisissez Confirmer Mot de Passe" 
                     ng-model="passwordConfirmation"
+                    minlength="5" 
 					required>
             </div>
 		</div>
 			
-		<button type="submit" class="btn btn-success" sng-disabled="!editForm.$valid" ng-click="saveuser(user)">Mettre à jour</button>
+		<button type="submit" class="btn btn-success" sng-disabled="!editForm.$valid" ng-click="upUser(user)">Mettre à jour</button>
         <button type="reset" class="btn btn-default" ng-click="reseteditForm()">Vider les champs</button>
 
 	</form>

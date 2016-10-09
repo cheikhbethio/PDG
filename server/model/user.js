@@ -132,9 +132,14 @@ exports.get = function (req, res, next) {
 		if (err || !user) {
 			res.send({message: "Le poeme est introuvables.", code: 1});
 		} else {
-			delete(user.local.password);
-			console.log(user.local.password)
-			res.send(user);
+			var pwdDeleter = new Promise(function (resolve, reject){
+				user.local.password = "";
+				return resolve();
+			});
+			pwdDeleter.then(function(){
+				console.log(user);
+				res.send(user);
+			})
 		}
 	});
 };

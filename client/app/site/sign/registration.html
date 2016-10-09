@@ -74,6 +74,7 @@
                     name="password" 
                     placeholder="Saisissez CVotre Mot de passe" 
                     ng-model="newUser.password" 
+                    minlength="5" 
                     required>
             </div>
 
@@ -85,7 +86,9 @@
                     name="passwordConfirmation" 
                     placeholder="Saisissez Confirmer Mot de Passe" 
                     ng-model="newUser.passwordConfirmation" 
-                    password-validate="newUser.password" required>
+                    password-validate="newUser.password" 
+                    minlength="5" 
+                    required>
             </div>
 
 			<button type="submit" class="btn btn-success" ng-disabled="!registrationForm.$valid" ng-click="saveNewUser(newUser)">S'incrire</button>

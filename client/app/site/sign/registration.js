@@ -19,16 +19,12 @@ angular.module('registration', ['ui.router'])
 				if ($scope.validation) {
 					$scope.showValidation = true;
 					Validation.getToken({id: $scope.validation}, function (res) {
-						console.log("++++++++ :", res);
 					});
 				}
 
 				$scope.info = {};
 				$scope.info.showMessage = false;
 				$scope.saveNewUser = function (newer) {
-
-					// if ($scope.registrationForm.$valid) {
-
 						if (newer.password === newer.passwordConfirmation) {
 							SignUp.save(newer, function (resp) {
 								if (resp.code === 0) {
@@ -49,11 +45,7 @@ angular.module('registration', ['ui.router'])
 							$scope.info.showMessage = true;
 							$scope.info.type = 'danger';
 						}
-					// } else {
-					// 	$scope.info.message = 'Les données sont incorrectes, Veillez recommencer svp'
-					// 	$scope.info.showMessage = true;
-					// 	$scope.info.type = 'danger';
-					// }
+					
 				};
 				$scope.resetRegistrationForm = function () {
 					$scope.newUser = {};

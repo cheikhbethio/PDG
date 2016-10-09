@@ -14,7 +14,7 @@
 								templateUrl: 'app/site/profile/edit.html',
 								controller: 'profileEditController',
 								resolve: {
-									user: getMe,
+									userToUp: getMe,
 								}
 							})
 							.state('site.profile.favoris', {
@@ -44,13 +44,31 @@
 			.controller('profilePoemController', profilePoemController)
 			.controller('profileMeController', profileMeController);
 
-	profileEditController.$inject = ["$scope", "user"]
-	function profileEditController($scope, user) {
-		$scope.pwdToggle = false;
-		$scope.user = user;
-		$scope.passwordConfirmation = "";
-
+	profileEditController.$inject = ["user", "$scope", "userToUp"]
+	function profileEditController(user, $scope, userToUp) {
+		$scope.user = userToUp;
 		console.log(" ********** ", $scope.user);
+
+		$scope.upUser =  upUser;
+		$scope.pwdToggle = false;
+		$scope.passwordConfirmation = "";
+		$scope.info = {};
+		$scope.info.showMessage = false;
+
+		function upUser(param){
+			console.log(" *****Param***** ", param);
+
+			if ($scope.pwdToggle && $scope.passwordConfirmation !== $scope.user.local.password) {
+				$scope.info.message = "Les deux mot de passe ne sont pas les mêmes";
+				$scope.info.type = 'danger';
+				$scope.info.showMessage = true;
+				console.log("passwordConfirmation : ",$scope.passwordConfirmation, "local : ",$scope.user.local.password)
+				//$scope.passwordConfirmation = ""; 
+				//$scope.user.local.password = "";
+			} else {
+				console.log("goooood")
+			}
+		}
 
 	}
 

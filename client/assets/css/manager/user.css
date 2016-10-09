@@ -58,6 +58,7 @@
 
 .profile-edit-panel .pwdToggle{
 	cursor: pointer;
+    color: blue;
 }
 .profile-edit-panel .pwdToggle:hover {
 	color: green;
