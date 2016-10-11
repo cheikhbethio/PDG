@@ -1,6 +1,26 @@
 var custumModal = angular.module('custumModal', ['underscore']);
 custumModal.factory('myModal', ['_', '$uibModal', function (_, $uibModal) {
 		return {
+			givePwd: function (template, size) {
+				return $uibModal.open({
+					animation: true,
+					templateUrl: template,
+					controller: function ($uibModalInstance, $scope) {
+						$scope.yes = yes;
+						$scope.exit = exit;
+						$scope.credit = {};
+
+						function yes() {
+							$uibModalInstance.close($scope.credit);
+						}
+
+						function exit() {
+							$uibModalInstance.dismiss('cancel');
+						}
+					},
+					size: size
+				});
+			},
 			confirm: function (template, size) {
 				return $uibModal.open({
 					animation: true,
@@ -26,8 +46,8 @@ custumModal.factory('myModal', ['_', '$uibModal', function (_, $uibModal) {
 					templateUrl: template,
 					controller: 'viewPoemController',
 					size: size,
-					resolve : {
-						poeme : function () {
+					resolve: {
+						poeme: function () {
 							return resolve;
 						}
 					}
@@ -37,7 +57,7 @@ custumModal.factory('myModal', ['_', '$uibModal', function (_, $uibModal) {
 				return $uibModal.open({
 					animation: true,
 					templateUrl: template,
-					controller: function($uibModalInstance, $scope, linkList){
+					controller: function ($uibModalInstance, $scope, linkList) {
 						$scope.linkList = linkList;
 						$scope.selectedTof = "";
 						$scope.showError = false;
@@ -48,9 +68,9 @@ custumModal.factory('myModal', ['_', '$uibModal', function (_, $uibModal) {
 						$scope.exit = exit;
 
 						function yes() {
-							if($scope.selectedTof){
-								$uibModalInstance.close($scope.selectedTof);		
-							}else{														
+							if ($scope.selectedTof) {
+								$uibModalInstance.close($scope.selectedTof);
+							} else {
 								$scope.showError = true;
 							}
 						}
@@ -59,13 +79,13 @@ custumModal.factory('myModal', ['_', '$uibModal', function (_, $uibModal) {
 							$uibModalInstance.dismiss('cancel');
 						}
 
-						function checkTof(elem){
-							$scope.selectedTof = elem;	
+						function checkTof(elem) {
+							$scope.selectedTof = elem;
 						}
 					},
 					size: size,
-					resolve : {
-						linkList : function () {
+					resolve: {
+						linkList: function () {
 							return resolve;
 						}
 					}

@@ -5,9 +5,10 @@ var _ = require("underscore");
 var myVar = require('../config/variables.js');
 var theMailer = require('../config/jobsMailer.js');
 
+
 //var schema = mongoose.Schema;
 
-var userProperties = ["email", "password", "firstname", "lastname", "login", "right", "idPic", "phone", "status", "hashkey", "created_at"];
+var userProperties = ["email", "password", "firstname", "lastname", "login", "right", "idPic", "phone", "status", "hashkey"];
 
 var userSchema = mongoose.Schema({
 	local: {
@@ -132,12 +133,11 @@ exports.get = function (req, res, next) {
 		if (err || !user) {
 			res.send({message: "Le poeme est introuvables.", code: 1});
 		} else {
-			var pwdDeleter = new Promise(function (resolve, reject){
+			var pwdDeleter = new Promise(function (resolve, reject) {
 				user.local.password = "";
 				return resolve();
 			});
-			pwdDeleter.then(function(){
-				console.log(user);
+			pwdDeleter.then(function () {
 				res.send(user);
 			})
 		}
@@ -171,6 +171,118 @@ exports.delete = function (req, res, next) {
 
 };
 
+
+
+
+exports.editProfile = function (req, res) {
+	var id = req.params.id;
+	var params = req.body;
+//	var profileToUp;
+
+	console.log("pram ", req.params.id, "body :", req.body);
+
+	//recherche par id puis par login
+	simpleRecherche("_id", id)
+			.then(function (res) {
+				console.log(" ************res************ : ", res);
+				var isLogged = bcrypt.compareSync(params.password, res.result.local.password);
+
+				if (res.code === 0 && res.result.local.login === params.login && isLogged) {
+//					profileToUp = res.result;
+					if (params.newPassword) {
+						params.password = bcrypt.hashSync(params.newPassword, bcrypt.genSaltSync(8), null);
+						console.log(" ************MDP a changer************");
+					} else {
+						delete params.password;
+						console.log(" *************MDP a ne pas changer***********");
+					}
+					if (res.result.local.email !== params.email) {
+						return simpleRecherche("email", params.email);
+//								.then(function (resultEmail) {
+//									if (resultEmail.code === 0) {
+//										return {message: "emailAlreaduUsed"};
+//									} else {
+//										return {message: "withoutEmail"};
+//									}
+//								});
+						console.log(" *************email à changer***********");
+					} else {
+						console.log(" ***********upWithoutEmail*************");
+						return {message: "upWithoutEmail"};
+					}
+				} else {
+					console.log(" ***********notFound*************");
+					return {message: "notFound", }
+				}
+			})
+			.then(function (res2) {
+				console.log(" *************res2*********** : ", res2);
+				if (res2.code === 0) {
+					res.send({message: "La Mise à jour a échoué : L'email existe déjà.", code: 2});
+					console.log(" 11111111111111111 ");
+				}
+				if (res2.message === "notFound") {
+					res.send({message: "La Mise à jour a échoué : cet Utilisateur n'existe pas", code: 2});
+					console.log(" 2222222222222 ");
+				}
+				if (res2.message === "emailAlreaduUsed") {
+					res.send({message: "L'email est déjà utilisé.", code: 2});
+					console.log(" xxxxxxxxxxxxxxxx ");
+				}
+				if (res2.code === 1 || res2.message === "upWithoutEmail" || res2.message === "emailAlreaduUsed") {
+//					profileToUp = res.result;
+					console.log(" 33333333333333 ");
+					toEdit(id, _.pick(params, "email", "firstname", "idPic",
+							"lastname", "login", "newPassword", "password", "phone"))
+							.then(function (response) {
+								res.send(response);
+							})
+							.catch(function (error) {
+								res.send(error);
+							});
+				} else {
+					console.log("ellllllllllllllllllllllll")
+				}
+			});
+}
+
+exports.edit = function (req, res, next) {
+
+	var id = req.body._id;
+	var params = req.body.local;
+
+	toEdit(id, params)
+			.then(function (response) {
+				res.send(response)
+			})
+			.catch(function (error) {
+				res.send(error)
+			});
+};
+
+
+
+function fillParam(objTo, objFrom) {
+	_.each(objFrom, function (value, key) {
+		if (userProperties.indexOf(key) >= 0) {
+			objTo[key] = value;
+		}
+	});
+}
+
+function simpleRecherche(key, value) {
+	var query = {};
+	query[key] = value;
+
+	return new Promise(function (resolve, reject) {
+		db.findOne(query, function (err, user) {
+			if (err || !user) {
+				return reject({message: "Le doc recherché est introuvable.", code: 1});
+			}
+			return resolve({message: "Le doc a bien été retrouvé.", code: 0, result: user});
+		});
+	});
+}
 function toEdit(id, params) {
 	return new Promise(function (resolve, reject) {
 		db.findById(id, function (err, user) {
@@ -193,58 +305,3 @@ function toEdit(id, params) {
 		});
 	});
 }
-
-exports.edit = function (req, res, next) {
-
-	var id = req.body._id;
-	var params = req.body.local;
-
-	toEdit(id, params)
-			.then(function (response) {
-				res.send(response)
-			})
-			.catch(function (error) {
-				res.send(error)
-			});
-
-//	db.findById(id, function (err, user) {
-//		console.log(req.body.local, id);
-//		// return next(user);
-//		if (err || !user) {
-//			console.log('le document est introuvable!!!');
-//			res.send({message: "le document est introuvable!!!", code: 2});
-//		} else {
-//
-//			fillParam(user.local, params);
-//			console.log(user.local);
-//			user.save(function (updateErr, updateResp) {
-//				if (updateErr) {
-//					console.log(updateErr);
-//					res.send({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 1});
-//				} else if (!updateResp) {
-//					res.send({message: "La Mise à jour impossible de ce poeme a échoué :(Probleme serveur).", code: 2});
-//				} else {
-//					res.send({message: "Le poeme a bien mis à jour.", code: 0, result: updateResp});
-//				}
-//			});
-//		}
-//	});
-};
-
-
-function fillParam1(objTo, objFrom) {
-	_.each(objFrom, function (value, key) {
-		if (value || key === 'isPublic' || key === 'denounced') {
-			objTo[key] = value;
-		}
-	});
-}
-
-function fillParam(objTo, objFrom) {
-	_.each(objFrom, function (value, key) {
-		if (userProperties.indexOf(key) >= 0) {
-			objTo[key] = value;
-		}
-	});
-}
-

@@ -44,29 +44,48 @@
 			.controller('profilePoemController', profilePoemController)
 			.controller('profileMeController', profileMeController);
 
-	profileEditController.$inject = ["user", "$scope", "userToUp"]
-	function profileEditController(user, $scope, userToUp) {
+	profileEditController.$inject = ["_", "ProfileService", "myModal", "user", "$scope", "userToUp"]
+	function profileEditController(_, ProfileService, myModal, user, $scope, userToUp) {
 		$scope.user = userToUp;
 		console.log(" ********** ", $scope.user);
 
-		$scope.upUser =  upUser;
 		$scope.pwdToggle = false;
-		$scope.passwordConfirmation = "";
+		$scope.user.local.passwordConfirmation = "";
 		$scope.info = {};
 		$scope.info.showMessage = false;
 
-		function upUser(param){
-			console.log(" *****Param***** ", param);
+		$scope.upUser = upUser;
+		$scope.givePwd = givePwd;
 
-			if ($scope.pwdToggle && $scope.passwordConfirmation !== $scope.user.local.password) {
+
+		function givePwd() {
+			var modalPwd = myModal.givePwd("app/common/modalView/pwdForm.html", "");
+			modalPwd.result.then(function (res) {
+				console.log("res modal : ", res);
+				$scope.user.local.login = res.login;
+				$scope.user.local.password = res.password;
+				console.log("********2222*******", $scope.user);
+			});
+		}
+
+		function upUser(param) {
+			console.log(" *****Param***** ", param);
+			if ($scope.pwdToggle && $scope.user.local.passwordConfirmation !== $scope.user.local.newPassword) {
 				$scope.info.message = "Les deux mot de passe ne sont pas les mêmes";
 				$scope.info.type = 'danger';
 				$scope.info.showMessage = true;
-				console.log("passwordConfirmation : ",$scope.passwordConfirmation, "local : ",$scope.user.local.password)
-				//$scope.passwordConfirmation = ""; 
-				//$scope.user.local.password = "";
 			} else {
-				console.log("goooood")
+//				$scope.givePwd();
+				myModal.givePwd("app/common/modalView/pwdForm.html", "md")
+						.result.then(function (res) {
+							console.log("res modal : ", res);
+							$scope.user.local.login = res.login;
+							$scope.user.local.password = res.password;
+							console.log("********2222*******", $scope.user);
+							ProfileService.update({id: $scope.user._id}, _.pick($scope.user.local, "email", "firstname", "idPic",
+									"lastname", "login", "newPassword", "password", "phone"));
+						});
+
 			}
 		}
 
@@ -94,10 +113,29 @@
 
 
 
-	//get allpoeme by author
+//get allpoeme by author
 	getPoemByAuthor.$inject = ['getPoemsByLabel', 'CurrentUser'];
 	function getPoemByAuthor(getPoemsByLabel, CurrentUser) {
 		return getPoemsByLabel.get({key: "id_auteur", valu: "577e12686f2c7ed4794451ad"}).$promise;
 	}
 
-})()
+	function upUser(user, $scope, $state) {
+		user.update({id: $scope.user._id}, $scope.user,
+				function (resp) {
+					if (resp.code === 0) {
+						$state.go('dashboard.user.show', {id: $scope.user._id});
+					} else {
+						$scope.info.message = resp.message;
+						$scope.info.type = 'danger';
+						$scope.info.showMessage = true;
+					}
+				},
+				function (error) {
+					$scope.info.message = "un probleme s'est produit. L'enregistrement est temporairement impossible";
+					$scope.info.type = 'danger';
+					$scope.info.showMessage = true;
+				});
+	}
+
+}
+)()

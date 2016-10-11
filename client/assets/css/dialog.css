@@ -142,3 +142,9 @@ Comment
 .rowLinker .denouncePoem{
 
 }
+
+
+/*//givePwd*/
+.pwdModal .modal-body{
+	overflow: auto;
+}

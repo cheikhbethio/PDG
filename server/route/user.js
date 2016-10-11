@@ -7,6 +7,7 @@ module.exports = function (app) {
 	app.get('/api/users', db_user.view);
 	app.get('/api/users/:id', db_user.get);
 	app.put('/api/users/:id', db_user.edit);
+	app.put('/api/profile/:id', db_user.editProfile);
 
 };
 
