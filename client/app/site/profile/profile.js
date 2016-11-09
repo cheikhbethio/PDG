@@ -55,18 +55,6 @@
 		$scope.info.showMessage = false;
 
 		$scope.upUser = upUser;
-		$scope.givePwd = givePwd;
-
-
-		function givePwd() {
-			var modalPwd = myModal.givePwd("app/common/modalView/pwdForm.html", "");
-			modalPwd.result.then(function (res) {
-				console.log("res modal : ", res);
-				$scope.user.local.login = res.login;
-				$scope.user.local.password = res.password;
-				console.log("********2222*******", $scope.user);
-			});
-		}
 
 		function upUser(param) {
 			console.log(" *****Param***** ", param);
@@ -75,7 +63,6 @@
 				$scope.info.type = 'danger';
 				$scope.info.showMessage = true;
 			} else {
-//				$scope.givePwd();
 				myModal.givePwd("app/common/modalView/pwdForm.html", "md")
 						.result.then(function (res) {
 							console.log("res modal : ", res);
@@ -83,7 +70,23 @@
 							$scope.user.local.password = res.password;
 							console.log("********2222*******", $scope.user);
 							ProfileService.update({id: $scope.user._id}, _.pick($scope.user.local, "email", "firstname", "idPic",
-									"lastname", "login", "newPassword", "password", "phone"));
+									"lastname", "login", "newPassword", "password", "phone"),
+							function(res){
+								console.log("======= : ", res);
+								if(res.code === 0){
+									$scope.info.message = "Votre Profile est bien a bien été mis à jour";
+									$scope.info.type = 'success';
+									$scope.info.showMessage = true;
+								}else if (res.code === 2){
+									$scope.info.message = "l'adresse email est déja utilisé est indisponible";
+									$scope.info.type = 'danger';
+									$scope.info.showMessage = true;
+								}else if (res.code === 3){
+									$scope.info.message = "Les identifiants ne sont pas bons. veillez reessayer";
+									$scope.info.type = 'danger';
+									$scope.info.showMessage = true;
+								}
+							});
 						});
 
 			}
@@ -110,8 +113,6 @@
 		var my_id = CurrentUser.getId();
 		return user.get({id: my_id}).$promise;
 	}
-
-
 
 //get allpoeme by author
 	getPoemByAuthor.$inject = ['getPoemsByLabel', 'CurrentUser'];

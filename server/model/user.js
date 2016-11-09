@@ -159,8 +159,6 @@ exports.getKeyValidation = function (req, res) {
 	});
 };
 
-
-
 exports.delete = function (req, res, next) {
 	var id = req.params.id;
 	db.findById(id, function (err, doc) {
@@ -173,119 +171,70 @@ exports.delete = function (req, res, next) {
 
 };
 
-
-
-
 exports.editProfile = function (req, res) {
 	var id = req.params.id;
 	var params = req.body;
+	var tabProm =[];
 //	var profileToUp;
 
 	console.log("pram ", req.params.id, "body :", req.body);
-	simpleRecherche("_id", id)
-			.then(function (res) {
-				var isLogged = bcrypt.compareSync(params.password, res.result.local.password);
+	//check user par _id : first elem of tab
+	tabProm.push(simpleRecherche("_id", id));
+	//check if email exit in db : second elem 
+	tabProm.push(simpleRecherche('local.email', params.email));
 
-				if (res.code === 0 && res.result.local.login === params.login && isLogged) {
-					return  {code: "yes", user: res.result};
-				} else {
-					return {code: "no", message: "Mauvais mot de passe"};
-				}
-			})
-			//on verifie le mail("email", params.email)
-			.then(function (res2) {
-				if (res2.code === "yes") {
-					if (res2.user.local.email !== params.email) {
-						return simpleRecherche("email", params.email);
-//								.then(function (resultEmail) {
-//									console.log(" *************xxxxxxxxxxxxxxxxx*********** : ", resultEmail.code);
-//									if (resultEmail.code === 0) {
-//										return Promise.resolve({code: "emailAlreaduUsed", message: "L'email est déjà utilisé."});
-//									} else {
-//										return Promise.resolve({code: "withoutEmail"});
-//									}
-//								});
-						console.log(" *************email à changer***********");
-					}
-				} else {
-					console.log(" ***********res2.message************* : ", res2.message);
-					return {code: "no", message: res2.message};
-				}
-			})
-			.then(function (resut) {
-				resut.then(function (rrrr) {
-					console.log("+++++++++++++ ", rrrr);
+	Promise.all(tabProm).then((values) => {
+		console.log("11111111111111111111111111111");
+		var rep = {};
+		if (values[0].code !== 0 || values[0].result.local.login !== params.login){
+			rep.message = "not_connected";
+			rep.code = 3;
+			return res.send(rep);
+		}
+		//update email
+		if (values[0].result.local.email !== params.email && values[1].code === 0) {
+			console.log("email is already");
+			return res.send({code: 2, message: "email_is_already_use"});
+		} 
 
-				})
-			});
-	/*
-
-	 //recherche par id puis par login
-	 simpleRecherche("_id", id)
-	 .then(function (res) {
-	 console.log(" ************res************ : ", res);
-	 var isLogged = bcrypt.compareSync(params.password, res.result.local.password);
-
-	 if (res.code === 0 && res.result.local.login === params.login && isLogged) {
-	 //					profileToUp = res.result;
-	 if (params.newPassword) {
-	 params.password = bcrypt.hashSync(params.newPassword, bcrypt.genSaltSync(8), null);
-	 console.log(" ************MDP a changer************");
-	 } else {
-	 delete params.password;
-	 console.log(" *************MDP a ne pas changer***********");
-	 }
-	 if (res.result.local.email !== params.email) {
-	 simpleRecherche("email", params.email)
-	 .then(function (resultEmail) {
-	 console.log(" *************000000000***********");
-	 if (resultEmail.code === 0) {
-	 return {message: "emailAlreaduUsed"};
-	 } else {
-	 return {message: "withoutEmail"};
-	 }
-	 });
-	 console.log(" *************email à changer***********");
-	 } else {
-	 console.log(" ***********upWithoutEmail*************");
-	 return {message: "upWithoutEmail"};
-	 }
-	 } else {
-	 console.log(" ***********notFound*************");
-	 return {message: "notFound", }
-	 }
-	 })
-	 .then(function (res2) {
-	 console.log(" *************res2*********** : ", res2);
-	 if (res2.code === 0) {
-	 res.send({message: "La Mise à jour a échoué : L'email existe déjà.", code: 2});
-	 console.log(" 11111111111111111 ");
-	 }
-	 if (res2.message === "notFound") {
-	 res.send({message: "La Mise à jour a échoué : cet Utilisateur n'existe pas", code: 2});
-	 console.log(" 2222222222222 ");
-	 }
-	 if (res2.message === "emailAlreaduUsed") {
-	 res.send({message: "L'email est déjà utilisé.", code: 2});
-	 console.log(" xxxxxxxxxxxxxxxx ");
-	 }
-	 if (res2.code === 1 || res2.message === "upWithoutEmail" || res2.message === "emailAlreaduUsed") {
-	 //					profileToUp = res.result;
-	 console.log(" 33333333333333 ");
-	 toEdit(id, _.pick(params, "email", "firstname", "idPic",
-	 "lastname", "login", "newPassword", "password", "phone"))
-	 .then(function (response) {
-	 res.send(response);
-	 })
-	 .catch(function (error) {
-	 res.send(error);
-	 });
-	 } else {
-	 console.log("ellllllllllllllllllllllll")
-	 }
-	 });
-	 */
-
+		// if (values[0].code === 0 && values[0].result.local.login === params.login){
+		var isLogged = bcrypt.compareSync(params.password, values[0].result.local.password);
+		console.log("------------ : ", isLogged);
+		if(isLogged){				
+			//updatepwd
+			params.newPassword ? (
+				params.password = bcrypt.hashSync(params.newPassword, bcrypt.genSaltSync(8), null),
+				console.log(" ************MDP a changer************")
+			) : (
+				delete params.password,
+				console.log(" *************MDP a ne pas changer***********")
+			)
+			console.log("2222222222222222222222");
+			//do edition
+			toEdit(id, _.pick(params, "email", "firstname", "idPic",
+	 			"lastname", "login", "password", "phone"))
+	 			.then(function(response){
+	 				console.log("-------------response--------------");
+	 				return res.send(response) 
+	 			})
+				.catch(function(error){
+					console.log("---------------error---------------");
+					return res.send(error)
+				});
+		}
+			//  else{
+			// 	console.log("not_connected");
+			// 	return res.send({message: "not_connected : ", code: 2});
+			// }
+		// }else{
+		// 		console.log("not_connected 2");
+		// 		return res.send({message: "not_connected : ", code: 22});
+		// }		
+	})
+	.catch((error) => {
+		console.log("not_connected 3");
+		return res.send({message: "not_connected : ", code: 3});
+	});
 }
 
 exports.edit = function (req, res, next) {
@@ -315,12 +264,18 @@ function fillParam(objTo, objFrom) {
 function simpleRecherche(key, value) {
 	var query = {};
 	query[key] = value;
-
 	return new Promise(function (resolve, reject) {
 		db.findOne(query, function (err, user) {
-			if (err || !user) {
+			if (err) {
+console.log("simpleRecherche err :", query);
 				return reject({message: "Le doc recherché est introuvable.", code: 1});
 			}
+			if (!user) {
+console.log("simpleRecherche videUser :", query);
+				return resolve({message: "Le doc recherché est introuvable.", code: 1, result: user});
+			}
+
+console.log("simpleRecherche user: ", user);
 			return resolve({message: "Le doc a bien été retrouvé.", code: 0, result: user});
 		});
 	});
