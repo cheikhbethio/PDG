@@ -116,32 +116,6 @@ body {
 /**********
     animation
 ***********/
-.anim.ng-leave {
-  animation: hider 0.5s linear;
-  -webkit-animation: hider 0.5s linear;
-}
-
-@keyframes hider {
-    to      { transform: translateX(-200%); }
-}
-
-@-webkit-keyframes hider {
-    to      { -webkit-transform: translateX(-200%); }
-}
-
-.anim.ng-enter {
-  animation: shower 4.5s linear;
-  -webkit-animation: shower 4.5s linear;
-}
-@keyframes shower {
-    from    { transform:translateX(200%); }
-    to      { transform: translateX(0%); }
-}
-
-@-webkit-keyframes shower {
-    from    { -webkit-transform:translateX(200%); }
-    to      { -webkit-transform: translateX(0%); }
-}
 
 
 /***********************************
