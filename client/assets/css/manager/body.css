@@ -74,10 +74,10 @@
 .placeholder {
   margin-bottom: 20px;
 }
-.placeholder img {
+/*.placeholder img {
   display: inline-block;
   border-radius: 50%;
-}
+}*/
 
 .ta-editor {
     min-height: 300px;

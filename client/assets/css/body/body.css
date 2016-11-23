@@ -46,14 +46,14 @@ body {
   margin-top: 10px;
 }
 
-#carreTheme{
+.carreTheme{
     background-color: #fff;
     height: 15vw;
     min-height: 60px;  
     padding: 2vw;
 }
 
-#carreThemeL{
+.recem_pub_panel{
     height: 15vw;
     min-height: 60px;
     -webkit-border-radius: 10px;
@@ -71,30 +71,16 @@ body {
 
 .themeOne{
     font-size: 3vw;
-    width: 49%;
-    /*
-    margin-right: 4px;*/
+    
 }
-.themeOneImg{
-    font-size: 1.5vw;
-    width: 49%;  
-}
-.imgThemeOne{ 
-}
-.textThemeOneImg{
-    font-size: 2vw;
-    height: 15vw;
-    display: inline-block; 
-
-}
-#carreThemeImg{
+.carreThemeImg{
     background-color: #fff;
     min-height: 60px; 
 }
 
 .themeTwo{
     font-size: 3vw;
-    width: 49%;
+    /*width: 49%;*/
 }
 .themeThre{
     font-size: 3vw;
@@ -140,4 +126,22 @@ body {
 .row{
 	margin-left: 0px;
 	margin-right: 0px; 
+}
+
+
+/******************************************
+			gestion des rubics
+*******************************************/
+.rubric_panel > div{
+	margin-bottom: 10px;
+}
+/*
+Image rubric
+*/
+.rub_1_img_container {
+    height: 100%;
+}
+img.rub_1_img {
+    width: 100%;
+    height: 100%;
 }

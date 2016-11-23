@@ -26,37 +26,37 @@ module.exports = function (passport) {
 		passwordField: 'password',
 		passReqToCallback: true
 	},
-			function (req, login, password, done) {
+		function (req, login, password, done) {
 
-				process.nextTick(function () {
+			process.nextTick(function () {
 
-					User.findOne({'local.login': req.body.login}, function (err, user) {
-						if (err)
-							return done(err);
-						if (user) {
-							return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-						} else {
-							var newUser = new User();
+				User.findOne({'local.login': req.body.login}, function (err, user) {
+					if (err)
+						return done(err);
+					if (user) {
+						return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+					} else {
+						var newUser = new User();
 
-							newUser.local.email = req.body.email;
-							newUser.local.login = req.body.login;
-							newUser.local.password = newUser.generateHash(password);
-							newUser.local.firstname = req.body.firstname;
-							newUser.local.lastname = req.body.lastname;
-							newUser.local.right = req.body.right;
+						newUser.local.email = req.body.email;
+						newUser.local.login = req.body.login;
+						newUser.local.password = newUser.generateHash(password);
+						newUser.local.firstname = req.body.firstname;
+						newUser.local.lastname = req.body.lastname;
+						newUser.local.right = req.body.right;
 
-							newUser.save(function (err) {
-								if (err)
-									throw err;
-								return done(null, newUser);
-							});
-						}
-
-					});
+						newUser.save(function (err) {
+							if (err)
+								throw err;
+							return done(null, newUser);
+						});
+					}
 
 				});
 
-			}));
+			});
+
+		}));
 
 	passport.use('local-login', new LocalStrategy({
 		// by default, local strategy uses username and password, we will override with email
@@ -64,17 +64,18 @@ module.exports = function (passport) {
 		passwordField: 'password',
 		passReqToCallback: true // allows us to pass back the entire request to the callback
 	},
-			function (req, username, password, done) {
-				User.findOne({'local.login': username}, function (err, user) {
-					if (err)
-						return done(err);
-					if (!user)
-						return done(null, false);
-					if (!user.validPassword(password))
-						return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
-					return done(null, user);
-				});
+		function (req, username, password, done) {
 
-			}));
+			User.findOne({'local.login': username}, function (err, user) {
+				if (err)
+					return done(err);
+				if (!user)
+					return done(null, false);
+				if (!user.validPassword(password))
+					return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+				return done(null, user);
+			});
+
+		}));
 
 };
