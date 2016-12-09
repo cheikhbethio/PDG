@@ -52,6 +52,29 @@ body {
     min-height: 60px;  
     /*padding: 2vw;*/
 }
+.carreTheme > div:first-child{
+    position: absolute;
+}
+
+.rub_1_img_container{
+}
+
+.rub_1_img_container {
+    animation-duration: 1s;
+    animation-name: slidein;
+    margin-left: 50%;
+    z-index: 10;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+  }
+
+  to {
+    margin-left: 50%;
+  }
+}
 
 .recem_pub_panel{
     height: 15vw;

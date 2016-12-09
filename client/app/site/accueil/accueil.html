@@ -12,51 +12,66 @@
 
 			<div class="row layout-row layout-align-space-between-center">
 
-					<div class="carreTheme layout-row layout-align-center-center themeOne" ng-click="rubrique(1)">
+					<div class="carreTheme layout-row layout-align-center-center themeOne" ng-click="rubrique(1)"  ng-mouseenter="runAnim(1)" ng-mouseleave="stopAnim(1)">
 						<div class="text-center">
 							<div>Dieureudieuf</div>
 							<div>SERIGNE</div>
 							<div>BETHIO</div>		  
 						</div>
-	<!--					<div class="rub_1_img_container">
+						<div class="{{anim[1] ? 'rub_1_img_container' : 'notDisplay'}}">
 							<img class="rub_1_img" src="../../../assets/images/cheikhAdiaSaliou.jpg" alt="cheikhAdiaSaliou"/>
-						</div>-->
+						</div>
 					</div>
 
-					<div class="carreTheme layout-row layout-align-center-center themeTwo"  ng-click="rubrique(2)">
+					<div class="carreTheme layout-row layout-align-center-center themeTwo"  ng-click="rubrique(2)"  ng-mouseenter="runAnim(2)" ng-mouseleave="stopAnim(2)">
 						<div>
 							<div>L'esprit</div>
 							<div class="col-sm-offset-1">universel</div>		
-						</div>					 
+						</div>	
+						<div class="{{anim[2] ? 'rub_1_img_container' : 'notDisplay'}}">
+							<img class="rub_1_img" src="../../../assets/images/cheikhAdiaSaliou.jpg" alt="cheikhAdiaSaliou"/>
+						</div>				 
 					</div>
 			</div>
 
 			<div class="row layout-row layout-align-space-between-center">
-					<div class="carreTheme themeThre layout-row layout-align-center-center text-center"  ng-click="rubrique(3)">
+					<div class="carreTheme themeThre layout-row layout-align-center-center text-center"  ng-click="rubrique(3)"  ng-mouseenter="runAnim(3)" ng-mouseleave="stopAnim(3)">
 						<div>
 							<div>Histoires sacrées</div>
 						</div>
+						<div class="{{anim[3] ? 'rub_1_img_container' : 'notDisplay'}}">
+							<img class="rub_1_img" src="../../../assets/images/cheikhAdiaSaliou.jpg" alt="cheikhAdiaSaliou"/>
+						</div>
 					</div>
 
-					<div class="carreTheme layout-row layout-align-center-center themeFour"  ng-click="rubrique(4)">
+					<div class="carreTheme layout-row layout-align-center-center themeFour"  ng-click="rubrique(4)" ng-mouseenter="runAnim(4)" ng-mouseleave="stopAnim(4)">
 						<div class="text-center">	
 							<div>GATT</div>
 							<div>SAFF!</div>
 						</div>
+						<div class="{{anim[4] ? 'rub_1_img_container' : 'notDisplay'}}">
+							<img class="rub_1_img" src="../../../assets/images/cheikhAdiaSaliou.jpg" alt="cheikhAdiaSaliou"/>
+						</div>
 					</div>
 			</div>
 
 			<div class="row layout-row layout-align-space-between-center">
-				<div class="carreTheme themeFive layout-row layout-align-center-center"  ng-click="rubrique(5)">
+				<div class="carreTheme themeFive layout-row layout-align-center-center"  ng-click="rubrique(5)" ng-mouseenter="runAnim(5)" ng-mouseleave="stopAnim(5)">
 					<div>
 						<div>Les plus appréciés</div>
 					</div>
+					<div class="{{anim[5] ? 'rub_1_img_container' : 'notDisplay'}}">
+						<img class="rub_1_img" src="../../../assets/images/cheikhAdiaSaliou.jpg" alt="cheikhAdiaSaliou"/>
+					</div>
 				</div>
 
-				<div class="carreTheme themeSix layout-row layout-align-center-center "  ng-click="rubrique(6)">
+				<div class="carreTheme themeSix layout-row layout-align-center-center "  ng-click="rubrique(6)" ng-mouseenter="runAnim(6)" ng-mouseleave="stopAnim(6)">
 					<div class="text-center">	
 						<div>L'originalité</div>
 						<div>spirituelle</div>
+					</div>
+					<div class="{{anim[6] ? 'rub_1_img_container' : 'notDisplay'}}">
+						<img class="rub_1_img" src="../../../assets/images/cheikhAdiaSaliou.jpg" alt="cheikhAdiaSaliou"/>
 					</div>
 				</div>
 			</div>

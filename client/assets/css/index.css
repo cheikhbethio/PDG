@@ -3,6 +3,9 @@
 .errorMsg{
 	color: red;
 }
+.notDisplay{
+display: none;
+}
 /* ---------------------
 	Flex Alignement
 ------------------------ */
@@ -12,12 +15,12 @@
    - En ligne
 ---------------------- */
 .layout-row {
-	display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 .layout-row > .flex {
     min-width: 0;

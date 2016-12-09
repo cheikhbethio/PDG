@@ -15,6 +15,17 @@ angular.module('accueil', ['ui.router'])
 		function(CurrentUser,$rootScope, $scope, $state){
 
 		$rootScope.confVariable.titre = "Thiantakones";
+		$scope.anim = [];
+
+		$scope.runAnim = runAnim;
+		function runAnim(elem){
+			$scope.anim[elem] = true;
+		}
+		$scope.stopAnim = stopAnim;
+		function stopAnim(elem){
+			$scope.anim[elem] = false;
+		}
+
 		$rootScope.confVariable.isConnected =  CurrentUser.isLoggedIn();
 		$scope.rubrique = function(id){
 			$state.go("site.rubrique", {id:id});
