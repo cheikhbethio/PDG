@@ -16,6 +16,17 @@ body {
 /***********************************
 		titre
 ***********************************/
+.panel-name{
+    color: white;    
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px
+}
+.carousel-inner>.item>a>img{
+    background-color: black;
+}
 .siteTile{
 	/*margin-top: 51px;*/
 }

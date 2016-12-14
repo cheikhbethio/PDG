@@ -3,6 +3,8 @@
 angular.module('siteBody', [])
 		.controller('siteBodyController', ['$scope', 'CurrentUser', '$state', '$rootScope',
 			function ($scope, CurrentUser, $state, $rootScope) {
+				
+				$scope.cookieUser = CurrentUser.getUser();
 
 				$scope.toDisconnect = function () {
 					CurrentUser.clear();

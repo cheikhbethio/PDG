@@ -9,27 +9,39 @@ currentUserModule.factory('userCookie', ['$resource', function ($resource) {
 
 currentUserModule.factory('CurrentUser', ['$cookies', '$localStorage',  '$resource',
 	function($cookies, $localStorage, $resource) {
+		var cookieName = 'SeugneBethioLaGrace';
   	return {
 
+		getUser: function() { 
+			var cookievalue = $cookies.get(cookieName);
+			if (cookievalue) {
+				return JSON.parse(cookievalue);
+			}
+			return undefined;
+		},
+
 		clear: function() {
-			$cookies.remove('SeugneBethioLaGrace');
+			$cookies.remove(cookieName);
 		},
 
 		isLoggedIn: function() {
- 			return angular.isDefined($cookies.get('SeugneBethioLaGrace'));
+ 			return angular.isDefined($cookies.get(cookieName));
 		},
+
 		getId: function(){
-			var cookievalue = JSON.parse($cookies.get('SeugneBethioLaGrace'));
+			// var cookievalue = JSON.parse($cookies.get(cookieName));
+			var cookievalue = this.getUser();
 			return cookievalue.id
 		},
 
 		getRight : function(){
-			var cookievalue = $cookies.get('SeugneBethioLaGrace');
+			// var cookievalue = $cookies.get('SeugneBethioLaGrace');
+			var cookievalue = this.getUser();
 			if (cookievalue) {
-				cookievalue = JSON.parse(cookievalue);
+				// cookievalue = JSON.parse(cookievalue);
 				return cookievalue.right;			
 			} 
-			return null
+			return null;
 		},
 
 		set: function(user) {
@@ -62,9 +74,7 @@ currentUserModule.factory('CurrentUser', ['$cookies', '$localStorage',  '$resour
             } else {
                 return "components/res/default.png";
             }
-        },
-
-		currentUser: function() { return $localStorage.currentUser; }
+        }
 
 	};
 }]);

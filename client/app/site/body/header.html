@@ -11,6 +11,8 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
+				<li><span class="panel-name">Bienvenue {{cookieUser.firstname}}</span></li>
+				<li><a ui-sref="site.accueil" ui-sref-active="active" ><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
 				<li  ng-if="confVariable.isConnected">
 					<a ui-sref="dashboard.home" ui-sref-active="active" >
 						<span class="glyphicon glyphicon-wrench"></span>Gestion du site 
@@ -21,7 +23,6 @@
 						<span class="glyphicon glyphicon-user"></span>Mon profil
 					</a>
 				</li>
-				<li><a ui-sref="site.accueil" ui-sref-active="active" ><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
 				<li  ng-if="!confVariable.isConnected">
 					<a ui-sref="site.connexion" ui-sref-active="active" ><span class="glyphicon glyphicon-user"></span>Connection</a>
 				</li>
