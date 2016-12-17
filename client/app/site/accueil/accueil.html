@@ -6,15 +6,17 @@
 						
 			<div class="row layout-row layout-align-center-start recem_pub_container">
 				<div class="col-sm-12 recem_pub_panel">
-					<div class="col-sm-3">
-						<div>RECEMMENT PUBLIES</div>
+					<div class="col-sm-3  current-pub">
+						<div class="text-center">
+							<div>RECEMMENT</div>
+							<div>PUBLIES</div>
+						</div>
 					</div>
-					<div class="carouselPoeme col-sm-9">
+					<div class="carousel col-sm-9">
 							<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
 								<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
 									<img ng-src="{{slide.image}}" style="margin:auto;">
 									<div class="carousel-caption">
-										<h1>Slide {{slide.id}}</h1>
 										<p>{{slide.text}}</p>
 									</div>
 								</uib-slide>
@@ -25,7 +27,7 @@
 
 			<div class="row layout-row layout-align-space-between-center">
 
-					<div class="carreTheme layout-row layout-align-center-center themeOne" ng-click="rubrique(1)"  ng-mouseenter="runAnim(1)" ng-mouseleave="stopAnim(1)">
+					<div class="carreTheme  layout-row layout-align-center-center themeOne" ng-click="rubrique(1)"  ng-mouseenter="runAnim(1)" ng-mouseleave="stopAnim(1)">
 						<div class="text-center">
 							<div>Dieureudieuf</div>
 							<div>SERIGNE</div>

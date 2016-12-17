@@ -236,3 +236,31 @@ display: none;
 	margin: 5px 0 5px 0; 
     border-top: 1px solid #ddd;
 }
+
+/*Carousel*/
+
+.carousel{
+  /*height: inherit;*/
+}
+/*
+.carousel .carousel-inner{
+  height: inherit;
+}*/
+
+
+.carousel, .carousel .carousel-inner, .carousel .carousel-inner > .active, .carousel .carousel-inner > .active > img{
+  height: inherit;
+}
+/*.carousel .carousel-inner > .active > img{
+  height: inherit;
+}*/
+
+.carousel .carousel-caption{
+  color: black;
+  text-shadow: none;
+  font-size: 2vw;
+}
+
+.carousel-indicators{
+  display: none;
+}

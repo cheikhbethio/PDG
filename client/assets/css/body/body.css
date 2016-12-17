@@ -87,6 +87,10 @@ body {
   }
 }
 
+.current-pub{
+    font-size: 2vw;
+}
+
 .recem_pub_panel{
     height: 15vw;
     min-height: 60px;
