@@ -16,6 +16,7 @@ var application_root = __dirname,
 
 //db Connection
 var configDB = require('./config/database.js');
+mongoose.Promise = global.Promise;
 mongoose.connect(configDB.url);
 
 // on recup les variables
