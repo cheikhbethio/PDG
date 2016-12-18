@@ -2,7 +2,7 @@
 
 // load the things we need
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt');
 var _ = require("underscore");
 var myVar = require('../config/variables.js');
 var theMailer = require('../config/jobsMailer.js');
