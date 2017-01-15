@@ -1,88 +1,49 @@
 'use strict';
 
 
-angular.module('accueil', ['ui.router'])
+angular.module('accueil', ['ui.router', 'angular-carousel', 'underscore'])
 	.config(['$stateProvider', function($stateProvider){
 		$stateProvider
 			.state('site.accueil', {
 				url :'/',
-                css : 'assets/css/body/content.css',
+        css : 'assets/css/body/content.css',
 				templateUrl : 'app/site/accueil/accueil.html',
 				controller	: 'accueilController'
 			})
 	}])
-	.controller('accueilController', ['CurrentUser', '$rootScope', '$scope', '$state', 
-		function(CurrentUser,$rootScope, $scope, $state){
+	.controller('accueilController', ['_', 'LastPoemes','CurrentUser', '$rootScope', '$scope', '$state',
+		function(_, LastPoemes, CurrentUser, $rootScope, $scope, $state){
 
 		$rootScope.confVariable.titre = "Thiantakones";
-		$scope.anim = [];
-
-		$scope.runAnim = runAnim;
-		function runAnim(elem){
-			$scope.anim[elem] = true;
-		}
-		$scope.stopAnim = stopAnim;
-		function stopAnim(elem){
-			$scope.anim[elem] = false;
-		}
-
 		$rootScope.confVariable.isConnected =  CurrentUser.isLoggedIn();
+		$scope.slides = [];
+
 		$scope.rubrique = function(id){
 			$state.go("site.rubrique", {id:id});
 		}
 
-		/************************* carousel *********************** */
-		
-		//-----------------------------------------function
+		LastPoemes.query(function (list) {
+			$scope.lastPoeme = list;
+			console.log("************ ", $scope.lastPoeme);
+			var i = 0;
+			_.each(list, function(elem){
+				var imgObjet = {
+						id: ++i,
+						label: 'slide #' + i,
+						img: elem.tof,
+						odd: (i % 2 === 0),
+						title : elem.title,
+						lastname: elem.id_auteur.local.lastname,
+						firstname : elem.id_auteur.local.firstname
+				};
+				$scope.slides.push(imgObjet);
+			});
+		});
+
 		// $scope.addSlide = addSlide;
 		$scope.goToPoeme = goToPoeme;
-		
-		//-----------------------------------------declaration
-		$scope.myInterval = 1000000;
-		$scope.noWrapSlides = false;
-		$scope.active = 0;
-		var slides = $scope.slides = [];
-		var currIndex = 0;
-		//à utiliser pour les différents poemes. à voire aussi avec ng-repeat
-		
-		initTofList();
-		function initTofList() {
-			var list = [];
-			for (var i = 13; i >= 1; i--) {
-				slides.push({
-					image : "assets/images/poeme/tofPoeme" + i + ".jpg",
-					//text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
-					text : "poeme nimoro " + i,
-					id: currIndex++
-				});
-			}
-			for (var i = 102; i >= 101; i--) {
-				slides.push({
-					image :"assets/images/poeme/tofPoeme" + i + ".png",
-					text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
-					id: currIndex++
-				})
-			}
-			return list;
-		}
-
-		// function addSlide() {
-			// var list  = initTofList();
-			// slides.push({
-				// image: 'http://lorempixel.com/' + newWidth + '/300',
-			// 	image : initTofList(),
-			// 	text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
-			// 	id: currIndex++
-			// });
-		// }
-
-		// for (var i = 0; i < 4; i++) {
-		// 	$scope.addSlide();
-		// }
-
 		function goToPoeme(poem) {
 			$scope.poemToDisplay = poem;
 		}
-
 
 	}]);

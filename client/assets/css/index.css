@@ -11,7 +11,7 @@ display: none;
 ------------------------ */
 
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - En ligne
 ---------------------- */
 .layout-row {
@@ -26,7 +26,7 @@ display: none;
     min-width: 0;
 }
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - En colonne
 ---------------------- */
 .layout-column {
@@ -44,8 +44,8 @@ display: none;
     flex-basis: auto;
 }
 /* ----------------------
-   Alignement des enfants : 
-   - Horizontal : au début 
+   Alignement des enfants :
+   - Horizontal : au début
    - Vertical : au début
 ---------------------- */
 .layout-align-start-start {
@@ -62,8 +62,8 @@ display: none;
     justify-content: flex-start;
 }
 /* ----------------------
-   Alignement des enfants : 
-   - Horizontal : au début 
+   Alignement des enfants :
+   - Horizontal : au début
    - Vertical : étendu sur la hauteur
    Etirer sur la hauteur
 ---------------------- */
@@ -82,7 +82,7 @@ display: none;
 }
 
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - Horizontal : au début
    - Vertical : au centre
 ---------------------- */
@@ -100,7 +100,7 @@ display: none;
     justify-content: flex-start;
 }
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - Horizontal : a la fin
    - Vertical : au centre
 ---------------------- */
@@ -118,7 +118,7 @@ display: none;
     justify-content: flex-end;
 }
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - Horizontal : au centre
    - Vertical : au début
 ---------------------- */
@@ -136,7 +136,7 @@ display: none;
     justify-content: center;
 }
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - Horizontal : au centre
    - Vertical : au centre
 ---------------------- */
@@ -154,7 +154,7 @@ display: none;
     justify-content: center;
 }
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - Horizontal : un espace entre chaque enfant
    - Vertical : au centre
 ---------------------- */
@@ -172,7 +172,7 @@ display: none;
     justify-content: space-between;
 }
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - Horizontal : un espace entre chaque enfant
    - Vertical : au centre
 ---------------------- */
@@ -190,7 +190,7 @@ display: none;
     justify-content: space-between;
 }
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - Horizontal : un espace entre chaque enfant
    - Vertical : au début
 ---------------------- */
@@ -208,7 +208,7 @@ display: none;
     justify-content: space-between;
 }
 /* ----------------------
-   Alignement des enfants : 
+   Alignement des enfants :
    - Horizontal : un espace entre chaque enfant
    - Vertical : au centre
 ---------------------- */
@@ -233,7 +233,7 @@ display: none;
 
 
 .divider{
-	margin: 5px 0 5px 0; 
+	margin: 5px 0 5px 0;
     border-top: 1px solid #ddd;
 }
 
@@ -263,4 +263,9 @@ display: none;
 
 .carousel-indicators{
   display: none;
+}
+
+
+a.carousel-control {
+    opacity: 0;
 }

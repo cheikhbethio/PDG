@@ -27,7 +27,9 @@ angular.module('pgdApp', [
 	'currentUser',
 	'underscore',
 	'custumModal',
-	'myAlerter'
+	'myAlerter',
+
+	'angular-carousel',
 
 ])
 		.config(['$stateProvider', '$urlRouterProvider',
@@ -94,4 +96,3 @@ angular.module('pgdApp', [
 			});
 
 		});
-

@@ -44,8 +44,6 @@
 
 	createPoemeController.$inject = ['myModal', 'CurrentUser', 'Poeme', '$scope', '_'];
 	function createPoemeController(myModal, CurrentUser, Poeme, $scope, _) {
-
-
 		$scope.addPoeme = addPoeme;
 		$scope.showModalTof = showModalTof;
 		$scope.info = {};
@@ -195,13 +193,6 @@
 
 	allPoemeController.$inject = ['$cookies', 'CurrentUser', 'Poeme', '$scope'];
 	function allPoemeController($cookies, CurrentUser, Poeme, $scope) {
-//		var my_id ;
-//		var tempo = CurrentUser.getId;
-//
-//		// console.log("+++++++++++++ : ", $cookies.getAll());
-//		var toto =  JSON.parse($cookies.get('SeugneBethioLaGrace'));
-
-
 		$scope.deletePoeme = deletePoeme;
 		$scope.poemlist = Poeme.query();
 		$scope.config = {
@@ -224,7 +215,6 @@
 
 	lastPoemeController.$inject = ['LastPoemes', '$scope'];
 	function lastPoemeController(LastPoemes, $scope) {
-
 		$scope.listPoeme;
 		$scope.poemToDisplay;
 		$scope.goToPoeme = goToPoeme;
@@ -232,7 +222,6 @@
 		$scope.rubricList = ['Dieureudieuf Serigne Bethio', 'L\'esprit universel', 'Histoire sacrées',
 			'Gatt Saf', 'Les plus appréciés', 'L\'originalité spiritelle'];
 
-		/************************lists des poemes**********************/
 		LastPoemes.query(function (list) {
 			$scope.listPoeme = list;
 		});

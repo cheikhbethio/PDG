@@ -1,28 +1,28 @@
 	<div class="row rowContenu">
-		<!--<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">-->
 		<div class="row layout-column layout-align-space-between-stretch rubric_panel">
-			
+
 			<my-info info='info'></my-info>
-						
+
 			<div class="row layout-row layout-align-center-start recem_pub_container">
-				<div class="col-sm-12 recem_pub_panel">
+				<div class="col-sm-12 recem_pub_panel layout-row layout-align-center-center">
 					<div class="col-sm-3  current-pub">
 						<div class="text-center">
-							<div>RECEMMENT</div>
-							<div>PUBLIES</div>
+							<div>RÉCEMMENT</div>
+							<div>PUBLIÉS</div>
 						</div>
 					</div>
-					<div class="carousel col-sm-9">
-							<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-								<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-									<img ng-src="{{slide.image}}" style="margin:auto;">
-									<div class="carousel-caption">
-										<p>{{slide.text}}</p>
-									</div>
-								</uib-slide>
-							</uib-carousel> 
-						</div>								
-				</div>
+					<div class="my_carousel col-sm-9">
+                    <ul rn-carousel rn-carousel-controls rn-carousel-index="carouselIndex2" rn-carousel-auto-slide rn-carousel-pause-on-hover rn-carousel-buffered class="carousel2">
+                        <li ng-repeat="slide in slides track by slide.id" ng-class="'id-' + slide.id">
+                            <div ng-style="{'background-image': 'url(' + slide.img + ')'}"  class="bgimage layout-column layout-align-center-center">
+                              <span class="carousel-poem carousel-poem-title">{{slide.title}}</span>
+															<span class="carousel-poem carousel-poem-lastname">{{slide.lastname}}</span>
+															<span class="carousel-poem carousel-poem-firstname">{{slide.firstname}}</span>
+                            </div>
+                        </li>
+                    </ul>
+            </div>
+					</div>
 			</div>
 
 			<div class="row layout-row layout-align-space-between-center">
@@ -31,7 +31,7 @@
 						<div class="text-center">
 							<div>Dieureudieuf</div>
 							<div>SERIGNE</div>
-							<div>BETHIO</div>		  
+							<div>BETHIO</div>
 						</div>
 						<div class="{{anim[1] ? 'rub_1_img_container' : 'notDisplay'}}">
 							<img class="rub_1_img" src="../../../assets/images/cheikhAdiaSaliou.jpg" alt="cheikhAdiaSaliou"/>
@@ -41,11 +41,11 @@
 					<div class="carreTheme layout-row layout-align-center-center themeTwo"  ng-click="rubrique(2)"  ng-mouseenter="runAnim(2)" ng-mouseleave="stopAnim(2)">
 						<div>
 							<div>L'esprit</div>
-							<div class="col-sm-offset-1">universel</div>		
-						</div>	
+							<div class="col-sm-offset-1">universel</div>
+						</div>
 						<div class="{{anim[2] ? 'rub_1_img_container' : 'notDisplay'}}">
 							<img class="rub_1_img" src="../../../assets/images/cheikhAdiaSaliou.jpg" alt="cheikhAdiaSaliou"/>
-						</div>				 
+						</div>
 					</div>
 			</div>
 
@@ -60,7 +60,7 @@
 					</div>
 
 					<div class="carreTheme layout-row layout-align-center-center themeFour"  ng-click="rubrique(4)" ng-mouseenter="runAnim(4)" ng-mouseleave="stopAnim(4)">
-						<div class="text-center">	
+						<div class="text-center">
 							<div>GATT</div>
 							<div>SAFF!</div>
 						</div>
@@ -81,7 +81,7 @@
 				</div>
 
 				<div class="carreTheme themeSix layout-row layout-align-center-center "  ng-click="rubrique(6)" ng-mouseenter="runAnim(6)" ng-mouseleave="stopAnim(6)">
-					<div class="text-center">	
+					<div class="text-center">
 						<div>L'originalité</div>
 						<div>spirituelle</div>
 					</div>
@@ -93,4 +93,3 @@
 		</div>
 
 	</div>
-

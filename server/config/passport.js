@@ -51,11 +51,8 @@ module.exports = function (passport) {
 							return done(null, newUser);
 						});
 					}
-
 				});
-
 			});
-
 		}));
 
 	passport.use('local-login', new LocalStrategy({
@@ -66,17 +63,16 @@ module.exports = function (passport) {
 	},
 		function (req, username, password, done) {
 			User.findOne({'local.login': username}, function (err, user) {
-			console.log("****************** ", password, user.validPassword(password));
-				
+
 				if (err)
 					return done(err);
-				if (!user)
-					return done(null, false);
+				// if (!user || user.local.status.code !== "451") {
+				// 	return done(null, false);
+				// }
 				if (!user.validPassword(password))
 					return done(null, false);
 				return done(null, user);
 			});
-
 		}));
 
 };
