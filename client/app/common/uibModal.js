@@ -40,6 +40,20 @@ custumModal.factory('myModal', ['_', '$uibModal', function (_, $uibModal) {
 					size: size
 				});
 			},
+			info: function (template, size) {
+				return $uibModal.open({
+					animation: true,
+					templateUrl: template,
+					controller: function ($uibModalInstance, $scope, message) {
+						$scope.message = message;
+						$scope.yes = yes;
+						function yes() {
+							$uibModalInstance.close("ok");
+						}
+					},
+					size: size
+				});
+			},
 			viewPoem: function (template, size, resolve) {
 				return $uibModal.open({
 					animation: true,

@@ -17,9 +17,9 @@ angular.module('connexion', ['ui.router'])
 				$scope.user;
 
 				//message
-				var okSignUp = "Merci pour votre inscription! Nous vous proposons de proceder à la validation dans l'émail qui viernt de bous être envoyé";
-				var byby = "Merci et à bientôt sur les publication de grâce";
-				var echecConnexion = "Echec de connexion: Verifiez votre mot de passe et ou votre login";
+				var okSignUp = "Merci pour votre inscription! Nous vous proposons de proceder à la validation dans l'émail qui vient de vous être envoyé";
+				var byby = "Merci et à bientôt sur les publications de grâce";
+				var echecConnexion = "Echec de connexion: Verifiez votre mot de passe et/ou votre login";
 				$scope.info = {
 					message: "",
 					type: ""

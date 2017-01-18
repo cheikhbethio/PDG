@@ -36,6 +36,20 @@
 								controller: 'lastPoemeController'
 							});
 				}])
+				.run(function($rootScope, $state, $stateParams, CurrentUser){
+					$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+						var status = CurrentUser.getRight();
+						console.log("*********typeof*************",  status);
+
+							if (status <= 1 || ($state.current.url !== "/poeme/create" && status === 2)) {
+								console.log("voilaaa cest un simple ecrivain");
+								// event.preventDefault();
+								$state.go('site.connexion');
+							}
+
+					})
+				})
+
 			.controller('createPoemeController', createPoemeController)
 			.controller('editPoemeController', editPoemeController)
 			.controller('showPoemeController', showPoemeController)
@@ -56,16 +70,6 @@
 		$scope.linkList = [];
 
 		initTofList($scope.linkList);
-
-		// initTofList();
-		// function initTofList(){
-		// 	for (var i = 13; i >= 1; i--) {
-		// 		$scope.linkList.push("assets/images/poeme/tofPoeme" + i + ".jpg");
-		// 	}
-		// 	for (var i = 102; i >= 101; i--) {
-		// 		$scope.linkList.push("assets/images/poeme/tofPoeme" + i + ".png");
-		// 	}
-		// }
 
 		function showModalTof() {
 			var modalTof = myModal.tofChoice('app/common/modalView/tof.html', 'lg', $scope.linkList);

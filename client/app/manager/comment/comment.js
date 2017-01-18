@@ -30,7 +30,7 @@
 
 		$scope.deleteComment = deleteComment;
 		$scope.denounceComment = denounceComment;
-		
+
 		function deleteComment() {
 			var modalConfirm = myModal.confirm('app/common/modalView/confirm.html', 'sm');
 			modalConfirm.result.then(function (res) {
@@ -52,8 +52,8 @@
 			var modalConfirm = myModal.confirm('app/common/modalView/confirm.html', 'sm');
 			modalConfirm.result.then(function (res) {
 				if (res) {
-					$scope.commentToDisplay.denounced =!$scope.commentToDisplay.denounced; 
-						comment.update({id : $scope.commentToDisplay._id}, $scope.commentToDisplay, function(res){		
+					$scope.commentToDisplay.denounced =!$scope.commentToDisplay.denounced;
+						comment.update({id : $scope.commentToDisplay._id}, $scope.commentToDisplay, function(res){
 					});
 				}});
 		}
@@ -63,10 +63,10 @@
 	commentController.$inject = ['myModal','comment', '$scope'];
 	function commentController(myModal, comment, $scope) {
 		comment.query(function(res){
-			$scope.commentList = res;	
+			$scope.commentList = res;
 		});
 		$scope.deleteComment=deleteComment;
-		
+
 		function deleteComment(indComment) {
 			var toDel = $scope.commentList[indComment];
 			var modalConfirm = myModal.confirm('app/common/modalView/confirm.html', 'sm');
@@ -102,18 +102,16 @@
 		getComment();
 
 		function denounceComment(commentDoc){
-			commentDoc.denounced =!commentDoc.denounced; 
-			comment.update({id : commentDoc._id}, commentDoc, function(res){		
+			commentDoc.denounced =!commentDoc.denounced;
+			comment.update({id : commentDoc._id}, commentDoc, function(res){
 			});
 
 		}
 
 
 		function denouncePoem(){
-			// console.log("########## 1 ######## : ", $scope.poemToDisplay.denounced);
 			$scope.poemToDisplay.denounced = !$scope.poemToDisplay.denounced;
-			Poeme.update({id : $scope.poemToDisplay._id}, $scope.poemToDisplay, function(res){
-			console.log("########## 2 ######## : ", $scope.poemToDisplay);});
+			Poeme.update({id : $scope.poemToDisplay._id}, $scope.poemToDisplay, function(res){});
 		}
 
 		function addComment(){
@@ -128,7 +126,7 @@
 					$scope.info.showMessage = true;
 				}else{
 					$scope.info.type = "danger";
-					$scope.info.showMessage = true;					
+					$scope.info.showMessage = true;
 				}
 				$scope.newComment.content = "";
 				$scope.showInputComment = false;
@@ -138,7 +136,7 @@
 		function getComment(){
 			getCommentByLabel.get({key :"id_poeme", value : poeme._id},function(res){
 				$scope.commentList = res.result;
-			});			
+			});
 		}
 
 	}

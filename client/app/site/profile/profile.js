@@ -7,7 +7,8 @@
 							.state('site.profile', {
 								url: '/profile',
 								abstract: true,
-								templateUrl: 'app/site/profile/profile.html'
+								templateUrl: 'app/site/profile/profile.html',
+								controller : 'profileHomeController'
 							})
 							.state('site.profile.edit', {
 								url: '/edit',
@@ -39,10 +40,17 @@
 								}
 							})
 				}])
+			.controller('profileHomeController', profileHomeController)
 			.controller('profileEditController', profileEditController)
 			.controller('profileFavorisController', profileFavorisController)
 			.controller('profilePoemController', profilePoemController)
 			.controller('profileMeController', profileMeController);
+
+			profileHomeController.$inject = ["$scope"];
+			function profileHomeController($scope){
+				$scope.hasRight = !false;
+			}
+
 
 	profileEditController.$inject = ["_", "ProfileService", "myModal", "user", "$scope", "userToUp"]
 	function profileEditController(_, ProfileService, myModal, user, $scope, userToUp) {

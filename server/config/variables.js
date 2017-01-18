@@ -9,7 +9,7 @@ var status = {
 exports.status = status;
 
 var myUrl = {
-	princiaplURL: "http://localhost:8000/#/",
+	princiaplURL: "http://137.74.172.146:8000/#/",
 	emailValidation: "registration?validation="
 };
 exports.myUrl = myUrl;

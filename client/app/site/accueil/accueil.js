@@ -24,7 +24,6 @@ angular.module('accueil', ['ui.router', 'angular-carousel', 'underscore'])
 
 		LastPoemes.query(function (list) {
 			$scope.lastPoeme = list;
-			console.log("************ ", $scope.lastPoeme);
 			var i = 0;
 			_.each(list, function(elem){
 				var imgObjet = {

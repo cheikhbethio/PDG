@@ -12,7 +12,7 @@ currentUserModule.factory('CurrentUser', ['$cookies', '$localStorage',  '$resour
 		var cookieName = 'SeugneBethioLaGrace';
   	return {
 
-		getUser: function() { 
+		getUser: function() {
 			var cookievalue = $cookies.get(cookieName);
 			if (cookievalue) {
 				return JSON.parse(cookievalue);
@@ -39,8 +39,8 @@ currentUserModule.factory('CurrentUser', ['$cookies', '$localStorage',  '$resour
 			var cookievalue = this.getUser();
 			if (cookievalue) {
 				// cookievalue = JSON.parse(cookievalue);
-				return cookievalue.right;			
-			} 
+				return cookievalue.right;
+			}
 			return null;
 		},
 
@@ -52,9 +52,9 @@ currentUserModule.factory('CurrentUser', ['$cookies', '$localStorage',  '$resour
 			if($localStorage.currentUser === undefined)
 				return false;
 			else
-				if(this.getRight() === 3) 
+				if(this.getRight() === 3)
 					return true;
-				else 
+				else
 					return false;
 		},
 
@@ -78,4 +78,3 @@ currentUserModule.factory('CurrentUser', ['$cookies', '$localStorage',  '$resour
 
 	};
 }]);
-

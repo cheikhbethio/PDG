@@ -79,20 +79,6 @@ angular.module('pgdApp', [
 							}
 						});
 			}])
-		.run(function ($rootScope, $state, CurrentUser) {
-			$rootScope.confVariable = {};
-			$rootScope.confVariable.titre = "Thiantakones";
-
-			$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-				var requireLogin = toState.data.requireLogin;
-				var requireLoginDashboard = toState.data.requireLoginDashboard;
-				var status = CurrentUser.getRight();
-
-				if (requireLogin && !CurrentUser.isLoggedIn()) {
-					console.log("not connected yet : ");
-					event.preventDefault();
-					$state.go('site.connexion');
-				}
-			});
-
+		.run(function (connectionRedirection) {
+			connectionRedirection.dashboard();
 		});

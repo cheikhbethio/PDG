@@ -22,25 +22,28 @@
 		$scope.info ={};
 		$scope.commentList =[];
 		$scope.tooltipInfo;
+		$scope.showInputComment = false;
+		$scope.isLoggedIn = CurrentUser.isLoggedIn();
 
 		$scope.denounceComment = denounceComment;
 		$scope.denouncePoem = denouncePoem;
+		$scope.toggleComment = toggleComment;
+
 
 
 		getComment();
 
 		function denounceComment(commentDoc){
-			commentDoc.denounced =!commentDoc.denounced; 
-			comment.update({id : commentDoc._id}, commentDoc, function(res){		
+			commentDoc.denounced =!commentDoc.denounced;
+			comment.update({id : commentDoc._id}, commentDoc, function(res){
 			});
 		}
 
 
 		function denouncePoem(){
-			// console.log("########## 1 ######## : ", $scope.poemToDisplay.denounced);
 			$scope.poemToDisplay.denounced = !$scope.poemToDisplay.denounced;
 			Poeme.update({id : $scope.poemToDisplay._id}, $scope.poemToDisplay, function(res){
-			console.log("########## 2 ######## : ", $scope.poemToDisplay);});
+		});
 		}
 
 		function addComment(){
@@ -55,7 +58,7 @@
 					$scope.info.showMessage = true;
 				}else{
 					$scope.info.type = "danger";
-					$scope.info.showMessage = true;					
+					$scope.info.showMessage = true;
 				}
 				$scope.newComment.content = "";
 				$scope.showInputComment = false;
@@ -65,7 +68,12 @@
 		function getComment(){
 			getCommentByLabel.get({key :"id_poeme", value : poeme._id},function(res){
 				$scope.commentList = res.result;
-			});			
+			});
+		}
+		function toggleComment(){
+			if($scope.isLoggedIn){
+				$scope.showInputComment = !$scope.showInputComment;
+			}
 		}
 
 	}
@@ -81,7 +89,7 @@
 		$scope.rubricList = ['Dieureudieuf Serigne Bethio', 'L\'esprit universel', 'Histoire sacrées',
 			'Gatt Saf', 'Les plus appréciés', 'L\'originalité spiritelle'];
 		$rootScope.confVariable.titre = $scope.rubricList[idParam-1];
-		
+
 
 		getPoemsByLabel.get({key :"rubric", valu : idParam}, function(res){
 			if (res.code===0) {

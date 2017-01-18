@@ -1,4 +1,4 @@
-<div class="poemeView">		
+<div class="poemeView">
 	<div class="modal-body">
 		<img ng-src="{{poemToDisplay.tof}}" class="img-responsive">
 	</div>
@@ -27,27 +27,27 @@
 			<hr class="firtHr">
 		</div>
 
-		<div class="row rowLinker" ng-init="showInputComment=false">
+		<div class="row rowLinker">
 			<div class="layout-row col-sm-8 col-sm-offset-2">
 				<div class="approval" uib-tooltip="cette fonctionnalité n'est pas encore active et le sera bientôt">
-					<span class="glyphicon glyphicon-thumbs-up"></span> 
+					<span class="glyphicon glyphicon-thumbs-up"></span>
 					<span>J'aime</span>
 				</div>
-				<div ng-click="showInputComment=!showInputComment">
+				<div ng-click="toggleComment()"  uib-tooltip="{{isLoggedIn ? '' : 'Veillez vous connecter pour acceder à ce service'}}">
 					<span class="glyphicon glyphicon-comment sharing"></span>
 					<span>Commenter</span>
 				</div>
-				<div uib-tooltip="cette fonctionnalité n'est pas encore active et le sera bientôt"> 
+				<div uib-tooltip="cette fonctionnalité n'est pas encore active et le sera bientôt">
 					<span class="glyphicon glyphicon-share-alt commentary"></span>
 					<span >Partager</span>
 				</div>
-				<div  ng-click="denouncePoem()"> 
+				<div  ng-click="denouncePoem()">
 					<span class="glyphicon glyphicon-alert"></span>
 
 					<span class="denouncePoem" ng-class="{'intoRed' : poemToDisplay.denounced, 'intoNormal' : !poemToDisplay.denounced}">{{poemToDisplay.denounced ? "Dénoncé" : "Je dénonce"}}
 					</span>
 				</div>
-			</div>	
+			</div>
 		</div>
 		<div class="row rowComments policeTextComment">
 
@@ -75,5 +75,3 @@
 		</div>
 	</div>
 </div>
-
-
