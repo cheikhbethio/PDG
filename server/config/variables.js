@@ -1,18 +1,16 @@
 "use strict";
 
 var status = {
-	watingClicEmail: {code: 1442, msg: "Verification email"},
-	watingValidation: {code: 191, msg: "En attente de Validation"},
-	active: {code: 451, msg: "Actif"},
-	removed: {code: 660, msg: "Suppimé"}
+	watingClicEmail: { code: 1442, msg: "Verification email" },
+	watingValidation: { code: 191, msg: "En attente de Validation" },
+	active: { code: 451, msg: "Actif" },
+	removed: { code: 660, msg: "Suppimé" }
 };
-exports.status = status;
 
 var myUrl = {
 	princiaplURL: "http://137.74.172.146:8000/#/",
 	emailValidation: "registration?validation="
 };
-exports.myUrl = myUrl;
 
 var routes = {
 	API: "/api",
@@ -61,6 +59,8 @@ var myMsg = {
 	}
 };
 
+exports.status = status;
+exports.myUrl = myUrl;
 exports.session = session;
 exports.darajas = darajas;
 exports.routes = routes;

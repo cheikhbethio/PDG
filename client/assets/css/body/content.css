@@ -27,7 +27,7 @@ div{
 .navbar-fixed-top {
   border: 0;
 }
-  
+
 
 .main {
   padding: 20px;
@@ -65,11 +65,9 @@ div{
 #carreTheme{
     background-color: #fff;
     height: 15vw;
-    min-height: 60px;  
+    min-height: 60px;
     padding: 2vw;
 }
-
-
 
 #carreThemeL{
     height: 15vw;
@@ -78,12 +76,10 @@ div{
     -moz-border-radius: 10px;
     border-radius: 10px;
     font-size: 3vw;
-    background-color: #fff;    
+    background-color: #fff;
     display: inline-block;
     vertical-align: middle;
     float: none;
-}
-.theme{
 }
 
 .themeOne{
@@ -94,19 +90,19 @@ div{
 }
 .themeOneImg{
     font-size: 1.5vw;
-    width: 49%;  
+    width: 49%;
 }
-.imgThemeOne{ 
-}
+
 .textThemeOneImg{
     font-size: 2vw;
     height: 15vw;
-    display: inline-block; 
+    display: inline-block;
 
 }
+
 #carreThemeImg{
     background-color: #fff;
-    min-height: 60px; 
+    min-height: 60px;
 }
 
 .themeTwo{
@@ -136,7 +132,7 @@ div{
   .rowContenu{
    /*// margin-top: 8vw;*/
   }
-  .imgThemeOne{  
+  .imgThemeOne{
     margin-top: 20px;
   }
   .textThemeOneImg {
@@ -162,7 +158,7 @@ div{
       text-align: center;
   }*/
 
-  .imgThemeOne{  
+  .imgThemeOne{
     margin-top: 14px;
   }
   .textThemeOneImg {

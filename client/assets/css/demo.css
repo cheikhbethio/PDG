@@ -41,3 +41,7 @@ span.rn-carousel-control{
   width: 50px;
   height: 50px;
 }
+
+.infoCarousel{
+  height: inherit;
+}

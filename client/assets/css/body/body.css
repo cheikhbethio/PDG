@@ -1,8 +1,8 @@
 
 
 html{
-   overflow: visible;  
-   
+   overflow: visible;
+
 }
 
 body {
@@ -10,14 +10,14 @@ body {
     background-color: #CFE1F1;
     width: 100%;
     min-width: 750px;
-    overflow: visible;   
-    height: auto; 
+    overflow: visible;
+    height: auto;
 }
 /***********************************
 		titre
 ***********************************/
 .panel-name{
-    color: white;    
+    color: white;
     float: left;
     height: 50px;
     padding: 15px 15px;
@@ -60,7 +60,7 @@ body {
 .carreTheme{
     background-color: #fff;
     height: 15vw;
-    min-height: 60px;  
+    min-height: 60px;
     /*padding: 2vw;*/
 }
 .carreTheme > div:first-child{
@@ -99,7 +99,7 @@ body {
     border-radius: 10px;
     font-size: 25px;
     color: #1b86e4;
-    background-color: #fff;    
+    background-color: #fff;
     display: inline-block;
     vertical-align: middle;
     float: none;
@@ -117,7 +117,7 @@ body {
 
 .carreThemeImg{
     background-color: #fff;
-    min-height: 60px; 
+    min-height: 60px;
 }
 
 .themeThre{
@@ -150,20 +150,20 @@ body {
     padding: 10px 0;
     color: black;
     font-size: 15px;
-    text-align: center;  
+    text-align: center;
     display: block;
     color: #337ab7;
     height: auto;
 }
 
 /*******************************************************
-                         External                         
+                         External
 ********************************************************/
 
 
 .row{
 	margin-left: 0px;
-	margin-right: 0px; 
+	margin-right: 0px;
 }
 
 

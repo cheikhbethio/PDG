@@ -12,7 +12,7 @@
 						</div>
 					</div>
 					<div class="my_carousel col-sm-9">
-                    <ul rn-carousel rn-carousel-controls rn-carousel-index="carouselIndex2" rn-carousel-auto-slide rn-carousel-pause-on-hover rn-carousel-buffered class="carousel2">
+                    <ul ng-if="slides.length" rn-carousel rn-carousel-controls rn-carousel-index="carouselIndex2" rn-carousel-auto-slide rn-carousel-pause-on-hover rn-carousel-buffered class="carousel2">
                         <li ng-repeat="slide in slides track by slide.id" ng-class="'id-' + slide.id">
                             <div ng-style="{'background-image': 'url(' + slide.img + ')'}"  class="bgimage layout-column layout-align-center-center">
                               <span class="carousel-poem carousel-poem-title">{{slide.title}}</span>
@@ -21,6 +21,11 @@
                             </div>
                         </li>
                     </ul>
+										<div class="infoCarousel layout-column layout-align-center-center" ng-if="!slides.length" >
+												<span>
+													Pas de nouveau poème.....
+												</span>
+										</div>
             </div>
 					</div>
 			</div>
