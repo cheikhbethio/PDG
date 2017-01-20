@@ -34,7 +34,7 @@ var isGod = function (req, res, next) {
 function disconnect(req, res) {
 	req.logout();
 	req.session.destroy();
-	return res.send([]);
+	return res.send(["Disconnection"]);
 }
 
 //exports

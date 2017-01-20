@@ -7,6 +7,11 @@ angular.module('connectionService', ['ngResource'])
 			login: { method: 'POST', isArray: false }
 		})
 			}])
+	.factory('PasseWordRegenerateService', ['$resource', function ($resource) {
+		return $resource('/api/passwordRegenerate', {}, {
+			regeneratePassWord: { method: 'POST', isArray: false }
+		})
+			}])
 	.factory('Validation', ['$resource', function ($resource) {
 		return $resource('/api/validation/signUp/:id', {}, {
 			getToken: { method: 'GET' }
@@ -25,7 +30,6 @@ angular.module('connectionService', ['ngResource'])
 					var status = CurrentUser.getRight();
 					var permitWriter = (requireLoginDashboard && status === 2 && toState.name !==
 						"dashboard.createPoeme") || (requireLoginDashboard && status < 2);
-					console.log("************ ", permitWriter, status);
 
 					if(requireLogin && !CurrentUser.isLoggedIn()) {
 						console.log("not connected yet : ");

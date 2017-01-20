@@ -1,6 +1,12 @@
+----------------IHM---------------------
+*) oublie de mot de passe et renvoie de email
+*) envoie du mot de passe dans l'email de confirmation
+*) css pour tablette et mobile
 
 
-----------------API---------
+----------------API---------------------
+*) mise en place de la bonne archi à combiner avec tests
+
 *) pour chaque écrivain on ne doit voir que ses poèmes.
 
-*) il faudrait que les opérations soient perso pour les écrivains et global pour les admins
+*) il faudrait que les opérations soient perso pour les écrivains et global pour les admins.

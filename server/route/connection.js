@@ -26,7 +26,7 @@ module.exports = function (app, passport) {
 
 		// console.log("+++++++++++++++----+ma variable : ", req.session.curentUser);
 
-		res.cookie('SeugneBethioLaGrace', JSON.stringify(forCookie), {maxAge: mayVar.session.session_duration});
+		res.cookie('SeugneBethioLaGrace', JSON.stringify(forCookie), { maxAge: mayVar.session.session_duration });
 		res.send(forCookie);
 	});
 
@@ -34,11 +34,21 @@ module.exports = function (app, passport) {
 		req.logout();
 		res.redirect('/');
 	});
+
+	app.post("/api/passwordRegenerate", function (req, res) {
+		//il faut verifier le eamil voir
+
+		//generer un mot de passe et le stoquer dans la bases
+
+		//lui envoyer dans le corps de la reponse le mot de passe par email
+
+	})
 };
 
 function giveRight(right) {
 	return 1 + rightTab.indexOf(right);
 }
+
 function init() {
 	_.each(mayVar.darajas, function (elem) {
 		rightTab.push(elem);
