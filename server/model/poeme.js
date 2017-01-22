@@ -1,9 +1,5 @@
-// load the things we need
-
-
 /***
  * requis :  titre  contenue  publication
- *
  */
 var mongoose = require('mongoose');
 var user = require('./user.js');
@@ -120,7 +116,6 @@ exports.getByLabel = function (req, res, next) {
 
 exports.delete = function (req, res, next) {
 	var id = req.params.id;
-
 	db.findById(id, function (err, doc) {
 		if(err || !doc) {
 			res.send({ message: "la supression est actuellement impossible (Probleme serveur).", code: 1 });
@@ -136,7 +131,6 @@ exports.edit = function (req, res, next) {
 
 	var id = req.params.id,
 		params = req.body;
-
 
 	if(!params.title || !params.content || !params.rubric || !params.title || !params.tof) {
 		return res.send({ message: "Les parametres sont incorrects", code: 1 });
@@ -182,13 +176,6 @@ exports.edit = function (req, res, next) {
 
 /********************************************************
  * functions Metier
- */
-
-/**
- *Prend un objet et un tableau en parametre remplit l'objet des éléments du tab
- * @param {object} objTo
- * @param {object} objFrom
- * @returns {undefined}
  */
 function fillParam(objTo, objFrom) {
 	_.each(objFrom, function (value, key) {

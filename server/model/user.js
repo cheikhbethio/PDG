@@ -1,4 +1,5 @@
 /* global Promise */
+'use strict';
 
 // load the things we need
 var mongoose = require('mongoose');
@@ -6,9 +7,6 @@ var bcrypt = require('bcrypt');
 var _ = require("underscore");
 var myVar = require('../config/variables.js');
 var theMailer = require('../config/jobsMailer.js');
-
-
-//var schema = mongoose.Schema;
 
 var userProperties = ["email", "password", "firstname", "lastname", "login", "right", "idPic",
 	"phone", "status", "hashkey"];
@@ -39,10 +37,8 @@ var userSchema = mongoose.Schema({
 		email: String,
 		name: String
 	}
-
 });
 
-// methods ======================
 // generating a hash
 userSchema.methods.generateHash = function (password) {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
@@ -59,7 +55,6 @@ module.exports.user = db;
 
 exports.dbAccess = db;
 
-//
 exports.create = function (req, res, next) {
 	var params = req.body;
 	var newUser = new db();
@@ -109,10 +104,6 @@ exports.create = function (req, res, next) {
 								.then(function () {
 									res.send({ message: myVar.forMail.signUp.popupMsg, code: 0, result: results });
 								});
-							//									.catch(function (error) {
-							//										console.log(error);
-							//									});
-
 						}
 					});
 				}
@@ -188,7 +179,6 @@ exports.editProfile = function (req, res) {
 	var id = req.params.id;
 	var params = req.body;
 	var tabProm = [];
-	//	var profileToUp;
 
 	console.log("pram ", req.params.id, "body :", req.body);
 	//check user par _id : first elem of tab
@@ -197,7 +187,6 @@ exports.editProfile = function (req, res) {
 	tabProm.push(simpleRecherche('local.email', params.email));
 
 	Promise.all(tabProm).then((values) => {
-			console.log("11111111111111111111111111111");
 			var rep = {};
 			if(values[0].code !== 0 || values[0].result.local.login !== params.login) {
 				rep.message = "not_connected";
@@ -212,46 +201,33 @@ exports.editProfile = function (req, res) {
 
 			// if (values[0].code === 0 && values[0].result.local.login === params.login){
 			var isLogged = bcrypt.compareSync(params.password, values[0].result.local.password);
-			console.log("------------ : ", isLogged);
 			if(isLogged) {
 				//updatepwd
-				params.newPassword ? (
-					params.password = bcrypt.hashSync(params.newPassword, bcrypt.genSaltSync(8), null),
-					console.log(" ************MDP a changer************")
-				) : (
-					delete params.password,
-					console.log(" *************MDP a ne pas changer***********")
-				)
-				console.log("2222222222222222222222");
+				if(params.newPassword) {
+					params.password = bcrypt.hashSync(params.newPassword, bcrypt.genSaltSync(8), null);
+				} else {
+					delete params.password;
+				}
+
 				//do edition
-				toEdit(id, _.pick(params, "email", "firstname", "idPic",
+				return toEdit(id, _.pick(params, "email", "firstname", "idPic",
 						"lastname", "login", "password", "phone"))
 					.then(function (response) {
-						console.log("-------------response--------------");
 						return res.send(response)
 					})
 					.catch(function (error) {
-						console.log("---------------error---------------");
 						return res.send(error)
 					});
+			}else {
+				return res.send({ message: "not_connected : ", code: 3 });
 			}
-			//  else{
-			// 	console.log("not_connected");
-			// 	return res.send({message: "not_connected : ", code: 2});
-			// }
-			// }else{
-			// 		console.log("not_connected 2");
-			// 		return res.send({message: "not_connected : ", code: 22});
-			// }
 		})
 		.catch((error) => {
-			console.log("not_connected 3");
 			return res.send({ message: "not_connected : ", code: 3 });
 		});
 }
 
 exports.edit = function (req, res, next) {
-
 	var id = req.body._id;
 	var params = req.body.local;
 
@@ -263,8 +239,6 @@ exports.edit = function (req, res, next) {
 			res.send(error)
 		});
 };
-
-
 
 function fillParam(objTo, objFrom) {
 	_.each(objFrom, function (value, key) {
@@ -280,25 +254,20 @@ function simpleRecherche(key, value) {
 	return new Promise(function (resolve, reject) {
 		db.findOne(query, function (err, user) {
 			if(err) {
-				console.log("simpleRecherche err :", query);
 				return reject({ message: "Le doc recherché est introuvable.", code: 1 });
 			}
 			if(!user) {
-				console.log("simpleRecherche videUser :", query);
 				return resolve({ message: "Le doc recherché est introuvable.", code: 1, result: user });
 			}
-
-			console.log("simpleRecherche user: ", user);
 			return resolve({ message: "Le doc a bien été retrouvé.", code: 0, result: user });
 		});
 	});
 }
 
-function toEdit(id, params) {
+var toEdit = function (id, params) {
 	return new Promise(function (resolve, reject) {
 		db.findById(id, function (err, user) {
 			if(err || !user) {
-				console.log('le document est introuvable!!!');
 				return reject({ message: "le document est introuvable!!!", code: 2 });
 			} else {
 				fillParam(user.local, params);
@@ -322,3 +291,5 @@ function toEdit(id, params) {
 		});
 	});
 }
+
+exports.toEdit = toEdit;

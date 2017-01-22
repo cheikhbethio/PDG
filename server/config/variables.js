@@ -47,6 +47,10 @@ var forMail = {
 		subject: "PDG - Validation nouveau Poême",
 		text: "Un nouveau poême vient d'être créé et est en attende de validation",
 		to: "mmoussasow@gmail.com"
+	},
+	regeneratePassword : {
+		subject: "PDG - Nouveau mot de passe",
+		text: "Vous avez demandé un nouveau mot de passe. Nous vous envoyons celui là. Vous pouvez le changer dans votre profil apres connexion. \n Nouveau mot de passe : "
 	}
 };
 

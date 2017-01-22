@@ -1,3 +1,4 @@
+'use strict';
 var mailer = require("nodemailer");
 var myVar = require("./variables");
 
@@ -8,11 +9,9 @@ var smtpTransport11 = mailer.createTransport("SMTP", {
 		user: "lespublicationdegrace@gmail.com",
 		pass: "mamadou170889"
 	}
-	
 });
 
 var smtpTransport = mailer.createTransport('smtps://lespublicationdegrace%40gmail.com:mamadou170889@smtp.gmail.com');
-
 
 var mail = {
 	from: "lespublicationdegrace@gmail.com"
@@ -26,6 +25,7 @@ function fillMail(to, subject, text) {
 }
 
 function emailSender(to, subject, text) {
+	console.log("-----------------envoie---------------");
 	var theMail = fillMail(to, subject, text)
 	return new Promise(function (resolve, reject) {
 		smtpTransport.sendMail(theMail, function (error, response) {

@@ -57,6 +57,7 @@
 
 	function profileEditController(_, ProfileService, myModal, user, $scope, userToUp) {
 		$scope.user = userToUp;
+		$scope.reseteditForm = reseteditForm;
 
 		$scope.pwdToggle = false;
 		$scope.user.local.passwordConfirmation = "";
@@ -64,6 +65,16 @@
 		$scope.info.showMessage = false;
 
 		$scope.upUser = upUser;
+
+
+		function reseteditForm(){
+			$scope.user.local.lastname = "";
+			$scope.user.local.firstname = "";
+			$scope.user.local.lastname = "";
+			$scope.user.local.email = "";
+			$scope.user.local.phone = "";
+			console.log("user ", $scope.user);
+		}
 
 		function upUser(param) {
 			console.log(" *****Param***** ", param);

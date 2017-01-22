@@ -1,56 +1,18 @@
+'use strict';
+
 var _ = require('underscore');
 var db_user = require('../model/user.js');
-var mayVar = require('../config/variables.js');
-
-var rightTab = [];
-
-init();
+var connectionModel = require('../model/connection.js');
 
 module.exports = function (app, passport) {
 
-	app.get('/api/session', function (req, res) {
-		res.send(req.session.id);
-	});
+	app.get('/api/session', connectionModel.sessionMiddleware);
+
 	app.get('/api/validation/signUp/:id', db_user.getKeyValidation);
 
-	app.post('/api/login', passport.authenticate('local-login'), function (req, res) {
-		var forCookie = {
-			id: req.user._id,
-			login: req.user.local.login,
-			lastname: req.user.local.lastname,
-			firstname: req.user.local.firstname,
-			right: giveRight(req.user.local.right)
-		};
-		req.user.local.password = "rien du tout";
-		req.session.curentUser = req.user;
+	app.get('/api/logout', connectionModel.loginMiddleware);
 
-		// console.log("+++++++++++++++----+ma variable : ", req.session.curentUser);
+	app.post("/api/login",  passport.authenticate('local-login'), connectionModel.loginMiddleware);
 
-		res.cookie('SeugneBethioLaGrace', JSON.stringify(forCookie), { maxAge: mayVar.session.session_duration });
-		res.send(forCookie);
-	});
-
-	app.get('/api/logout', function (req, res) {
-		req.logout();
-		res.redirect('/');
-	});
-
-	app.post("/api/passwordRegenerate", function (req, res) {
-		//il faut verifier le eamil voir
-
-		//generer un mot de passe et le stoquer dans la bases
-
-		//lui envoyer dans le corps de la reponse le mot de passe par email
-
-	})
+	app.post("/api/passwordRegenerate", connectionModel.updatePassWord);
 };
-
-function giveRight(right) {
-	return 1 + rightTab.indexOf(right);
-}
-
-function init() {
-	_.each(mayVar.darajas, function (elem) {
-		rightTab.push(elem);
-	});
-}

@@ -17,6 +17,16 @@ angular.module('accueil', ['ui.router', 'angular-carousel', 'underscore'])
 		$rootScope.confVariable.titre = "Thiantakones";
 		$rootScope.confVariable.isConnected =  CurrentUser.isLoggedIn();
 		$scope.slides = [];
+		$scope.anim = [];
+
+		$scope.runAnim = runAnim;
+		function runAnim(elem){
+			$scope.anim[elem] = true;
+		}
+		$scope.stopAnim = stopAnim;
+		function stopAnim(elem){
+			$scope.anim[elem] = false;
+		}
 
 		$scope.rubrique = function(id){
 			$state.go("site.rubrique", {id:id});
