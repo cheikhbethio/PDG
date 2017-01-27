@@ -36,19 +36,6 @@
 					controller: 'lastPoemeController'
 				});
 				}])
-		// .run(function($rootScope, $state, $stateParams, CurrentUser){
-		// 	$rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-		// 		var status = CurrentUser.getRight();
-		// 		console.log("*********typeof*************",  status);
-		//
-		// 			if (status <= 1 || ($state.current.url !== "/poeme/create" && status === 2)) {
-		// 				console.log("voilaaa cest un simple ecrivain");
-		// 				// event.preventDefault();
-		// 				$state.go('site.connexion');
-		// 			}
-		//
-		// 	})
-		// })
 
 		.controller('createPoemeController', createPoemeController)
 		.controller('editPoemeController', editPoemeController)

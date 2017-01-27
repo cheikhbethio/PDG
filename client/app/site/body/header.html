@@ -11,38 +11,64 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li  ng-if="confVariable.isConnected">
-					<span class="panel-name">Bienvenue {{cookieUser.firstname}}</span>
+				<li  class="panel-name" ng-if="confVariable.isConnected">
+					<span>Bienvenue {{cookieUser.firstname}}</span>
 				</li>
 				<li>
-					<a ui-sref="site.accueil" ui-sref-active="active" ><span class="glyphicon glyphicon-home"></span> Accueil</a>
+					<a ui-sref="site.allPoems" ui-sref-active="active" >
+						<span class="glyphicon glyphicon-list"></span>
+						<span>Tous les poèmes</span>
+					</a>
+				</li>
+				<li>
+					<a ui-sref="site.accueil" ui-sref-active="active" >
+						<span class="glyphicon glyphicon-home"></span>
+						<span>
+							Accueil
+						</span>
+					</a>
 				</li>
 				<li  ng-if="confVariable.isConnected && confVariable.forManagement">
 					<a ui-sref="dashboard.home" ui-sref-active="active" >
-						<span class="glyphicon glyphicon-wrench"></span>Gestion des poemes
+						<span class="glyphicon glyphicon-wrench"></span>
+						<span>
+							Gestion du site
+						</span>
 					</a>
 				</li>
 				<li  ng-if="confVariable.isConnected">
 					<a ui-sref="site.profile.me" ui-sref-active="active" >
-						<span class="glyphicon glyphicon-user"></span>Mon profil
+						<span class="glyphicon glyphicon-user"></span>
+						<span>
+							Mon profil
+						</span>
 					</a>
 				</li>
 				<li  ng-if="!confVariable.isConnected">
-					<a ui-sref="site.connexion" ui-sref-active="active" ><span class="glyphicon glyphicon-user"></span>Connection</a>
+					<a ui-sref="site.connexion" ui-sref-active="active" >
+						<span class="glyphicon glyphicon-user"></span>
+						<span>
+							Connection
+						</span>
+					</a>
 				</li>
 				<li ng-if="confVariable.isConnected">
-					<a ng-click="toDisconnect()"><span class="glyphicon glyphicon-log-out"></span>Déconnexion</a>
+					<a ng-click="toDisconnect()">
+						<span class="glyphicon glyphicon-log-out"></span>
+						<span>
+							Déconnexion
+						</span>
+					</a>
 				</li>
 				<li ng-if="!confVariable.isConnected">
 					<a ui-sref="site.registration" ui-sref-active="active" >
 						<span class="glyphicon glyphicon-floppy-disk"></span>
-						Inscription
+						<span>
+							Inscription
+						</span>
 					</a>
 				</li>
 			</ul>
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="Search...">
-			</form>
 		</div>
 	</div>
 </nav>
