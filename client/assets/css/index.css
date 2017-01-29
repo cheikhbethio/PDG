@@ -118,6 +118,40 @@ display: none;
     justify-content: flex-end;
 }
 /* ----------------------
+2 lignes ou plus :
+   Alignement des enfants :
+   - Horizontal  au centre:
+   - Vertical : a la fin
+---------------------- */
+.layout-align-center-end {
+	-webkit-align-content: flex-end;
+    -ms-flex-line-pack: flex-end;
+    align-content: flex-end;
+
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+/* ----------------------
+1 seule ligne :
+   Alignement des enfants :
+   - Horizontal  au centre:
+   - Vertical : a la fin
+---------------------- */
+.layout-align-center-end-one {
+    -webkit-align-items: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+/* ----------------------
    Alignement des enfants :
    - Horizontal : au centre
    - Vertical : au début
@@ -231,29 +265,14 @@ display: none;
 	border : 0px;
 }
 
-
 .divider{
 	margin: 5px 0 5px 0;
     border-top: 1px solid #ddd;
 }
 
-/*Carousel*/
-
-.carousel{
-  /*height: inherit;*/
-}
-/*
-.carousel .carousel-inner{
-  height: inherit;
-}*/
-
-
 .carousel, .carousel .carousel-inner, .carousel .carousel-inner > .active, .carousel .carousel-inner > .active > img{
   height: inherit;
 }
-/*.carousel .carousel-inner > .active > img{
-  height: inherit;
-}*/
 
 .carousel .carousel-caption{
   color: black;
@@ -264,7 +283,6 @@ display: none;
 .carousel-indicators{
   display: none;
 }
-
 
 a.carousel-control {
     opacity: 0;

@@ -66,19 +66,19 @@
 		<div ng-if="pwdToggle">
             <div class="form-group" ng-class="{ 'has-error':
             editForm.newPassword.$invalid }">
-                <label for="newPassword">Mot de passe</label>
+                <label for="newPassword">Nouveau mot de passe</label>
                 <input type="password"
                     class="form-control"
                     id="newPassword"
                     name="newPassword"
-                    placeholder="Saisissez CVotre Mot de passe"
+                    placeholder="Saisissez Votre Mot de passe"
                     ng-model="user.local.newPassword"
                     minlength="5"
                     required>
             </div>
             <div class="form-group" ng-class="{ 'has-error':
             user.local.passwordConfirmation !== user.local.newPassword}">
-                <label for="passwordConfirmation">Confirmation</label>
+                <label for="passwordConfirmation">Confirmation nouveau mot de passse</label>
                 <input type="password"
                     class="form-control"
                     id="passwordConfirmation"

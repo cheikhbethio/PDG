@@ -13,11 +13,11 @@
 					</div>
 					<div class="my_carousel col-sm-9">
                     <ul ng-if="slides.length" rn-carousel rn-carousel-controls rn-carousel-index="carouselIndex2" rn-carousel-auto-slide rn-carousel-pause-on-hover rn-carousel-buffered class="carousel2">
-                        <li ng-repeat="slide in slides track by slide.id" ng-class="'id-' + slide.id">
-                            <div ng-style="{'background-image': 'url(' + slide.img + ')'}"  class="bgimage layout-column layout-align-center-center">
+                        <li ng-repeat="slide in slides track by slide._id">
+                            <div ng-style="{'background-image': 'url(' + slide.img + ')'}"
+															ng-click="viewPoem('lg', slide._id)"
+															class="bgimage layout-row layout-align-center-end-one">
                               <span class="carousel-poem carousel-poem-title">{{slide.title}}</span>
-															<span class="carousel-poem carousel-poem-lastname">{{slide.lastname}}</span>
-															<span class="carousel-poem carousel-poem-firstname">{{slide.firstname}}</span>
                             </div>
                         </li>
                     </ul>

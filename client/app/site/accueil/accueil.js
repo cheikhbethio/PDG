@@ -11,8 +11,8 @@ angular.module('accueil', ['ui.router', 'angular-carousel', 'underscore'])
 				controller	: 'accueilController'
 			})
 	}])
-	.controller('accueilController', ['_', 'LastPoemes','CurrentUser', '$rootScope', '$scope', '$state',
-		function(_, LastPoemes, CurrentUser, $rootScope, $scope, $state){
+	.controller('accueilController', ['_', 'LastPoemes','CurrentUser', '$rootScope', '$scope', '$state', 'Poeme', 'myModal',
+		function(_, LastPoemes, CurrentUser, $rootScope, $scope, $state, Poeme, myModal){
 
 		$rootScope.confVariable.titre = "Thiantakones";
 		$rootScope.confVariable.isConnected =  CurrentUser.isLoggedIn();
@@ -20,15 +20,26 @@ angular.module('accueil', ['ui.router', 'angular-carousel', 'underscore'])
 		$scope.anim = [];
 
 		$scope.runAnim = runAnim;
+		$scope.rubrique = rubrique;
+		$scope.stopAnim = stopAnim;
+		$scope.viewPoem = viewPoem;
+
+		function viewPoem(width, poemeId) {
+			Poeme.get({id: poemeId}, function (res) {
+				var poemToDisplay = res.result;
+				var poemModal = myModal.viewPoem('app/manager/poemes/modals/poemeVue.html', 'lg', poemToDisplay);
+			});
+		}
+
 		function runAnim(elem){
 			$scope.anim[elem] = true;
 		}
-		$scope.stopAnim = stopAnim;
+
 		function stopAnim(elem){
 			$scope.anim[elem] = false;
 		}
 
-		$scope.rubrique = function(id){
+		function rubrique(id){
 			$state.go("site.rubrique", {id:id});
 		}
 
@@ -37,8 +48,8 @@ angular.module('accueil', ['ui.router', 'angular-carousel', 'underscore'])
 			var i = 0;
 			_.each(list, function(elem){
 				var imgObjet = {
-						id: ++i,
-						label: 'slide #' + i,
+						_id: elem._id,
+						// label: 'slide #' + i,
 						img: elem.tof,
 						odd: (i % 2 === 0),
 						title : elem.title,
@@ -50,9 +61,9 @@ angular.module('accueil', ['ui.router', 'angular-carousel', 'underscore'])
 		});
 
 		// $scope.addSlide = addSlide;
-		$scope.goToPoeme = goToPoeme;
-		function goToPoeme(poem) {
-			$scope.poemToDisplay = poem;
-		}
+		// $scope.goToPoeme = goToPoeme;
+		// function goToPoeme(poem) {
+		// 	$scope.poemToDisplay = poem;
+		// }
 
 	}]);

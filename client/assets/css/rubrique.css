@@ -13,10 +13,12 @@
 /********************/
 
 .poemePanel{
-	/*box-shadow: 5px 5px 8px #71706e;*/
   border-radius: 0px;
   border: 1px solid #c3bfbf;
 	height: 300px;
+}
+.poemePanel:hover{
+	box-shadow: 5px 5px 8px #71706e;	
 }
 .poemePanelContainer{
   margin-top: 20px;
@@ -35,7 +37,7 @@
   overflow :  auto;
   background-color : #CFE1F1;
   overflow: hidden;
-  padding: 5px; 
+  padding: 5px;
 }
 .poemePanel .author{
 	font-size: 18px;
@@ -49,10 +51,10 @@
 }
 
 .poemePanelBody{
-  font-family: garamond;	
+  font-family: garamond;
 }
 .poemePanelBody .title{
-	padding-bottom :15px; 
+	padding-bottom :15px;
 	height: 30px;
   font-style: italic;
   font-size: 20px;
@@ -80,7 +82,7 @@
 	height: 150px;
 }
 .poemePanel img{
-	width: 100%; 
+	width: 100%;
 	height: 100%;
 }
 .poemePanel .panel-footer div{
@@ -90,5 +92,3 @@
     color: green;
     font-weight: bold;
 }
-
-

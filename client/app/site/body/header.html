@@ -11,21 +11,11 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li  class="panel-name" ng-if="confVariable.isConnected">
-					<span>Bienvenue {{cookieUser.firstname}}</span>
-				</li>
+
 				<li>
 					<a ui-sref="site.allPoems" ui-sref-active="active" >
 						<span class="glyphicon glyphicon-list"></span>
 						<span>Tous les poèmes</span>
-					</a>
-				</li>
-				<li>
-					<a ui-sref="site.accueil" ui-sref-active="active" >
-						<span class="glyphicon glyphicon-home"></span>
-						<span>
-							Accueil
-						</span>
 					</a>
 				</li>
 				<li  ng-if="confVariable.isConnected && confVariable.forManagement">
@@ -67,6 +57,9 @@
 							Inscription
 						</span>
 					</a>
+				</li>
+				<li  class="panel-name" ng-if="confVariable.isConnected">
+					<span>{{cookieUser.firstname}}</span>
 				</li>
 			</ul>
 		</div>
