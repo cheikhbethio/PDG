@@ -12,17 +12,24 @@
 }
 /********************/
 
+.poemListPanel{
+	fle
+}
+
 .poemePanel{
   border-radius: 0px;
   border: 1px solid #c3bfbf;
 	height: 300px;
 }
+
 .poemePanel:hover{
-	box-shadow: 5px 5px 8px #71706e;	
+	box-shadow: 5px 5px 8px #71706e;
 }
 .poemePanelContainer{
   margin-top: 20px;
-  min-width: 200px;
+	height: 300px;
+	width: 350px;
+  /*min-width: 200px;*/
 }
 
 .panel-primary>.panel-heading {
