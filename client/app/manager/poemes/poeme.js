@@ -80,12 +80,14 @@
 					$scope.newPoeme.rubric = null;
 				}
 
-				Poeme.save($scope.newPoeme, function (resp) {
+				Poeme.save($scope.newPoeme, function (err, resp) {
 					$scope.info.message = resp.message;
 					$scope.info.showMessage = true;
 					if(resp.code === 0) {
 						$scope.info.type = "success";
+						console.log("**************************");
 					} else {
+						console.log("++++++++++++++++++++++++++++++");
 						$scope.info.message = "Le titre, le livre d'origine, " +
 							"l'image, la catégorie et contenu du poême sont tous obligatoire";
 						$scope.info.type = "danger";

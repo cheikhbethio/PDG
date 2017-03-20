@@ -30,28 +30,30 @@ module.exports.poeme = db;
 exports.create = function (req, res, next) {
 	var params = req.body;
 	var newPoeme = new db();
-
+console.log("++++++++++++++++++++++++++++++++++++++++++++");
 	newPoeme.title = params.title,
-		newPoeme.content = params.content,
-		newPoeme.from = params.from,
-		newPoeme.rubric = params.rubric,
-		newPoeme.id_auteur = params.id_auteur,
-		newPoeme.denounced = false,
-		newPoeme.date = Date.now(),
-		newPoeme.isPublic = params.isPublic ? params.isPublic : false,
-		newPoeme.updateAt = undefined;
+	newPoeme.content = params.content,
+	newPoeme.from = params.from,
+	newPoeme.rubric = params.rubric,
+	newPoeme.id_auteur = params.id_auteur,
+	newPoeme.denounced = false,
+	newPoeme.date = Date.now(),
+	newPoeme.isPublic = params.isPublic ? params.isPublic : false,
+	newPoeme.updateAt = undefined;
 	newPoeme.histo = false;
 	newPoeme.tof = params.tof;
 
 	if(!newPoeme.title || !newPoeme.content || !newPoeme.rubric || !newPoeme.tof) {
-		return res.send({ message: "Les parametres sont incorrects", code: 1 });
+		console.log("Les parametres sont incorrects");
+		return res.json({ message: "Les parametres sont incorrects", code: 1 }).end();
 	}
 
 	newPoeme.save(function (err, doc) {
+		console.log("***********err, doc ", err, doc);
 		if(err || !doc) {
-			res.send({ message: err, code: 1 });
+			res.json({ message: err, code: 1 }).end();
 		} else {
-			res.send({ message: "Le poeme a bien été créer.", code: 0, result: doc });
+			res.json({ message: "Le poeme a bien été créer.", code: 0, result: doc }).end();
 		}
 	});
 };

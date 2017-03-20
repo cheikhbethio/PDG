@@ -95,7 +95,7 @@
 			if (res.code===0) {
 				$scope.poemlist = res.result;
 			}else{
-				$scope.info.message = res.message;
+				$scope.info.message = "Rubrique vide pour le moment. Aucun poème présent";
 				$scope.info.type = 'info';
 				$scope.info.showMessage = true;
 			}
