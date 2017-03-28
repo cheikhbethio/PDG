@@ -32,11 +32,9 @@ angular.module('connectionService', ['ngResource'])
 						"dashboard.createPoeme") || (requireLoginDashboard && status < 2);
 
 					if(requireLogin && !CurrentUser.isLoggedIn()) {
-						console.log("not connected yet : ");
 						event.preventDefault();
 						$state.go('site.connexion');
 					} else if(permitWriter) {
-						console.log("not connected yet22 : ");
 						event.preventDefault();
 						$state.go('site.accueil');
 					}

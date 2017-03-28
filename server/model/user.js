@@ -75,7 +75,6 @@ exports.create = function (req, res, next) {
 			next(err);
 		else {
 			if(user) {
-				// console.log("*******************: ", user);
 				res.send({ message: "email is already used!", code: 1 });
 				return next();
 			}
@@ -85,7 +84,6 @@ exports.create = function (req, res, next) {
 					next(errLogin);
 				} else {
 					if(userLogin) {
-						console.log("login is already used!");
 						res.send({ message: "login is already used!", code: 2 });
 						return next();
 					}
@@ -97,7 +95,6 @@ exports.create = function (req, res, next) {
 						if(err) {
 							res.send({ message: err });
 						} else {
-							console.log("#### signup succes!!");
 							var textSent = myVar.forMail.signUp.text + myVar.myUrl.princiaplURL + myVar.myUrl.emailValidation +
 								hashed;
 							theMailer.emailSender(params.email, myVar.forMail.signUp.subject, textSent)
@@ -117,7 +114,6 @@ exports.view = function (req, res, next) {
 		if(!err) {
 			return res.send(results);
 		} else {
-			console.log(err);
 			next(err);
 		}
 	});
@@ -143,7 +139,6 @@ exports.get = function (req, res, next) {
 exports.getKeyValidation = function (req, res) {
 	db.findOne({ 'local.hashkey': req.params.id }, function (err, user) {
 		if(err || !user) {
-			console.log(err);
 			res.send({
 				message: "Désolé mais ce compte est invalide. Veillez vous réinscrire et faire la valivation dans les plus bref délais.",
 				code: 1
@@ -180,7 +175,6 @@ exports.editProfile = function (req, res) {
 	var params = req.body;
 	var tabProm = [];
 
-	console.log("pram ", req.params.id, "body :", req.body);
 	//check user par _id : first elem of tab
 	tabProm.push(simpleRecherche("_id", id));
 	//check if email exit in db : second elem
@@ -195,7 +189,6 @@ exports.editProfile = function (req, res) {
 			}
 			//update email
 			if(values[0].result.local.email !== params.email && values[1].code === 0) {
-				console.log("email is already");
 				return res.send({ code: 2, message: "email_is_already_use" });
 			}
 
@@ -273,7 +266,6 @@ var toEdit = function (id, params) {
 				fillParam(user.local, params);
 				user.save(function (updateErr, updateResp) {
 					if(updateErr) {
-						console.log(updateErr);
 						return reject({
 							message: "La Mise à jour impossible de ce doc a échoué :(Probleme serveur).",
 							code: 1

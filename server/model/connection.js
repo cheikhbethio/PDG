@@ -29,7 +29,6 @@ var updatePassWord = function(req, res){
   var regenerationResult;
   return checkedUser
     .then((checkedUserRes) => {
-      console.log("*******111********** ", checkedUserRes);
       if (checkedUserRes) {
           _id = checkedUserRes._id;
           email = checkedUserRes.local.email;
@@ -43,20 +42,17 @@ var updatePassWord = function(req, res){
       }
     })
     .then((newGeneratedPassword) => {
-      console.log("*******22222********** ", newGeneratedPassword);
       return user.toEdit(_id, {password : newGeneratedPassword})
       .then((value) => {
         return value});
     })
     .then((updateRes) => {
-      console.log("*******333********** ", updateRes);
       //sendEmail
 			theMailer.emailSender(email, mayVar.forMail.regeneratePassword.subject, mayVar.forMail
 				.regeneratePassword.text + regenerationResult.stringToHash);
       return res.send(updateRes);
     })
     .catch((err) => {
-      console.log("*******4444********** ", err);
       return res.send(err);
     })
 }

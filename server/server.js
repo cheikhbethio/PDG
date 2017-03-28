@@ -46,10 +46,7 @@ app.use(flash());
 
 app.use(function manageSession(req, res, next) {
 	var session_age = req.session.cookie.expires;
-	// console.log('req.session : ', req.session);
-	// console.log('new Date(Date.now() + 6)', new Date(Date.now()));
 	if (session_age < new Date(Date.now())) {
-		console.log("log out :++++++++++")
 		req.logout();
 		req.session.destroy();
 	}

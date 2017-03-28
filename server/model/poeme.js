@@ -30,7 +30,6 @@ module.exports.poeme = db;
 exports.create = function (req, res, next) {
 	var params = req.body;
 	var newPoeme = new db();
-console.log("++++++++++++++++++++++++++++++++++++++++++++");
 	newPoeme.title = params.title,
 	newPoeme.content = params.content,
 	newPoeme.from = params.from,
@@ -44,12 +43,10 @@ console.log("++++++++++++++++++++++++++++++++++++++++++++");
 	newPoeme.tof = params.tof;
 
 	if(!newPoeme.title || !newPoeme.content || !newPoeme.rubric || !newPoeme.tof) {
-		console.log("Les parametres sont incorrects");
 		return res.json({ message: "Les parametres sont incorrects", code: 1 }).end();
 	}
 
 	newPoeme.save(function (err, doc) {
-		console.log("***********err, doc ", err, doc);
 		if(err || !doc) {
 			res.json({ message: err, code: 1 }).end();
 		} else {
@@ -94,11 +91,11 @@ exports.getLastPoemes = function (req, res, next) {
 };
 
 
-exports.getByLabel = function (req, res, next) {
-	var keyObj = req.param('key'),
-		valueObj = req.param('valu');
+exports.getByLabel = function (req, res) {
+	var keyObj = req.query.key,
+		valueObj = req.query.value;
 	var query = {};
-	query[req.param('key')] = req.param('valu');
+	query[keyObj] = valueObj;
 	if(_.indexOf(labelList, keyObj) < 0) {
 		res.send({ message: "ce document est introuvable", code: 1 });
 	} else {

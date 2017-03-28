@@ -26,10 +26,8 @@ angular.module('connexion', ['ui.router'])
 					PasseWordRegenerateService.regeneratePassWord({
 						email: $scope.user.email,
 					}, function (user) {
-						console.log("*********Cool**************")
 						$state.go('site.accueil');
 					}, function (error) {
-						console.log('Erreur de connection');
 						setInfo(echecConnexion, "danger");
 						$scope.user = {};
 					})
@@ -89,12 +87,10 @@ angular.module('connexion', ['ui.router'])
 						// $localStorage.currentUser = user;
 						$state.go('site.accueil');
 					}, function (error) {
-						console.log('Erreur de connection');
 						setInfo(echecConnexion, "danger");
 						$scope.user = {};
 					});
 				} else {
-					console.log('Formulaire Invalide');
 					setInfo(echecConnexion, "danger");
 				}
 			};

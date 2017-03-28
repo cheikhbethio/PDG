@@ -25,17 +25,13 @@ function fillMail(to, subject, text) {
 }
 
 function emailSender(to, subject, text) {
-	console.log("-----------------envoie---------------");
 	var theMail = fillMail(to, subject, text)
 	return new Promise(function (resolve, reject) {
 		smtpTransport.sendMail(theMail, function (error, response) {
 			if (error) {
-				console.log(myVar.myMesg.error.mailSendind);
-				console.log(error);
 				smtpTransport.close();
 				return reject();
 			} else {
-				console.log(myVar.myMesg.success.mailSendind);
 				smtpTransport.close();
 				return resolve();
 			}
